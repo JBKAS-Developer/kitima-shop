@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KITIMA SHOP – Import Dubaï, High-Tech & Agro-business en RDC</title>
+<meta name="description" content="KITIMA SHOP, boutique en ligne de KITIMA WORK SARL : smartphones import Dubaï, matériel d'élevage et produits agricoles. Paiement Mobile Money sécurisé par PawaPay.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+:root{--navy:#0F172A;--green:#059669;--green-d:#047857;--amber:#F59E0B;--bg:#F8FAFC;--card:#fff;--ink:#1e293b;--mute:#64748b;--line:#e2e8f0;--r:14px}
+*{box-sizing:border-box;margin:0}
+body{-webkit-font-smoothing:antialiased}
+h1,h2,h3,.brand{font-family:Sora,system-ui,sans-serif;line-height:1.2;color:var(--navy)}
+a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer;border:0}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+section.blk{padding:36px 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:10px;font-weight:600;transition:.2s;min-height:44px}
+.btn-g{background:var(--green);color:#fff}.btn-g:hover{background:var(--green-d);transform:translateY(-1px)}
+.btn-n{background:var(--navy);color:#fff}.btn-n:hover{background:#1e293b}
+.btn-o{background:#fff;border:1.5px solid var(--line);color:var(--navy)}.btn-o:hover{border-color:var(--navy)}
+.btn-a{background:var(--amber);color:var(--navy)}
+/* header */
+.brand{display:flex;align-items:center;gap:8px;color:#fff;font-weight:800;font-size:1.15rem;letter-spacing:.3px}
+.brand small{color:var(--amber);font-weight:800}
+.search select{border:0;background:#f1f5f9;padding:0 8px;font:inherit;font-size:.85rem;max-width:42%;color:var(--ink)}
+.search input{flex:1;border:0;padding:11px 12px;font:inherit;min-width:0}
+.search button{background:var(--green);color:#fff;padding:0 16px}
+.ibtn{background:rgba(255,255,255,.1);color:#fff;border-radius:10px;padding:10px 12px;position:relative;font-size:.9rem;min-height:44px;transition:.2s}
+.ibtn:hover{background:rgba(255,255,255,.2)}
+.badge{position:absolute;top:-6px;right:-6px;background:var(--amber);color:var(--navy);font-size:.72rem;font-weight:800;min-width:20px;height:20px;border-radius:10px;display:grid;place-items:center;transition:transform .25s}
+.badge.pop{transform:scale(1.4)}
+nav.main{display:none;gap:4px}
+nav.main.is-open{display:flex;position:fixed;inset:0 auto 0 0;z-index:70;width:min(84vw,340px);height:100dvh;flex-direction:column;align-items:stretch;gap:8px;padding:82px 18px 24px;background:var(--navy);box-shadow:12px 0 40px #02061766;overflow-y:auto;animation:drawer-in .24s ease-out}
+@keyframes drawer-in{from{transform:translateX(-100%)}to{transform:translateX(0)}}
+body.menu-open{overflow:hidden}
+.menu-scrim{position:fixed;inset:0;z-index:60;background:#02061799;opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s}
+.menu-scrim.on{opacity:1;visibility:visible}
+.menu-toggle{z-index:80}
+nav.main a{padding:12px;border-radius:8px;color:#cbd5e1;font-weight:500}
+nav.main a i{width:24px;margin-right:8px;text-align:center;color:var(--amber)}
+nav.main a:hover,nav.main a.on{background:rgba(255,255,255,.1);color:#fff}
+.lbl{display:none}
+@media(min-width:900px){nav.main{display:flex;position:static;width:auto;height:auto;box-shadow:none;flex:0 1 auto;flex-direction:row;padding:0;background:transparent;overflow:visible;animation:none}.menu-scrim{display:none}.lbl{display:inline}}
+/* hero */
+.hero{background:linear-gradient(120deg,var(--navy) 55%,#12304a);color:#fff;border-radius:20px;overflow:hidden;position:relative;margin-top:18px}
+.slide{display:none;padding:30px 22px;min-height:300px;flex-direction:column;justify-content:center;gap:14px;animation:fade .5s;background-size:cover;background-position:center}
+.slide.on{display:flex}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hero h1{color:#fff;font-size:clamp(1.6rem,6vw,2.8rem);max-width:640px}
+.hero p{color:#cbd5e1;max-width:520px}
+.tag{align-self:flex-start;background:var(--amber);color:var(--navy);font-weight:700;font-size:.8rem;padding:4px 12px;border-radius:20px}
+.tag.g{background:var(--green);color:#fff}
+.big{position:absolute;right:16px;bottom:-10px;font-size:7rem;opacity:.18;pointer-events:none}
+@media(min-width:800px){.slide{padding:56px;min-height:380px}.big{font-size:14rem;right:50px;opacity:.9;filter:drop-shadow(0 10px 30px #0006)}}
+.dots{position:absolute;left:22px;bottom:14px;display:flex;gap:6px}
+.dots button{width:10px;height:10px;border-radius:5px;background:#ffffff55;padding:0}
+.dots button.on{background:var(--amber);width:26px}
+@media(min-width:800px){.dots{left:56px}}
+/* trust */
+.trust{display:grid;gap:10px;margin-top:18px}
+.trust div{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;font-weight:600;font-size:.92rem;color:var(--navy)}.trust i{color:var(--green);margin-right:6px}
+@media(min-width:700px){.trust{grid-template-columns:repeat(3,1fr)}}
+h2.t{font-size:1.4rem;margin-bottom:16px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+h2.t a{font-size:.9rem;color:var(--green);font-family:Figtree}
+.cats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:800px){.cats{grid-template-columns:repeat(4,1fr)}}
+.cat{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px 12px;text-align:center;transition:.2s;font-weight:700;color:var(--navy)}
+.cat:hover{border-color:var(--green);transform:translateY(-3px);box-shadow:0 10px 24px #0f172a14}
+.cat span{display:block;font-size:2.2rem;margin-bottom:6px;color:var(--green)}
+.cat small{display:block;color:var(--mute);font-weight:400}
+/* products */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:760px){.grid{grid-template-columns:repeat(3,1fr);gap:18px}}
+@media(min-width:1050px){.grid{grid-template-columns:repeat(4,1fr)}}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:.2s}
+.pc:hover{box-shadow:0 12px 28px #0f172a18;transform:translateY(-3px)}
+.pimg{aspect-ratio:1;display:grid;place-items:center;position:relative;cursor:pointer;overflow:hidden;background:#f1f5f9}
+.pimg img{width:100%;height:100%;object-fit:cover;transition:transform .3s}.pc:hover .pimg img{transform:scale(1.04)}
+.pc .info{padding:12px;display:flex;flex-direction:column;gap:5px;flex:1}
+.pc h3{font-size:.95rem;font-family:Figtree;font-weight:600;cursor:pointer}
+.stars{color:var(--amber);font-size:.85rem}.stars .count{color:var(--mute);font-style:normal;margin-left:4px}
+.price{font-family:Sora;font-weight:700;color:var(--navy);font-size:1.1rem}
+.price s{color:var(--mute);font-weight:400;font-size:.8rem;margin-left:4px}
+.cdf{font-size:.78rem;color:var(--mute)}
+.promo{position:absolute;top:10px;left:10px;background:var(--amber);color:var(--navy);font-weight:800;font-size:.75rem;padding:3px 9px;border-radius:20px}
+.avail{position:absolute;top:10px;right:10px;background:#d1fae5;color:var(--green-d);font-weight:600;font-size:.7rem;padding:3px 8px;border-radius:20px}
+.pc .btn{margin-top:auto;padding:10px;font-size:.9rem}
+/* shop */
+.shop{display:grid;gap:18px}
+@media(min-width:900px){.shop{grid-template-columns:250px 1fr}}
+.filters{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px;align-self:start}
+.filters h3{font-size:1rem;margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.chip{padding:7px 13px;border-radius:20px;background:#f1f5f9;color:var(--ink);font-size:.88rem;transition:.2s}
+.chip.on{background:var(--navy);color:#fff}
+input[type=range]{width:100%;accent-color:var(--green)}
+.field{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+.field label{font-weight:600;font-size:.9rem}
+.field input,.field select,.field textarea{padding:12px;border:1.5px solid var(--line);border-radius:10px;font:inherit;background:#fff;min-height:44px}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--green);outline:none}
+/* product page */
+.pd{display:grid;gap:22px;margin-top:18px}
+@media(min-width:800px){.pd{grid-template-columns:1fr 1fr;gap:40px}}
+.gal .main{aspect-ratio:1;border-radius:20px;display:grid;place-items:center;border:1px solid var(--line);overflow:hidden}.gal .main img{width:100%;height:100%;object-fit:cover}
+.thumbs{display:flex;gap:10px;margin-top:10px}
+.thumbs button{width:70px;height:70px;border-radius:12px;border:2px solid transparent;padding:0;overflow:hidden}.thumbs img{width:100%;height:100%;object-fit:cover}
+.thumbs button.on{border-color:var(--green)}
+.pd h1{font-size:1.7rem;margin:6px 0}
+.pd .price{font-size:1.8rem}
+.specs{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem}
+.specs td{padding:9px 0;border-bottom:1px solid var(--line)}.specs td:first-child{color:var(--mute);width:42%}
+.qty{display:inline-flex;align-items:center;border:1.5px solid var(--line);border-radius:10px;background:#fff}
+.qty button{width:42px;height:42px;background:none;font-size:1rem;color:var(--navy)}
+.qty span{min-width:34px;text-align:center;font-weight:700}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.row .btn{flex:1 1 160px}
+.crumb{font-size:.88rem;color:var(--mute);margin-top:16px}.crumb a{color:var(--green)}
+/* cart */
+.cl{display:grid;gap:18px}
+@media(min-width:900px){.cl{grid-template-columns:1fr 360px}}
+.box{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.ci{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.ci:last-child{border:0}
+.ci .th{width:64px;height:64px;border-radius:12px;display:grid;place-items:center;font-size:2rem}
+.ci .x{background:none;color:#dc2626;font-size:.82rem;margin-top:4px;padding:0}
+.sum div{display:flex;justify-content:space-between;padding:6px 0}
+.sum .tot{font-family:Sora;font-weight:800;font-size:1.2rem;border-top:1px solid var(--line);margin-top:6px;padding-top:12px;color:var(--navy)}
+.pay{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:6px 0 14px}
+.pay label{border:2px solid var(--line);border-radius:12px;padding:12px;display:flex;gap:8px;align-items:center;cursor:pointer;font-weight:600;font-size:.92rem;transition:.2s;background:#fff}
+.pay input{accent-color:var(--green)}
+.pay label:has(input:checked){border-color:var(--green);background:#ecfdf5}
+.dot{width:12px;height:12px;border-radius:50%}
+.empty{text-align:center;padding:50px 16px}.empty .e{font-size:3.5rem}
+/* modal & toast */
+.modal{position:fixed;inset:0;background:#0f172acc;display:none;place-items:center;z-index:100;padding:16px}
+.modal.on{display:grid}
+.mbox{background:#fff;border-radius:20px;padding:26px;max-width:460px;width:100%;max-height:90vh;overflow:auto;animation:pop .35s cubic-bezier(.2,1.3,.4,1)}
+@keyframes pop{from{transform:scale(.85);opacity:0}}
+.ok{width:64px;height:64px;border-radius:50%;background:var(--green);color:#fff;font-size:2rem;display:grid;place-items:center;margin:0 auto 12px}
+.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,90px);background:var(--navy);color:#fff;padding:12px 20px;border-radius:30px;z-index:90;transition:.3s;font-weight:500}
+.toast.on{transform:translate(-50%,0)}
+.icon{display:inline-flex;align-items:center;justify-content:center}
+/* pages */
+.prose{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:22px;margin-top:18px}
+.prose h1{font-size:1.7rem;margin-bottom:12px}.prose h2{font-size:1.2rem;margin:20px 0 8px}
+.prose p,.prose li{max-width:70ch;color:#334155}.prose ul{padding-left:20px}
+.legal{background:#f1f5f9;border-left:4px solid var(--green);border-radius:10px;padding:16px;margin:14px 0}
+.legal strong{color:var(--navy)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.stats div{background:var(--navy);color:#fff;border-radius:12px;padding:14px;text-align:center}
+.stats b{display:block;font-family:Sora;font-size:1.6rem;color:var(--amber)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+/* footer */
+.fg{display:grid;gap:22px}
+@media(min-width:800px){.fg{grid-template-columns:1.4fr 1fr 1fr 1.2fr}}
+footer h4{color:#fff;margin-bottom:8px;font-family:Sora}
+footer a{display:block;padding:3px 0}footer a:hover{color:var(--amber)}
+.fb{border-top:1px solid #334155;margin-top:22px;padding-top:14px;font-size:.82rem;color:#94a3b8}
+.heart{position:absolute;right:10px;bottom:10px;width:38px;height:38px;border-radius:50%;background:#fff;color:#94a3b8;font-size:1.2rem;display:grid;place-items:center;box-shadow:0 2px 8px #0002;transition:.2s}
+.heart.on{color:#dc2626;transform:scale(1.1)}
+.fab{position:fixed;right:14px;width:48px;height:48px;border-radius:50%;place-items:center;display:grid;color:#fff;z-index:45;box-shadow:0 6px 16px #0003;font-size:1.3rem}
+.tl{list-style:none;padding:0;margin:14px 0}.tl li{padding:8px 0 8px 30px;position:relative;color:var(--mute)}
+.tl li:before{content:'';position:absolute;left:4px;top:12px;width:14px;height:14px;border-radius:50%;background:var(--line)}
+.tl li.done{color:var(--navy);font-weight:600}.tl li.done:before{background:var(--green)}
+details{border-bottom:1px solid var(--line);padding:12px 0}summary{cursor:pointer;font-weight:600;color:var(--navy)}details p{margin-top:8px}
+.rv{padding:10px 0;border-top:1px solid var(--line)}
+.spin{width:46px;height:46px;border:4px solid var(--line);border-top-color:var(--green);border-radius:50%;margin:0 auto 14px;animation:sp 1s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
+.cp{display:flex;gap:8px;margin:10px 0}.cp input{flex:1;min-width:0;padding:10px;border:1.5px solid var(--line);border-radius:10px;font:inherit}
+.nl{display:flex;gap:6px;margin-top:8px}.nl input{flex:1;min-width:0;padding:10px;border-radius:8px;border:0;font:inherit}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+ theme: {
+  extend: {
+   colors: {
+    kitima: {
+     navy: '#0F172A',
+     green: '#059669',
+     'green-dark': '#047857',
+     amber: '#F59E0B',
+     surface: '#F8FAFC'
+    }
+   },
+   fontFamily: {
+    sans: ['Figtree', 'system-ui', 'sans-serif'],
+    display: ['Sora', 'system-ui', 'sans-serif']
+   }
+  }
+ }
+};
+</script>
+</head>
+<body class="scroll-smooth bg-kitima-surface font-sans leading-[1.55] text-slate-800 antialiased">
+<header class="sticky top-0 z-[70] bg-kitima-navy text-white">
+ <div class="mx-auto w-full max-w-[1180px] px-4">
+  <div class="hrow flex flex-wrap items-center gap-3 py-2.5 min-[900px]:flex-nowrap">
+   <a href="#/" class="brand order-0 shrink-0" aria-label="KITIMA SHOP – accueil">
+    <svg width="38" height="34" viewBox="0 0 38 34" aria-hidden="true"><path d="M2 3h5l4 17h18" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 8h22l-3 10H12z" fill="#F59E0B"/><path d="M11 17l6-7 4 4 8-9" fill="none" stroke="#0F172A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="14" cy="28" r="3" fill="#fff"/><circle cx="27" cy="28" r="3" fill="#fff"/></svg>
+    <span>KITIMA <small>SHOP</small></span>
+   </a>
+   <button class="menu-toggle order-1 z-[90] inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg bg-white/10 text-white transition hover:bg-white/20 min-[900px]:hidden" id="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-controls="main-nav" aria-expanded="false">
+    <i class="fa-solid fa-bars menu-icon" aria-hidden="true"></i><i class="fa-solid fa-xmark close-icon hidden" aria-hidden="true"></i>
+   </button>
+   <nav class="main order-4 min-[900px]:order-1" id="main-nav" aria-label="Navigation principale">
+    <a href="#/" data-r="home"><i class="fa-solid fa-house" aria-hidden="true"></i>Accueil</a><a href="#/boutique" data-r="shop"><i class="fa-solid fa-store" aria-hidden="true"></i>Boutique</a><a href="#/a-propos" data-r="about"><i class="fa-regular fa-circle-question" aria-hidden="true"></i>À propos</a><a href="#/contact" data-r="contact"><i class="fa-regular fa-envelope" aria-hidden="true"></i>Contact</a><a href="#/suivi" data-r="track"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i>Suivi</a><a href="#/legal" data-r="legal"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>Mentions légales</a>
+   </nav>
+   <form class="search order-3 flex-[1_1_100%] overflow-hidden rounded-xl bg-white min-[900px]:order-2 min-[900px]:flex-[1_1_380px]" id="sf" role="search">
+    <select id="sc" aria-label="Catégorie"></select>
+    <input id="sq" type="search" placeholder="Rechercher un produit…" aria-label="Rechercher">
+    <button aria-label="Rechercher"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></button>
+   </form>
+   <div class="hact order-2 ml-auto flex items-center gap-2 min-[900px]:order-3">
+    <a class="ibtn" href="#/favoris" aria-label="Favoris"><i class="fa-regular fa-heart" aria-hidden="true"></i><span class="badge" id="wb">0</span></a><a class="ibtn" href="#/compte" aria-label="Mon compte"><i class="fa-regular fa-user" aria-hidden="true"></i><span class="lbl" id="ul"> Mon compte</span></a>
+    <a class="ibtn" href="#/panier" aria-label="Panier"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i><span class="badge" id="cb">0</span></a>
+   </div>
+  </div>
+ </div>
+</header>
+<button class="menu-scrim" id="menu-scrim" type="button" aria-label="Fermer le menu" tabindex="-1"></button>
+<main id="app" class="mx-auto w-full max-w-[1180px] px-4" tabindex="-1"></main>
+<footer class="mt-10 bg-kitima-navy py-8 text-[.92rem] text-slate-300">
+ <div class="mx-auto w-full max-w-[1180px] px-4">
+  <div class="fg">
+   <div><h4>KITIMA SHOP</h4><p>Smartphones import Dubaï, matériel d'élevage et produits agricoles, livrés en RDC et à l'international. Une marque de KITIMA WORK SARL.</p></div>
+   <div><h4>Boutique</h4><a href="#/boutique">Tous les produits</a><a href="#/boutique/smartphones">Smartphones Dubaï</a><a href="#/boutique/agro">Agriculture & Élevage</a></div>
+   <div><h4>Informations</h4><a href="#/a-propos">À propos</a><a href="#/contact">Contact</a><a href="#/faq">FAQ</a><a href="#/suivi">Suivre ma commande</a><a href="#/legal/cgv">Conditions Générales de Vente</a><a href="#/legal/retours">Politique de retour</a><a href="#/legal/confidentialite">Confidentialité</a></div>
+   <div><h4>Paiement sécurisé</h4><p>Mobile Money via PawaPay : M-Pesa, Airtel Money, Orange Money, Africell.</p><p style="margin-top:8px">Goma, Nord-Kivu, RDC</p><form class="nl" onsubmit="event.preventDefault();toast('Merci, vous êtes inscrit(e)');this.reset()"><input type="email" required placeholder="Votre e-mail" aria-label="E-mail newsletter"><button class="btn btn-a">OK</button></form></div>
+  </div>
+  <div class="fb">© 2026 KITIMA-WORK SARL · RCCM CD/GOM/RCCM/22-B-00437 · Id. Nat. 19-A0103-N06327E · NIF A2296413X</div>
+ </div>
+</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true"><div class="mbox" id="mbox"></div></div>
+<a class="fab" id="wa" target="_blank" rel="noopener" aria-label="WhatsApp" style="bottom:18px;background:#25D366"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a><button class="fab" id="up" aria-label="Haut de page" style="bottom:76px;background:var(--navy);display:none" onclick="scrollTo({top:0,behavior:'smooth'})"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const RATE=2800; // 1 USD = 2 800 CDF (taux indicatif, à ajuster)
+const CATS=[{id:'smartphones',n:'Smartphones Dubaï',e:'fa-solid fa-mobile-screen-button'},{id:'hightech',n:'High-Tech',e:'fa-solid fa-headphones'},{id:'elevage',n:'Élevage',e:'fa-solid fa-egg'},{id:'agro',n:'Agriculture',e:'fa-solid fa-seedling'}];
+const P=[
+{id:1,n:'iPhone 15 Pro Max 256 Go',c:'smartphones',p:1180,o:1290,img:'https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=900&q=85',bg:'#fef3c7',r:4.8,rv:126,d:"Le haut de gamme d'Apple, importé directement de Dubaï. Boîtier titane, puce A17 Pro, triple capteur photo 48 Mpx. Livré neuf, scellé, avec chargeur USB-C.",s:{Écran:'6,7\" Super Retina XDR',Stockage:'256 Go',Appareil:'48 + 12 + 12 Mpx',Garantie:'12 mois',Origine:'Dubaï (EAU)'},hot:1},
+{id:2,n:'Samsung Galaxy S24 Ultra 512 Go',c:'smartphones',p:1090,img:'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=85',bg:'#e0e7ff',r:4.7,rv:98,d:"Écran AMOLED 120 Hz, stylet S Pen intégré et fonctions Galaxy AI. Version double SIM, idéale pour la RDC. Neuf sous emballage d'origine.",s:{Écran:'6,8\" Dynamic AMOLED 2X',Stockage:'512 Go',Appareil:'200 Mpx',Batterie:'5 000 mAh',Garantie:'12 mois'},hot:1},
+{id:3,n:'Samsung Galaxy A55 5G 128 Go',c:'smartphones',p:340,o:389,img:'https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=900&q=85',bg:'#dbeafe',r:4.5,rv:64,d:"Le meilleur rapport qualité/prix : écran fluide, 5G, grande autonomie. Double SIM.",s:{Écran:'6,6\" Super AMOLED',Stockage:'128 Go',Appareil:'50 Mpx',Batterie:'5 000 mAh',Garantie:'12 mois'}},
+{id:4,n:'AirPods Pro 2 (USB-C)',c:'hightech',p:219,img:'https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?auto=format&fit=crop&w=900&q=85',bg:'#fce7f3',r:4.9,rv:210,d:"Réduction de bruit active, audio spatial, boîtier MagSafe USB-C. Import Dubaï, authenticité garantie.",s:{Autonomie:'6 h (30 h avec boîtier)',Connexion:'Bluetooth 5.3',Résistance:'IP54',Garantie:'12 mois'},hot:1},
+{id:5,n:'Couveuse automatique 96 œufs',c:'elevage',p:185,o:210,img:'https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=900&q=85',bg:'#ffedd5',r:4.6,rv:52,d:"Couveuse entièrement automatique avec rotation des œufs, régulation de température et d'humidité. Convient aux poules, canards et cailles.",s:{Capacité:'96 œufs de poule',Alimentation:'220 V + 12 V batterie',Contrôle:'Écran numérique',Garantie:'6 mois'}},
+{id:6,n:'Abreuvoirs & mangeoires – lot de 10',c:'elevage',p:48,img:'https://images.unsplash.com/photo-1493962853295-0fd70327578a?auto=format&fit=crop&w=900&q=85',bg:'#fef9c3',r:4.4,rv:37,d:"Lot de 10 abreuvoirs et mangeoires en plastique alimentaire robuste pour volailles. Faciles à nettoyer.",s:{Matière:'Plastique alimentaire',Contenance:'2 L (eau) / 3 kg (grain)',Quantité:'10 pièces'}},
+{id:7,n:'Semences de maïs hybride – sac 10 kg',c:'agro',p:42,img:'https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=900&q=85',bg:'#dcfce7',r:4.7,rv:81,d:"Maïs hybride à haut rendement, adapté aux sols du Nord-Kivu. Cycle de 110 jours, bonne résistance à la sécheresse.",s:{Poids:'10 kg',Cycle:'110 jours',Rendement:"jusqu'à 7 t/ha",Origine:'Certifiée'}},
+{id:8,n:'Pulvérisateur à dos 20 L',c:'agro',p:65,o:79,img:'https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=900&q=85',bg:'#d1fae5',r:4.5,rv:44,d:"Pulvérisateur manuel à pression, bretelles rembourrées et lance en laiton. Pour traitements phytosanitaires et engrais liquides.",s:{Capacité:'20 L',Type:'Manuel à pression',Lance:'Laiton réglable',Garantie:'6 mois'}}
+];
+const PAY=[{id:'mpesa',n:'M-Pesa',c:'#16a34a'},{id:'airtel',n:'Airtel Money',c:'#dc2626'},{id:'orange',n:'Orange Money',c:'#f97316'},{id:'africell',n:'Africell Money',c:'#7c3aed'}];
+const $=(s,r=document)=>r.querySelector(s);
+const app=$('#app');
+let cart=[];try{cart=JSON.parse(localStorage.getItem('kitima_cart')||'[]')}catch(e){}
+const save=()=>{try{localStorage.setItem('kitima_cart',JSON.stringify(cart))}catch(e){}badge()};
+const usd=n=>'$'+n.toLocaleString('fr-FR',{minimumFractionDigits:n%1?2:0,maximumFractionDigits:2});
+const cdf=n=>Math.round(n*RATE).toLocaleString('fr-FR')+' FC';
+const find=id=>P.find(x=>x.id==id);
+const total=()=>cart.reduce((s,i)=>s+find(i.id).p*i.q,0);
+function badge(){const b=$('#cb');b.textContent=cart.reduce((s,i)=>s+i.q,0);b.classList.add('pop');setTimeout(()=>b.classList.remove('pop'),250)}
+let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2200)}
+function add(id,q=1){const i=cart.find(x=>x.id==id);i?i.q+=q:cart.push({id:+id,q});save();toast('Ajouté au panier')}
+const starIcons=r=>`${'<i class="fa-solid fa-star" aria-hidden="true"></i>'.repeat(Math.round(r))}${'<i class="fa-regular fa-star" aria-hidden="true"></i>'.repeat(5-Math.round(r))}`;
+const stars=(r,n)=>`<div class="stars" aria-label="Note ${r} sur 5">${starIcons(r)}<span class="count">${r} (${n})</span></div>`;
+const card=p=>`<article class="pc"><div class="pimg" onclick="location.hash='#/produit/${p.id}'"><img src="${p.img}" alt="${p.n}" loading="lazy">${p.o?`<span class="promo">-${Math.round((1-p.p/p.o)*100)}%</span>`:''}<span class="avail">En stock</span><button class="heart ${wish.includes(p.id)?'on':''}" data-id="${p.id}" aria-label="Ajouter aux favoris" onclick="event.stopPropagation();fav(${p.id})"><i class="fa-solid fa-heart" aria-hidden="true"></i></button></div>
+<div class="info"><h3 onclick="location.hash='#/produit/${p.id}'">${p.n}</h3>${stars(p.r,p.rv)}<div class="price">${usd(p.p)}${p.o?`<s>${usd(p.o)}</s>`:''}</div><div class="cdf">${cdf(p.p)}</div>
+<button class="btn btn-g" onclick="add(${p.id})">Ajouter au panier</button></div></article>`;
+
+/* views */
+function home(){
+ const feat=P.filter(p=>p.hot).concat(P.filter(p=>!p.hot)).slice(0,4);
+ app.innerHTML=`<div class="hero" id="hero">
+ <div class="slide on" style="background-image:linear-gradient(90deg,#0f172af2 30%,#0f172a77),url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1600&q=85')"><span class="tag">Import Dubaï</span><h1>Les meilleurs smartphones et high-tech, directement de Dubaï.</h1><p>iPhone, Samsung, accessoires : neufs, garantis, livrés à Goma, Kinshasa et partout en Afrique.</p><div><a class="btn btn-a" href="#/boutique/smartphones">Voir les smartphones</a></div></div>
+ <div class="slide" style="background-image:linear-gradient(90deg,#0f172af2 30%,#0f172a66),url('https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=1600&q=85')"><span class="tag g">Agro-business & élevage</span><h1>Équipez votre ferme, augmentez vos récoltes.</h1><p>Semences, couveuses, pulvérisateurs et matériel d'élevage sélectionnés pour les professionnels et les particuliers.</p><div><a class="btn btn-g" href="#/boutique/agro">Découvrir l'agro</a></div></div>
+ <div class="dots"><button class="on" aria-label="Diapositive 1"></button><button aria-label="Diapositive 2"></button></div></div>
+ <div class="trust"><div><i class="fa-solid fa-truck-fast" aria-hidden="true"></i> Livraison RDC & International</div><div><i class="fa-solid fa-lock" aria-hidden="true"></i> Paiement sécurisé PawaPay</div><div><i class="fa-solid fa-building" aria-hidden="true"></i> Entreprise enregistrée (RCCM/NIF)</div></div>
+ <section class="blk"><h2 class="t">Grandes catégories</h2><div class="cats">${CATS.map(c=>`<a class="cat" href="#/boutique/${c.id}"><span><i class="${c.e}" aria-hidden="true"></i></span>${c.n}<small>${P.filter(p=>p.c==c.id).length} produit(s)</small></a>`).join('')}</div></section>
+ <section class="blk"><h2 class="t">Produits vedettes <a href="#/boutique">Tout voir</a></h2><div class="grid">${feat.map(card).join('')}</div></section>
+ ${viewed.length?`<section class="blk"><h2 class="t">Récemment consultés</h2><div class="grid">${viewed.map(id=>card(find(id))).join('')}</div></section>`:''}<section class="blk"><div class="box" style="background:var(--navy);color:#fff;display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between"><div><h2 style="color:var(--amber);font-size:1.3rem">Payez avec votre Mobile Money</h2><p style="color:#cbd5e1">M-Pesa, Airtel Money, Orange Money et Africell, via PawaPay.</p></div><a class="btn btn-g" href="#/boutique">Commander maintenant</a></div></section>`;
+ const sl=[...app.querySelectorAll('.slide')],ds=[...app.querySelectorAll('.dots button')];let k=0;
+ const go=i=>{k=i;sl.forEach((s,j)=>s.classList.toggle('on',j==i));ds.forEach((d,j)=>d.classList.toggle('on',j==i))};
+ ds.forEach((d,i)=>d.onclick=()=>go(i));
+ window._iv=setInterval(()=>{if(!$('#hero'))return clearInterval(window._iv);go((k+1)%sl.length)},6000);
+}
+function shop(cat='all'){
+ let st={cat,max:1500,q:window._q||'',sort:'pop'};window._q='';
+ app.innerHTML=`<h1 style="margin:22px 0 14px;font-size:1.6rem">Boutique</h1><div class="shop"><aside class="filters">
+ <h3>Catégories</h3><div class="chips" id="ch"></div>
+ <h3>Prix maximum : <span id="pv"></span></h3><input type="range" id="pr" min="20" max="1500" step="10" value="1500" aria-label="Prix maximum"><div style="height:14px"></div>
+ <h3>Trier par</h3><select id="so" style="width:100%;padding:10px;border-radius:10px;border:1.5px solid var(--line)"><option value="pop">Popularité</option><option value="asc">Prix croissant</option><option value="desc">Prix décroissant</option></select></aside>
+ <div><p id="cnt" style="margin-bottom:12px;color:var(--mute)"></p><div class="grid" id="gr"></div></div></div>`;
+ const draw=()=>{
+  $('#ch').innerHTML=[{id:'all',n:'Tout'},...CATS].map(c=>`<button class="chip ${st.cat==c.id?'on':''}" data-c="${c.id}">${c.n}</button>`).join('');
+  $('#pv').textContent=usd(st.max);
+  let l=P.filter(p=>(st.cat=='all'||p.c==st.cat)&&p.p<=st.max&&(!st.q||p.n.toLowerCase().includes(st.q.toLowerCase())));
+  if(st.sort=='asc')l.sort((a,b)=>a.p-b.p);if(st.sort=='desc')l.sort((a,b)=>b.p-a.p);if(st.sort=='pop')l.sort((a,b)=>b.rv-a.rv);
+  $('#cnt').textContent=l.length+' produit(s)';
+  $('#gr').innerHTML=l.length?l.map(card).join(''):'<div class="empty" style="grid-column:1/-1"><div class="e"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></div><p>Aucun produit ne correspond. Élargissez le prix ou changez de catégorie.</p></div>';
+  $('#ch').querySelectorAll('button').forEach(b=>b.onclick=()=>{st.cat=b.dataset.c;draw()});
+ };
+ $('#pr').oninput=e=>{st.max=+e.target.value;draw()};$('#so').onchange=e=>{st.sort=e.target.value;draw()};
+ draw();
+}
+function product(id){
+ const p=find(id);if(!p)return shop();let q=1;viewed=[p.id,...viewed.filter(x=>x!=p.id)].slice(0,4);const cat=CATS.find(c=>c.id==p.c);
+ app.innerHTML=`<div class="crumb"><a href="#/">Accueil</a> / <a href="#/boutique/${p.c}">${cat.n}</a> / ${p.n}</div><div class="pd">
+ <div class="gal"><div class="main" id="mn"><img src="${p.img}" alt="${p.n}"></div><div class="thumbs"><button class="on" aria-label="Photo du produit"><img src="${p.img}" alt=""></button></div></div>
+ <div><span class="avail" style="position:static;display:inline-block">En stock</span>${p.o?' <span class="promo" style="position:static;display:inline-block">Promo</span>':''}<h1>${p.n}</h1>${stars(p.r,p.rv)}
+ <div class="price" style="margin-top:8px">${usd(p.p)}${p.o?`<s>${usd(p.o)}</s>`:''}</div><div class="cdf" style="font-size:.95rem">≈ ${cdf(p.p)}</div>
+ <p style="margin:14px 0">${p.d}</p><table class="specs">${Object.entries(p.s).map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join('')}</table>
+ <div style="display:flex;align-items:center;gap:12px"><b>Quantité</b><div class="qty"><button id="mi" aria-label="Moins"><i class="fa-solid fa-minus" aria-hidden="true"></i></button><span id="qv">1</span><button id="pl" aria-label="Plus"><i class="fa-solid fa-plus" aria-hidden="true"></i></button></div></div>
+ <div class="row"><button class="btn btn-g" id="ad"><i class="fa-solid fa-cart-plus" aria-hidden="true"></i> Ajouter au panier</button><button class="btn btn-n" id="bn"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Acheter maintenant</button><button class="btn btn-o" id="wf"><i class="fa-regular fa-heart" aria-hidden="true"></i> Favoris</button><a class="btn btn-o" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(p.n+' – '+location.href)}"><i class="fa-solid fa-share-nodes" aria-hidden="true"></i> Partager</a></div>
+ <p style="margin-top:14px;font-size:.88rem;color:var(--mute)"><i class="fa-solid fa-lock" aria-hidden="true"></i> Paiement Mobile Money sécurisé par PawaPay · <i class="fa-solid fa-truck-fast" aria-hidden="true"></i> Livraison RDC & International</p></div></div>
+ <section class="blk"><h2 class="t">Avis clients</h2><div class="box"><form id="rf" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px"><select id="rr" aria-label="Note" style="padding:10px;border-radius:10px;border:1.5px solid var(--line)"><option value="5">5 étoiles</option><option value="4">4 étoiles</option><option value="3">3 étoiles</option><option value="2">2 étoiles</option><option value="1">1 étoile</option></select><input id="rt" placeholder="Votre avis…" aria-label="Votre avis" style="flex:1;min-width:180px;padding:10px;border:1.5px solid var(--line);border-radius:10px"><button class="btn btn-n">Publier</button></form><div id="rvs"></div></div></section><section class="blk"><h2 class="t">Vous aimerez aussi</h2><div class="grid">${P.filter(x=>x.id!=p.id).slice(0,4).map(card).join('')}</div></section>`;
+ const set=n=>{q=Math.max(1,Math.min(20,n));$('#qv').textContent=q};
+ rv(p.id);$('#wf').onclick=()=>fav(p.id);$('#mi').onclick=()=>set(q-1);$('#pl').onclick=()=>set(q+1);
+ $('#ad').onclick=()=>add(p.id,q);$('#bn').onclick=()=>{add(p.id,q);location.hash='#/commande'};
+ app.querySelectorAll('.thumbs button').forEach(b=>b.onclick=()=>{app.querySelectorAll('.thumbs button').forEach(x=>x.classList.remove('on'));b.classList.add('on');$('#mn img').src=b.querySelector('img').src});
+}
+const ls=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}};
+const sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const WA='243000000000'; // TODO : numéro WhatsApp Business (format international, sans +)
+let wish=ls('k_wish',[]),user=ls('k_user',null),users=ls('k_users',[]),orders=ls('k_orders',[]),viewed=[],coupon=null;
+const disc=()=>coupon?total()*.1:0;
+const grand=(s=0)=>Math.max(0,total()-disc())+s;
+const ZONES=[['Goma (ville)',5],['Autres villes de RDC',15],['International (Afrique)',40]];
+const STEPS=['Commande reçue','Paiement confirmé','En préparation','Expédiée','Livrée'];
+const fld=(id,l,t='text',v='',ph='')=>`<div class="field"><label for="${id}">${l}</label><input id="${id}" type="${t}" value="${v}" placeholder="${ph}"></div>`;
+function hdr(){$('#wb').textContent=wish.length;$('#ul').textContent=user?' '+user.name.split(' ')[0]:' Mon compte'}
+function fav(id){const on=wish.includes(id);wish=on?wish.filter(x=>x!=id):[...wish,id];sv('k_wish',wish);hdr();document.querySelectorAll('.heart[data-id="'+id+'"]').forEach(h=>h.classList.toggle('on',!on));toast(on?'Retiré des favoris':'Ajouté aux favoris');if(location.hash=='#/favoris')favs()}
+function rv(id){const all=ls('k_rev',{});
+ const l=[...(all[id]||[]),{n:'Client vérifié',r:5,t:'Produit conforme à la description, livraison rapide.'},{n:'Mireille K.',r:4,t:'Très bon rapport qualité/prix.'}];
+ $('#rvs').innerHTML=l.map(x=>`<div class="rv"><b>${esc(x.n)}</b> <span class="stars" aria-label="Note ${x.r} sur 5">${starIcons(x.r)}</span><p>${esc(x.t)}</p></div>`).join('');
+ $('#rf').onsubmit=e=>{e.preventDefault();const t=$('#rt').value.trim();if(!t)return toast('Écrivez votre avis');all[id]=[{n:user?user.name:'Visiteur',r:+$('#rr').value,t},...(all[id]||[])];sv('k_rev',all);toast('Merci pour votre avis');rv(id)}}
+function cartV(){
+ if(!cart.length){app.innerHTML=`<div class="empty"><div class="e"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i></div><h2>Votre panier est vide</h2><p style="margin:8px 0 16px">Ajoutez un produit pour commencer.</p><a class="btn btn-g" href="#/boutique">Parcourir la boutique</a></div>`;return}
+ app.innerHTML=`<h1 style="margin:22px 0 14px;font-size:1.6rem">Mon panier</h1><div class="cl"><div class="box">${cart.map(i=>{const p=find(i.id);return`<div class="ci"><img class="th" src="${p.img}" alt="${p.n}" style="object-fit:cover"><div><a href="#/produit/${p.id}"><b>${p.n}</b></a><div class="cdf">${usd(p.p)} · ${cdf(p.p)}</div><button class="x" data-x="${p.id}"><i class="fa-regular fa-trash-can" aria-hidden="true"></i> Supprimer</button></div>
+ <div style="text-align:right"><div class="qty"><button data-m="${p.id}" aria-label="Moins"><i class="fa-solid fa-minus" aria-hidden="true"></i></button><span>${i.q}</span><button data-p="${p.id}" aria-label="Plus"><i class="fa-solid fa-plus" aria-hidden="true"></i></button></div><div class="price" style="font-size:.95rem;margin-top:6px">${usd(p.p*i.q)}</div></div></div>`}).join('')}</div>
+ <div class="box sum" style="align-self:start"><h2 style="font-size:1.2rem;margin-bottom:8px">Récapitulatif</h2><div><span>Sous-total</span><b>${usd(total())}</b></div>${coupon?`<div><span>Code ${coupon}</span><span>-${usd(disc())}</span></div>`:''}<div><span>Livraison</span><span>Choisie au paiement</span></div><div class="tot"><span>Total</span><span>${usd(grand())}</span></div><div class="cdf">≈ ${cdf(grand())}</div>
+ <div class="cp"><input id="cc" placeholder="Code promo (ex. KITIMA10)" aria-label="Code promo"><button class="btn btn-o" id="cp">Appliquer</button></div>
+ <a class="btn btn-g" style="width:100%" href="#/commande">Valider la commande</a><a class="btn btn-o" style="width:100%;margin-top:8px" href="#/boutique">Continuer mes achats</a><button class="btn btn-o" id="ec" style="width:100%;margin-top:8px">Vider le panier</button></div></div>`;
+ const ch=(id,d)=>{const i=cart.find(x=>x.id==id);i.q+=d;if(i.q<1)cart=cart.filter(x=>x.id!=id);save();cartV()};
+ app.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>ch(b.dataset.m,-1));
+ app.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>ch(b.dataset.p,1));
+ app.querySelectorAll('[data-x]').forEach(b=>b.onclick=()=>{cart=cart.filter(x=>x.id!=b.dataset.x);save();cartV()});
+ $('#ec').onclick=()=>{cart=[];coupon=null;save();cartV()};
+ $('#cp').onclick=()=>{const v=$('#cc').value.trim().toUpperCase();if(v=='KITIMA10'){coupon=v;toast('Code appliqué : -10 %')}else toast('Code promo invalide');cartV()};
+}
+function checkout(){
+ if(!cart.length)return cartV();const u=user||{};
+ app.innerHTML=`<h1 style="margin:22px 0 14px;font-size:1.6rem">Finaliser la commande</h1><form class="cl" id="cf" novalidate><div class="box"><h2 style="font-size:1.15rem;margin-bottom:12px">Livraison</h2>
+ ${fld('nm','Nom complet','text',esc(u.name||''),'Ex. Amani Kabila')}${fld('tl','Téléphone (WhatsApp)','tel',esc(u.tel||''),'+243 8X XXX XXXX')}${fld('ad','Adresse de livraison','text',esc(u.ad||''),'Avenue, quartier, commune')}${fld('vl','Ville / Province ou pays','text','','Ex. Goma, Nord-Kivu')}
+ <div class="field"><label for="zn">Zone de livraison</label><select id="zn">${ZONES.map(z=>`<option value="${z[1]}">${z[0]} – ${usd(z[1])}</option>`).join('')}</select></div>
+ <h2 style="font-size:1.15rem;margin:18px 0 10px">Paiement Mobile Money <span style="font-size:.8rem;color:var(--green)">via PawaPay</span></h2>
+ <div class="pay">${PAY.map((m,i)=>`<label><input type="radio" name="pm" value="${m.n}" ${i?'':'checked'}><span class="dot" style="background:${m.c}"></span>${m.n}</label>`).join('')}</div>
+ ${fld('mm','Numéro Mobile Money à débiter','tel',esc(u.tel||''),'+243 …')}
+ <p style="font-size:.85rem;color:var(--mute)">Vous recevrez une demande de confirmation sur ce numéro. Démo : aucun paiement réel n'est débité.</p></div>
+ <div class="box sum" style="align-self:start"><h2 style="font-size:1.2rem;margin-bottom:8px">Votre commande</h2>${cart.map(i=>{const p=find(i.id);return`<div><span>${i.q} × ${p.n}</span><span>${usd(p.p*i.q)}</span></div>`}).join('')}${coupon?`<div><span>Code ${coupon}</span><span>-${usd(disc())}</span></div>`:''}<div><span>Livraison</span><span id="sh"></span></div><div class="tot"><span>Total</span><span id="gt"></span></div><div class="cdf" id="gc"></div><button class="btn btn-g" id="pb" style="width:100%;margin-top:12px"></button><a class="btn btn-o" style="width:100%;margin-top:8px" href="#/panier">Modifier le panier</a></div></form>`;
+ const upd=()=>{const z=+$('#zn').value,t=grand(z);$('#sh').textContent=usd(z);$('#gt').textContent=usd(t);$('#gc').textContent='≈ '+cdf(t);$('#pb').textContent='Payer '+usd(t)};
+ $('#zn').onchange=upd;upd();
+ $('#cf').onsubmit=e=>{e.preventDefault();let ok=true;
+  ['nm','tl','ad','vl','mm'].forEach(id=>{const f=$('#'+id),bad=!f.value.trim()||((id=='tl'||id=='mm')&&f.value.replace(/\D/g,'').length<9);f.style.borderColor=bad?'#dc2626':'';if(bad)ok=false});
+  if(!ok)return toast('Complétez les champs en rouge');
+  const z=+$('#zn').value,o={no:'KS-'+Date.now().toString().slice(-6),ts:Date.now(),items:cart.map(i=>({...i})),total:grand(z),ship:z,pm:document.querySelector('[name=pm]:checked').value,city:$('#vl').value.trim(),tel:$('#tl').value.trim(),mm:$('#mm').value.trim(),name:$('#nm').value.trim()};
+  $('#mbox').innerHTML=`<div style="text-align:center"><div class="spin"></div><h2>Confirmez sur votre téléphone</h2><p style="color:var(--mute);margin-top:8px">Demande de ${usd(o.total)} envoyée au ${esc(o.mm)} via ${o.pm}. Saisissez votre code PIN pour valider.</p></div>`;
+  $('#modal').classList.add('on');setTimeout(()=>done(o),2800);
+ };
+}
+function done(o){
+ orders.unshift(o);sv('k_orders',orders);cart=[];coupon=null;save();
+ $('#mbox').innerHTML=`<div style="text-align:center"><div class="ok"><i class="fa-solid fa-check" aria-hidden="true"></i></div><h2>Paiement confirmé</h2><p style="color:var(--mute)">Commande ${o.no}</p></div><div class="legal" style="font-size:.92rem">${o.items.map(i=>`<div style="display:flex;justify-content:space-between;gap:10px;padding:4px 0"><span>${i.q} × ${find(i.id).n}</span><b>${usd(find(i.id).p*i.q)}</b></div>`).join('')}<div style="display:flex;justify-content:space-between;padding:4px 0"><span>Livraison</span><b>${usd(o.ship)}</b></div><div style="display:flex;justify-content:space-between;border-top:1px solid #cbd5e1;margin-top:6px;padding-top:8px"><b>Total</b><b>${usd(o.total)}</b></div></div><p style="font-size:.92rem">Paiement : <b>${o.pm}</b><br>Livraison : ${esc(o.city)}<br>Nous vous contactons sur WhatsApp au ${esc(o.tel)}.</p><a class="btn btn-g" style="width:100%;margin-top:12px" href="#/suivi/${o.no}" id="m1">Suivre ma commande</a><a class="btn btn-o" style="width:100%;margin-top:8px" href="#/boutique" id="m2">Continuer mes achats</a>`;
+ $('#modal').classList.add('on');['m1','m2'].forEach(k=>$('#'+k).addEventListener('click',()=>$('#modal').classList.remove('on')));
+}
+function track(no=''){
+ app.innerHTML=`<div class="prose"><h1>Suivre ma commande</h1><form id="tf" style="max-width:420px">${fld('tn','Numéro de commande','text',esc(no),'KS-123456')}${fld('tp','Téléphone utilisé','tel','','+243 …')}<button class="btn btn-g">Suivre</button></form><div id="tr"></div></div>`;
+ const run=a=>{const n=$('#tn').value.trim().toUpperCase(),d=$('#tp').value.replace(/\D/g,'').slice(-9);
+  const o=orders.find(x=>x.no==n&&(a||(d&&x.tel.replace(/\D/g,'').endsWith(d))));
+  if(!o){$('#tr').innerHTML='<p style="margin-top:14px;color:#dc2626">Commande introuvable. Vérifiez le numéro et le téléphone.</p>';return}
+  const st=Math.min(4,Math.floor((Date.now()-o.ts)/120000));
+  $('#tr').innerHTML=`<h2>Commande ${o.no}</h2><p>${usd(o.total)} · ${o.pm} · ${esc(o.city)}</p><ul class="tl">${STEPS.map((t,i)=>`<li class="${i<=st?'done':''}">${t}</li>`).join('')}</ul><p class="cdf">Statut simulé pour la démonstration.</p>`};
+ $('#tf').onsubmit=e=>{e.preventDefault();run(false)};if(no)run(true);
+}
+function favs(){app.innerHTML=`<h1 style="margin:22px 0 14px;font-size:1.6rem">Mes favoris</h1>`+(wish.length?`<div class="grid">${wish.map(id=>card(find(id))).join('')}</div>`:`<div class="empty"><div class="e"><i class="fa-regular fa-heart" aria-hidden="true"></i></div><p style="margin:8px 0 16px">Touchez le cœur d'un produit pour le retrouver ici.</p><a class="btn btn-g" href="#/boutique">Voir la boutique</a></div>`)}
+function account(){
+ if(!user){let reg=false;
+  app.innerHTML=`<div class="prose" style="max-width:480px;margin:18px auto"><div class="tabs" style="margin:0 0 14px"><button class="chip on" id="t1">Connexion</button><button class="chip" id="t2">Créer un compte</button></div><form id="af" novalidate></form></div>`;
+  const draw=()=>{$('#t1').classList.toggle('on',!reg);$('#t2').classList.toggle('on',reg);
+   $('#af').innerHTML=(reg?fld('an','Nom complet')+fld('at','Téléphone','tel'):'')+fld('ae','E-mail','email')+fld('ap','Mot de passe','password')+`<button class="btn btn-g" style="width:100%">${reg?'Créer mon compte':'Me connecter'}</button>`};
+  $('#t1').onclick=()=>{reg=false;draw()};$('#t2').onclick=()=>{reg=true;draw()};draw();
+  $('#af').onsubmit=e=>{e.preventDefault();const em=$('#ae').value.trim().toLowerCase(),pw=$('#ap').value;
+   if(!/^\S+@\S+\.\S+$/.test(em)||pw.length<6)return toast('E-mail valide et mot de passe de 6 caractères minimum');
+   if(reg){const nm=$('#an').value.trim();if(!nm)return toast('Indiquez votre nom');if(users.some(u=>u.em==em))return toast('Un compte existe déjà avec cet e-mail');
+    user={name:nm,tel:$('#at').value.trim(),em,pw,ad:''};users.push(user);sv('k_users',users)}
+   else{const u=users.find(u=>u.em==em&&u.pw==pw);if(!u)return toast('E-mail ou mot de passe incorrect');user=u}
+   sv('k_user',user);toast('Bienvenue '+user.name.split(' ')[0]);route()};
+  return}
+ app.innerHTML=`<h1 style="margin:22px 0 14px;font-size:1.6rem">Bonjour ${esc(user.name)}</h1><div class="cl"><div class="box"><h2 style="font-size:1.15rem;margin-bottom:8px">Mes commandes</h2>${orders.length?orders.map((o,i)=>`<div class="ci" style="grid-template-columns:1fr auto"><div><b>${o.no}</b><div class="cdf">${new Date(o.ts).toLocaleDateString('fr-FR')} · ${usd(o.total)} · ${o.pm}</div></div><div style="display:flex;gap:6px;flex-wrap:wrap"><a class="btn btn-o" href="#/suivi/${o.no}">Suivre</a><button class="btn btn-n" data-re="${i}">Recommander</button></div></div>`).join(''):'<p>Aucune commande pour le moment.</p>'}</div>
+ <div class="box" style="align-self:start"><h2 style="font-size:1.15rem;margin-bottom:8px">Mon profil</h2><form id="pf">${fld('pn','Nom','text',esc(user.name))}${fld('pt','Téléphone','tel',esc(user.tel||''))}${fld('pa','Adresse','text',esc(user.ad||''))}<button class="btn btn-g" style="width:100%">Enregistrer</button></form><a class="btn btn-o" style="width:100%;margin-top:8px" href="#/favoris">Mes favoris (${wish.length})</a><button class="btn btn-o" id="lo" style="width:100%;margin-top:8px">Se déconnecter</button></div></div>`;
+ $('#pf').onsubmit=e=>{e.preventDefault();user={...user,name:$('#pn').value.trim()||user.name,tel:$('#pt').value.trim(),ad:$('#pa').value.trim()};users=users.map(x=>x.em==user.em?user:x);sv('k_user',user);sv('k_users',users);hdr();toast('Profil enregistré')};
+ $('#lo').onclick=()=>{user=null;sv('k_user',null);toast('Déconnecté');route()};
+ app.querySelectorAll('[data-re]').forEach(b=>b.onclick=()=>{orders[+b.dataset.re].items.forEach(i=>add(i.id,i.q));location.hash='#/panier'});
+}
+function contact(){
+ app.innerHTML=`<div class="prose"><h1>Contact</h1><p>Une question sur une commande, un produit ou un achat en gros ? Écrivez-nous, nous répondons sous 24 h.</p><div class="cl" style="margin-top:14px"><form id="ctf" novalidate>${fld('cn','Nom','text',esc(user?user.name:''))}${fld('ct','Téléphone / WhatsApp','tel',esc(user?user.tel||'':''))}<div class="field"><label for="cs">Sujet</label><select id="cs"><option>Question sur un produit</option><option>Suivi de commande</option><option>Paiement Mobile Money</option><option>Devis / achat en gros</option></select></div><div class="field"><label for="cm">Message</label><textarea id="cm" rows="4"></textarea></div><button class="btn btn-g">Envoyer le message</button></form>
+ <div class="box" style="align-self:start"><h2 style="font-size:1.15rem;margin-bottom:6px">Autres moyens</h2><p>26, Av. Coin du Marché, Q. Virunga, Goma</p><a class="btn btn-g" id="wa2" target="_blank" rel="noopener" style="margin-top:10px;width:100%">Discuter sur WhatsApp</a><a class="btn btn-o" href="#/faq" style="margin-top:8px;width:100%">Questions fréquentes</a></div></div></div>`;
+ $('#wa2').href='https://wa.me/'+WA;
+ $('#ctf').onsubmit=e=>{e.preventDefault();if(!$('#cn').value.trim()||!$('#cm').value.trim()||$('#ct').value.replace(/\D/g,'').length<9)return toast('Nom, téléphone et message sont requis');
+  const m=ls('k_msgs',[]);m.push({n:$('#cn').value,t:$('#ct').value,s:$('#cs').value,m:$('#cm').value,ts:Date.now()});sv('k_msgs',m);
+  $('#ctf').innerHTML='<div class="empty"><div class="e"><i class="fa-solid fa-circle-check" aria-hidden="true"></i></div><h2>Message envoyé</h2><p>Nous vous répondons très vite.</p></div>'};
+}
+function faq(){
+ const Q=[['Comment payer ma commande ?','Choisissez M-Pesa, Airtel Money, Orange Money ou Africell à la validation. Vous confirmez avec votre code PIN sur votre téléphone ; le paiement est traité par PawaPay.'],['Quels sont les délais de livraison ?','À Goma, 24 à 72 h. Dans les autres villes de RDC, 3 à 7 jours. À l\'international, 7 à 15 jours selon le pays.'],['Les smartphones sont-ils neufs et garantis ?','Oui : neufs, scellés, importés de Dubaï, avec 12 mois de garantie.'],['Puis-je retourner un produit ?','Oui, selon notre politique de retour (voir Mentions légales).'],['Comment suivre ma commande ?','Utilisez la page « Suivi » avec votre numéro de commande et votre téléphone.'],['Livrez-vous dans d\'autres pays ?','Nous préparons l\'extension à 12 pays d\'Afrique via PawaPay. Contactez-nous pour votre pays.']];
+ app.innerHTML=`<div class="prose"><h1>Questions fréquentes</h1>${Q.map(q=>`<details><summary>${q[0]}</summary><p>${q[1]}</p></details>`).join('')}<a class="btn btn-g" href="#/contact" style="margin-top:16px">Une autre question ?</a></div>`;
+}
+$('#wa').href='https://wa.me/'+WA;
+addEventListener('scroll',()=>{$('#up').style.display=scrollY>500?'grid':'none'});
+function about(){
+ app.innerHTML=`<div class="prose"><h1>À propos de KITIMA WORK SARL</h1>
+ <p>KITIMA WORK SARL est une entreprise congolaise basée à Goma, dans le Nord-Kivu. Elle exploite KITIMA SHOP, sa boutique en ligne dédiée à deux marchés : l'importation de smartphones et de produits high-tech depuis Dubaï, et l'agro-business avec le matériel d'élevage et les intrants agricoles.</p>
+ <div class="stats"><div><b>RDC</b>Siège à Goma</div><div><b>12</b>Pays visés</div><div><b>4</b>Mobile Money</div></div>
+ <h2>Notre vision</h2><p>Rendre l'achat en ligne simple et sûr en Afrique centrale et de l'Est : des produits authentiques, des prix clairs en USD et en francs congolais, et un paiement par Mobile Money, sans carte bancaire.</p>
+ <h2>Notre expansion</h2><p>Partis de la RDC, nous étendons la livraison et le paiement à 12 pays africains grâce à notre partenaire PawaPay, qui connecte les principaux opérateurs Mobile Money.</p>
+ <h2>Nous contacter</h2><ul><li>WhatsApp et téléphone : à renseigner</li><li>E-mail : à renseigner</li><li>26, Av. Coin du Marché, Q. Virunga, C/Karisimbi, Goma</li></ul></div>`;
+}
+function legal(sec){
+ const S={
+  cgv:['Conditions Générales de Vente','<p>[Emplacement réservé : insérez ici vos CGV – objet, prix en USD/CDF, commande, paiement Mobile Money via PawaPay, délais et zones de livraison, garanties, responsabilité, droit applicable.]</p>'],
+  retours:['Politique de retour','<p>[Emplacement réservé : insérez ici votre politique de retour – délai de rétractation, état du produit, procédure, remboursement vers le compte Mobile Money.]</p>'],
+  confidentialite:['Politique de confidentialité','<p>[Emplacement réservé : insérez ici votre politique de confidentialité – données collectées (nom, téléphone, adresse), finalité, durée de conservation, partage avec PawaPay, droits des clients.]</p>']};
+ app.innerHTML=`<div class="prose"><h1>Mentions légales & conformité</h1>
+ <div class="legal"><strong>KITIMA-WORK SARL</strong> – Entreprise légalement enregistrée en RDC.<ul style="margin-top:8px;list-style:none;padding:0"><li><strong>Siège social :</strong> 26, Av. Coin du Marché, Q. Virunga, C/Karisimbi, Goma, Nord-Kivu, RDC</li><li><strong>RCCM :</strong> CD/GOM/RCCM/22-B-00437</li><li><strong>Identification Nationale :</strong> 19-A0103-N06327E</li><li><strong>Numéro Impôt :</strong> A2296413X</li></ul></div>
+ <p>Les paiements Mobile Money sont traités par notre partenaire PawaPay.</p>
+ <div class="tabs">${Object.entries(S).map(([k,v])=>`<a class="chip ${sec==k?'on':''}" href="#/legal/${k}">${v[0]}</a>`).join('')}</div>
+ ${S[sec]?`<h2 id="s">${S[sec][0]}</h2>${S[sec][1]}`:''}</div>`;
+}
+
+/* router */
+function route(){
+ clearInterval(window._iv);
+ const [,a='',b]=location.hash.split('/');
+ ({'':()=>home(),boutique:()=>shop(b||'all'),produit:()=>product(b),panier:cartV,commande:checkout,'a-propos':about,legal:()=>legal(b),favoris:favs,compte:account,suivi:()=>track(b||''),contact,faq}[a]||home)();hdr();
+ const key={'':'home',boutique:'shop','a-propos':'about',legal:'legal',contact:'contact',suivi:'track'}[a];
+ document.querySelectorAll('[data-r]').forEach(l=>l.classList.toggle('on',l.dataset.r==key));
+ window.scrollTo({top:0});
+}
+$('#sc').innerHTML='<option value="all">Toutes</option>'+CATS.map(c=>`<option value="${c.id}">${c.n}</option>`).join('');
+$('#sf').onsubmit=e=>{e.preventDefault();window._q=$('#sq').value;const c=$('#sc').value,h='#/boutique'+(c=='all'?'':'/'+c);if(location.hash==h)route();else location.hash=h};
+const menu=$('#main-nav'),menuToggle=$('#menu-toggle'),menuScrim=$('#menu-scrim');
+function setMenuOpen(open){
+ menu.classList.toggle('is-open',open);
+ menuScrim.classList.toggle('on',open);
+ document.body.classList.toggle('menu-open',open);
+ menuToggle.setAttribute('aria-expanded',String(open));
+ menuToggle.setAttribute('aria-label',open?'Fermer le menu':'Ouvrir le menu');
+ menuToggle.querySelector('.menu-icon').classList.toggle('hidden',open);
+ menuToggle.querySelector('.close-icon').classList.toggle('hidden',!open);
+}
+menuToggle.onclick=()=>setMenuOpen(menuToggle.getAttribute('aria-expanded')!=='true');
+menuScrim.onclick=()=>setMenuOpen(false);
+menu.addEventListener('click',e=>{if(e.target.closest('a'))setMenuOpen(false)});
+addEventListener('keydown',e=>{if(e.key==='Escape')setMenuOpen(false)});
+addEventListener('resize',()=>{if(matchMedia('(min-width: 900px)').matches)setMenuOpen(false)});
+$('#modal').onclick=e=>{if(e.target.id=='modal'){$('#modal').classList.remove('on');if(location.hash=='#/commande'&&!cart.length)location.hash='#/'}};
+addEventListener('hashchange',()=>{setMenuOpen(false);route()});badge();route();
+</script>
+</body>
+</html>
