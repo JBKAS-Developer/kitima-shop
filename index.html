@@ -284,6 +284,7 @@ footer a{display:block;padding:3px 0}footer a:hover{color:var(--amber)}
 .heart{position:absolute;right:10px;bottom:10px;width:38px;height:38px;border-radius:50%;background:#fff;color:#94a3b8;font-size:1.2rem;display:grid;place-items:center;box-shadow:0 2px 8px #0002;transition:.2s}
 .heart.on{color:#dc2626;transform:scale(1.1)}
 .fab{position:fixed;right:14px;width:48px;height:48px;border-radius:50%;place-items:center;display:grid;color:#fff;z-index:45;box-shadow:0 6px 16px #0003;font-size:1.3rem}
+.fab.is-visible{display:grid!important}
 .tl{list-style:none;padding:0;margin:14px 0}.tl li{padding:8px 0 8px 30px;position:relative;color:var(--mute)}
 .tl li:before{content:'';position:absolute;left:4px;top:12px;width:14px;height:14px;border-radius:50%;background:var(--line)}
 .tl li.done{color:var(--navy);font-weight:600}.tl li.done:before{background:var(--green)}
@@ -366,7 +367,7 @@ tailwind.config = {
 </footer>
 
 <div class="modal" id="modal" role="dialog" aria-modal="true"><div class="mbox" id="mbox"></div></div>
-<button class="fab" id="up" aria-label="Haut de page" style="bottom:18px;background:var(--navy);display:none" onclick="scrollTo({top:0,behavior:'smooth'})"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
+<button class="fab" id="up" type="button" aria-label="Revenir en haut de la page" style="bottom:18px;background:var(--navy);display:none"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
 <div class="toast" id="toast" role="status"></div>
 
 <script src="assets/catalog.js"></script>
@@ -814,7 +815,10 @@ function faq(){
  const Q=[['Comment passer une commande ?','Ajoutez vos produits au panier, indiquez vos coordonnées et envoyez le récapitulatif à KITIMA SHOP sur WhatsApp. Notre équipe confirme votre commande et les modalités de livraison.'],['Le paiement en ligne est-il disponible ?','Le paiement en ligne n’est pas proposé actuellement. Les modalités de règlement sont communiquées par notre équipe lors de la confirmation de commande.'],['Les smartphones sont-ils neufs et garantis ?','KITIMA SHOP propose des smartphones neufs scellés, importés de Dubaï et couverts par une garantie.'],['Puis-je retourner un produit ?','Pour toute demande de retour, contactez le service client en indiquant votre numéro de commande et le produit concerné.'],['Comment suivre ma commande ?','Envoyez votre numéro de commande au service client via la page « Suivi » ou par WhatsApp.'],['Comment joindre KITIMA SHOP ?','Écrivez au +243 977 327 328 ou au +243 974 809 794. Le support client est joignable au +243 974 767 738.']];
  app.innerHTML=`<div class="prose"><h1>Questions fréquentes</h1>${Q.map(q=>`<details><summary>${q[0]}</summary><p>${q[1]}</p></details>`).join('')}<a class="btn btn-g" href="#/contact" style="margin-top:16px">Une autre question ?</a></div>`;
 }
-addEventListener('scroll',()=>{$('#up').style.display=scrollY>500?'grid':'none'});
+const upButton=$('#up');
+const updateUpButton=()=>upButton.classList.toggle('is-visible',Math.max(window.scrollY,document.documentElement.scrollTop,document.body.scrollTop)>300);
+addEventListener('scroll',updateUpButton,{passive:true});
+upButton.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
 function about(){
  app.innerHTML=`<div class="prose about-content"><h1>À propos de KITIMA WORK SARL</h1>
  <p>KITIMA SHOP est l’enseigne commerciale de KITIMA-WORK SARL, entreprise basée à Goma, dans le Nord-Kivu. Ses activités couvrent deux domaines : les smartphones neufs scellés importés de Dubaï avec garantie et les équipements d’agrobusiness et d’élevage.</p>
