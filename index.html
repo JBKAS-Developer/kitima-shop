@@ -337,8 +337,10 @@ const BUSINESS_EMAIL='contact@kitima.shop';
 const P=window.KITIMA_PRODUCTS;
 const $=(s,r=document)=>r.querySelector(s);
 const app=$('#app');
-let cart=[];try{cart=JSON.parse(localStorage.getItem('kitima_cart')||'[]').filter(i=>P.some(p=>p.id===Number(i.id))&&Number.isInteger(i.q)&&i.q>0)}catch(e){}
-const save=()=>{try{localStorage.setItem('kitima_cart',JSON.stringify(cart))}catch(e){}badge()};
+let cart=[];
+const accountKey=(name,id=user?.id)=>id?`k_${name}_${id}`:null;
+const validCart=value=>Array.isArray(value)?value.filter(i=>P.some(p=>p.id===Number(i.id))&&Number.isInteger(i.q)&&i.q>0):[];
+const save=()=>{const key=accountKey('cart');if(key)sv(key,cart);badge()};
 const usd=n=>'$'+n.toLocaleString('fr-FR',{minimumFractionDigits:n%1?2:0,maximumFractionDigits:2});
 const cdf=n=>Math.round(n*RATE).toLocaleString('fr-FR')+' FC';
 const find=id=>P.find(x=>x.id==id);
@@ -421,19 +423,30 @@ async function shareProduct(p){
 const ls=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}};
 const sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let wish=ls('k_wish',[]).filter(id=>P.some(p=>p.id===Number(id))),users=ls('k_users',[]).filter(value=>value&&typeof value==='object'),viewed=[];
+let wish=[],users=ls('k_users',[]).filter(value=>value&&typeof value==='object'),viewed=[];
 const savedUser=ls('k_user',null),savedIdentifier=KitimaAuth.normalizeIdentifier(savedUser?.em||savedUser?.tel||'');
 let user=users.find(value=>value.id===savedUser?.id||KitimaAuth.normalizeIdentifier(value.em||value.tel)===savedIdentifier)||null;
 let orderHistory=ls('k_orders',[]).filter(value=>value&&typeof value==='object');
+function loadAccountData(migrateLegacy=false){
+ if(!user){wish=[];cart=[];orderHistory=ls('k_orders',[]).filter(value=>value&&typeof value==='object');badge();return}
+ const wishKey=accountKey('wish'),cartKey=accountKey('cart');
+ const legacyWish=ls('k_wish',null),legacyCart=ls('kitima_cart',null);
+ wish=ls(wishKey,Array.isArray(legacyWish)?legacyWish:[]).filter(id=>P.some(p=>p.id===Number(id)));
+ cart=validCart(ls(cartKey,Array.isArray(legacyCart)?legacyCart:[]));
+ if(migrateLegacy){if(legacyWish!==null)sv(wishKey,wish);if(legacyCart!==null)sv(cartKey,cart);try{localStorage.removeItem('k_wish');localStorage.removeItem('kitima_cart')}catch(e){}}
+ orderHistory=ls('k_orders',[]).filter(value=>value&&typeof value==='object');badge();
+}
+loadAccountData(true);
 const grand=()=>total();
 const fld=(id,l,t='text',v='',ph='')=>`<div class="field"><label for="${id}">${l}</label><input id="${id}" type="${t}" value="${v}" placeholder="${ph}"></div>`;
 const avatarMarkup=(value,alt='')=>`<img class="user-avatar" src="${esc(KitimaAuth.avatarUrl(value))}" alt="${esc(alt)}" onerror="this.onerror=null;this.src='${KitimaAuth.DEFAULT_AVATAR}'">`;
 function persistUsers(){localStorage.setItem('k_users',JSON.stringify(users))}
-function persistSession(nextUser){localStorage.setItem('k_user',JSON.stringify(nextUser));user=nextUser}
+function persistSession(nextUser){localStorage.setItem('k_user',JSON.stringify(nextUser));user=nextUser;loadAccountData(true)}
 function signOut(){
  try{localStorage.removeItem('k_user')}
  catch(error){console.error('Could not clear session',error);toast('Impossible de fermer la session.');return}
  user=null;
+ wish=[];cart=[];viewed=[];badge();
  hdr();
  toast('Déconnexion réussie');
  if(location.hash.startsWith('#/compte'))location.hash='#/';
@@ -460,7 +473,7 @@ function hdr(){
   $('#header-avatar').src=KitimaAuth.DEFAULT_AVATAR;
  }
 }
-function fav(id){const on=wish.includes(id);wish=on?wish.filter(x=>x!=id):[...wish,id];sv('k_wish',wish);hdr();document.querySelectorAll('.heart[data-id="'+id+'"]').forEach(h=>h.classList.toggle('on',!on));toast(on?'Retiré des favoris':'Ajouté aux favoris');if(location.hash=='#/favoris')favs()}
+function fav(id){const on=wish.includes(id);wish=on?wish.filter(x=>x!=id):[...wish,id];const key=accountKey('wish');if(key)sv(key,wish);hdr();document.querySelectorAll('.heart[data-id="'+id+'"]').forEach(h=>h.classList.toggle('on',!on));toast(on?'Retiré des favoris':'Ajouté aux favoris');if(location.hash=='#/favoris')favs()}
 function rv(id){const all=ls('k_rev',{});
  const l=all[id]||[];
  $('#rvs').innerHTML=l.length?l.map(x=>`<div class="rv"><b>${esc(x.n)}</b><p>${esc(x.t)}</p></div>`).join(''):'<p>Aucun avis pour le moment.</p>';
@@ -706,8 +719,10 @@ addEventListener('storage',event=>{
  if(event.key!=='k_user')return;
  const stored=ls('k_user',null),identifier=KitimaAuth.normalizeIdentifier(stored?.em||stored?.tel||'');
  user=stored?users.find(value=>value.id===stored.id||KitimaAuth.normalizeIdentifier(value.em||value.tel)===identifier)||null:null;
- hdr();
  if(user)user={...user,...stored};
+ loadAccountData(false);
+ if(!user)viewed=[];
+ hdr();
  if(location.hash.startsWith('#/compte')&&!user)location.hash='#/';
  else route();
 });
