@@ -89,7 +89,7 @@ nav.main a:hover,nav.main a.on{background:rgba(255,255,255,.1);color:#fff}
 @media(min-width:1200px){nav.main{gap:2px}nav.main a{padding:8px 6px;font-size:.87rem;white-space:nowrap}nav.main a i{width:auto;margin:0 4px 0 0}}
 @media(min-width:1200px) and (max-width:1399px){.hrow{flex-wrap:wrap!important}.search{min-width:0}.header-auth{flex-basis:100%;justify-content:flex-end}}
 @media(max-width:500px){.brand img{width:132px;height:auto}.hact .ibtn{min-width:40px;min-height:40px;padding:8px 9px}.profile-summary div{grid-template-columns:1fr;gap:2px}}
-@media(max-width:640px){.profile-page>.profile-heading{align-items:flex-start;padding:16px}.profile-page>.profile-heading .user-avatar{width:60px;height:60px}.profile-page .profile-layout{gap:14px}}
+@media(max-width:640px){.profile-page>.profile-topline{align-items:flex-start;padding:16px}.profile-page .profile-layout{gap:14px}}
 @media(max-width:360px){.hrow{column-gap:6px}.brand img{width:116px}.menu-toggle{min-width:40px;min-height:40px}.hact{gap:4px}.hact .ibtn{min-width:36px;min-height:36px;padding:7px}}
 /* hero */
 .hero{background:linear-gradient(120deg,var(--navy) 55%,#12304a);color:#fff;border-radius:20px;overflow:hidden;position:relative;margin-top:18px}
@@ -220,9 +220,29 @@ input[type=range]{width:100%;accent-color:var(--green)}
 .auth-switch{text-align:center;margin:20px 0 0;color:var(--mute);font-size:.96rem}
 .auth-switch a{color:var(--green-d);font-weight:800;text-decoration:underline;text-underline-offset:3px}
 .profile-page{padding-bottom:28px}
-.profile-page>.profile-heading{padding:18px 20px;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 24px #0f172a08}
+.profile-page>.profile-topline{padding:18px 20px;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 24px #0f172a08}
 .profile-page .profile-layout{align-items:start}
 .profile-page .box{box-shadow:0 8px 24px #0f172a08}
+.profile-topline{display:flex;align-items:center;justify-content:space-between;gap:14px;min-width:0}
+.profile-heading{min-width:0}
+.profile-heading h1{overflow-wrap:anywhere}
+.profile-photo-wrap{position:relative;flex:0 0 auto}
+.profile-photo-open{display:block;width:76px;height:76px;padding:0;border:0;border-radius:50%;background:transparent;overflow:hidden}
+.profile-photo-open .user-avatar{display:block;width:100%;height:100%;border:3px solid #fff;box-shadow:0 0 0 1px var(--line)}
+.profile-photo-camera{position:absolute;right:-3px;bottom:-1px;width:34px;height:34px;border:3px solid #fff;border-radius:50%;display:grid;place-items:center;background:var(--green);color:#fff;box-shadow:0 3px 10px #0f172a25}
+.profile-photo-camera:hover{background:var(--green-d)}
+.profile-edit-trigger{flex:0 0 auto;border:1px solid var(--line);background:#fff;color:var(--navy);padding:9px 12px}
+.profile-edit-trigger:hover{border-color:var(--green);color:var(--green-d)}
+.photo-options{display:grid;gap:10px}
+.photo-options h2{font-size:1.25rem}
+.photo-options>p{color:var(--mute);margin-top:-6px}
+.photo-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.photo-actions button{min-height:48px;padding:10px;border-radius:10px;display:flex;align-items:center;justify-content:flex-start;gap:9px;background:#f1f5f9;color:var(--navy);text-align:left}
+.photo-actions button:hover{background:#e2e8f0}
+.photo-actions .photo-delete{background:#fff1f2;color:#be123c}
+.photo-preview{display:block;width:min(72vw,360px);height:min(72vw,360px);object-fit:contain;margin:0 auto 16px;border-radius:16px;background:#f1f5f9}
+.photo-preview-close{width:100%}
+@media(max-width:390px){.photo-actions{grid-template-columns:1fr}.profile-topline{align-items:flex-start}}
 .profile-danger{width:100%;margin-top:12px;background:#fff1f2;color:#be123c;border:1px solid #fecdd3}
 .profile-danger:hover{background:#ffe4e6}
 .profile-danger-zone{margin-top:20px;padding-top:16px;border-top:1px solid var(--line)}
@@ -353,7 +373,7 @@ const P=window.KITIMA_PRODUCTS;
 const $=(s,r=document)=>r.querySelector(s);
 const app=$('#app');
 let cart=[];
-const ACCOUNT_RESET_KEY='kitima_account_reset_2026_10';
+const ACCOUNT_RESET_KEY='kitima_account_reset_2026_10_v2';
 if(!localStorage.getItem(ACCOUNT_RESET_KEY)){
  try{
   const accountKeys=Array.from({length:localStorage.length},(_,index)=>localStorage.key(index)).filter(key=>key&&(/^(k_users|k_user|k_orders|k_wish|kitima_cart)$/.test(key)||/^k_(?:wish|cart)_/.test(key)));
@@ -474,6 +494,40 @@ async function resizeAvatar(file){
  const context=canvas.getContext('2d');if(!context){source.close?.();cleanup();throw new Error('Canvas indisponible')}
  context.drawImage(source,0,0,canvas.width,canvas.height);source.close?.();cleanup();
  return canvas.toDataURL('image/jpeg',.82);
+}
+function closeAvatarModal(){const modal=$('#modal');modal.classList.remove('on');$('#mbox').innerHTML=''}
+function showAvatarPreview(){
+ const box=$('#mbox');box.innerHTML=`<div class="photo-options"><img class="photo-preview" src="${esc(KitimaAuth.avatarUrl(user.avatar))}" alt="Photo de profil de ${esc(user.name)}"><button class="btn btn-o photo-preview-close" id="photo-preview-close" type="button">Fermer</button></div>`;
+ $('#photo-preview-close').onclick=closeAvatarModal;
+}
+function showAvatarOptions(){
+ const modal=$('#modal'),box=$('#mbox');
+ box.innerHTML=`<div class="photo-options"><h2>Photo de profil</h2><p>Choisissez une action pour votre photo.</p><div class="photo-actions">
+  <button id="photo-camera-choice" type="button"><i class="fa-solid fa-camera" aria-hidden="true"></i> Caméra</button>
+  <button id="photo-import-choice" type="button"><i class="fa-solid fa-image" aria-hidden="true"></i> Importer une photo</button>
+  <button id="photo-view-choice" type="button"><i class="fa-regular fa-eye" aria-hidden="true"></i> Voir la photo</button>
+  <button id="photo-delete-choice" class="photo-delete" type="button"><i class="fa-regular fa-trash-can" aria-hidden="true"></i> Supprimer la photo</button>
+ </div><button class="btn btn-o" id="photo-options-close" type="button">Annuler</button></div>`;
+ modal.classList.add('on');
+ $('#photo-camera-choice').onclick=()=>{closeAvatarModal();$('#profile-avatar-camera').click()};
+ $('#photo-import-choice').onclick=()=>{closeAvatarModal();$('#profile-avatar-upload').click()};
+ $('#photo-view-choice').onclick=showAvatarPreview;
+ $('#photo-delete-choice').onclick=()=>saveProfileAvatar(KitimaAuth.DEFAULT_AVATAR);
+ $('#photo-options-close').onclick=closeAvatarModal;
+}
+function saveProfileAvatar(avatar){
+ if(!user?.id)return;
+ const updated={...user,avatar:KitimaAuth.avatarUrl(avatar)},nextUsers=users.map(value=>value.id===user.id?{...value,...updated}:value);
+ try{
+  localStorage.setItem('k_users',JSON.stringify(nextUsers));localStorage.setItem('k_user',JSON.stringify(updated));
+  users=nextUsers;user=updated;closeAvatarModal();hdr();route();toast('Photo de profil mise à jour');
+ }catch(error){console.error('Could not update profile photo',error);closeAvatarModal();toast('Impossible d’enregistrer cette photo.')}
+}
+async function selectProfilePhoto(event){
+ const input=event.currentTarget,file=input.files[0];input.value='';if(!file)return;
+ if(!file.type.startsWith('image/'))return toast('Choisissez un fichier image valide.');
+ if(file.size>8*1024*1024)return toast('La photo doit peser moins de 8 Mo.');
+ try{saveProfileAvatar(await resizeAvatar(file))}catch(error){console.error('Could not read profile photo',error);toast('Impossible de lire cette image. Choisissez une autre photo.')}
 }
 function persistUsers(){localStorage.setItem('k_users',JSON.stringify(users))}
 function persistSession(nextUser){localStorage.setItem('k_user',JSON.stringify(nextUser));user=nextUser;loadAccountData(true)}
@@ -672,15 +726,19 @@ function account(mode='login'){
  const email=user.em||'Aucune adresse e-mail enregistrée',address=user.ad||'Aucune adresse de livraison enregistrée';
  orderHistory=ls('k_orders',[]).filter(value=>value&&typeof value==='object');
  const userOrders=orderHistory.filter(order=>order.userId===user.id).sort((first,second)=>second.ts-first.ts);
- app.innerHTML=`<div class="profile-page"><div class="profile-heading">${avatarMarkup(user.avatar,user.name)}<div><h1 style="font-size:1.6rem">Mon compte</h1><p style="color:var(--mute)">Bienvenue, ${esc(user.name)}.</p></div></div>
+ app.innerHTML=`<div class="profile-page"><div class="profile-topline"><div class="profile-heading"><div class="profile-photo-wrap">
+   <button class="profile-photo-open" id="profile-photo-open" type="button" aria-label="Options de la photo de profil">${avatarMarkup(user.avatar,user.name)}</button>
+   <button class="profile-photo-camera" id="profile-photo-camera" type="button" aria-label="Changer la photo de profil"><i class="fa-solid fa-camera" aria-hidden="true"></i></button>
+   <input id="profile-avatar-camera" type="file" accept="image/*" capture="user" hidden><input id="profile-avatar-upload" type="file" accept="image/*" hidden>
+  </div><div><h1 style="font-size:1.6rem">Mon compte</h1><p style="color:var(--mute)">Bienvenue, ${esc(user.name)}.</p></div></div>
+  <button class="btn profile-edit-trigger" id="profile-edit-trigger" type="button"><i class="fa-solid fa-pen" aria-hidden="true"></i><span>Modifier</span></button></div>
   <div class="cl profile-layout"><section class="box"><h2 style="font-size:1.2rem">Mon profil</h2>
    <dl class="profile-summary"><div><dt>Nom complet</dt><dd>${esc(user.name)}</dd></div><div><dt>E-mail</dt><dd>${esc(email)}</dd></div><div><dt>Téléphone WhatsApp</dt><dd>${esc(user.tel||'Aucun numéro enregistré')}</dd></div><div><dt>Adresse de livraison</dt><dd>${esc(address)}</dd></div></dl>
-   <details><summary>Modifier le profil</summary><form id="profile-form" class="auth-fields" style="margin-top:14px" novalidate>
+   <details id="profile-edit-section"><summary>Modifier mes informations</summary><form id="profile-form" class="auth-fields" style="margin-top:14px" novalidate>
     ${fld('profile-name','Nom complet','text',esc(user.name))}
     ${fld('profile-email','Adresse e-mail','email',esc(user.em||''))}
     ${fld('profile-phone','Téléphone WhatsApp','tel',esc(user.tel||''))}
     ${fld('profile-address','Adresse de livraison','text',esc(user.ad||''))}
-    <div class="field"><label for="profile-avatar">Photo de profil depuis votre appareil</label><input id="profile-avatar" type="file" accept="image/*"><small>Choisissez une image dans la galerie de votre téléphone ou sur votre appareil.</small></div>
     <p id="profile-error" class="auth-error" role="alert" aria-live="polite" hidden></p>
     <button class="btn btn-g" type="submit">Enregistrer les modifications</button>
    </form></details>
@@ -693,22 +751,21 @@ function account(mode='login'){
   <section class="box"><h2 style="font-size:1.2rem;margin-bottom:12px">Mes commandes WhatsApp</h2>
    ${userOrders.length?`<div class="order-list">${userOrders.map(order=>`<article class="order-card"><b>${esc(order.id)}</b><p class="cdf">${new Date(order.ts).toLocaleString('fr-FR')} · ${usd(order.total)}</p><ul>${order.items.map(item=>`<li><a href="#/produit/${Number(item.id)}">${esc(item.quantity)} × ${esc(item.name)}</a> — ${usd(item.subtotal)}</li>`).join('')}</ul><p class="cdf" style="margin-top:8px">Demande préparée pour WhatsApp</p></article>`).join('')}</div>`:'<p>Aucune commande WhatsApp dans votre historique.</p>'}
   </section></div></div>`;
+ $('#profile-photo-open').onclick=showAvatarOptions;
+ $('#profile-photo-camera').onclick=showAvatarOptions;
+ $('#profile-avatar-camera').onchange=selectProfilePhoto;
+ $('#profile-avatar-upload').onchange=selectProfilePhoto;
+ $('#profile-edit-trigger').onclick=()=>{const section=$('#profile-edit-section');section.open=true;section.scrollIntoView({behavior:'smooth',block:'center'})};
  $('#profile-form').onsubmit=async event=>{
   event.preventDefault();
   const error=$('#profile-error'),showProfileError=message=>{error.textContent=message;error.hidden=!message};
-  const name=$('#profile-name').value.trim(),em=KitimaAuth.normalizeEmail($('#profile-email').value),tel=$('#profile-phone').value.trim(),ad=$('#profile-address').value.trim(),file=$('#profile-avatar').files[0];
+  const name=$('#profile-name').value.trim(),em=KitimaAuth.normalizeEmail($('#profile-email').value),tel=$('#profile-phone').value.trim(),ad=$('#profile-address').value.trim();
   if(!name)return showProfileError('Indiquez votre nom complet.');
   if(!/^\S+@\S+\.\S+$/.test(em))return showProfileError('Indiquez une adresse e-mail valide.');
   if(tel&&KitimaAuth.normalizePhone(tel).length<9)return showProfileError('Vérifiez le numéro WhatsApp ou laissez ce champ vide.');
-  if(file&&!file.type.startsWith('image/'))return showProfileError('Choisissez un fichier image valide.');
-  if(file&&file.size>8*1024*1024)return showProfileError('La photo doit peser moins de 8 Mo.');
   if(users.some(value=>value.id!==user.id&&KitimaAuth.normalizeEmail(value.em)===em))return showProfileError('Un compte utilise déjà cette adresse e-mail.');
   if(tel&&users.some(value=>value.id!==user.id&&KitimaAuth.normalizePhone(value.tel)===KitimaAuth.normalizePhone(tel)))return showProfileError('Un compte utilise déjà ce numéro WhatsApp.');
-  let avatar=user.avatar;
-  if(file){
-   try{avatar=await resizeAvatar(file)}catch(error){return showProfileError('Impossible de lire cette image. Choisissez une autre photo.');}
-  }
-  const updated={...user,name,em,tel,ad,avatar:KitimaAuth.avatarUrl(avatar)};
+  const updated={...user,name,em,tel,ad,avatar:user.avatar};
   const nextUsers=users.map(value=>value.id===user.id?{...value,...updated}:value);
   try{localStorage.setItem('k_users',JSON.stringify(nextUsers));localStorage.setItem('k_user',JSON.stringify(updated));users=nextUsers;user=updated;hdr();route();toast('Profil mis à jour')}
   catch(error){console.error('Could not save profile',error);toast('Impossible d’enregistrer le profil.')}
