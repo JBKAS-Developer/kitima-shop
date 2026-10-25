@@ -29,6 +29,7 @@
  }
  const avatarUrl=value=>{
   if(!value)return defaultAvatar;
+  if(/^data:image\/(?:jpeg|png|webp);base64,[A-Za-z0-9+/]+=*$/.test(value))return value;
   try{const url=new URL(value);return url.protocol==='https:'?url.href:defaultAvatar}catch{return defaultAvatar}
  };
  const isValidAvatarUrl=value=>{

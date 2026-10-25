@@ -68,14 +68,12 @@ nav.main a:hover,nav.main a.on{background:rgba(255,255,255,.1);color:#fff}
 .drawer-auth{display:grid;gap:10px;margin-top:auto;padding-top:20px;border-top:1px solid #ffffff24}
 .drawer-auth a{display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:12px 14px;border-radius:10px;font-weight:700}
 .drawer-auth .auth-login{background:var(--green);color:#fff}
-.drawer-auth .auth-register{border:1px solid #ffffff50;color:#fff}
 .drawer-auth .auth-account{background:#fff;color:var(--navy)}
 .drawer-auth .auth-logout{border:1px solid #ffffff35;background:transparent;color:#fecaca}
 .drawer-auth a:hover{filter:brightness(1.1)}
 .header-auth{display:flex;order:4;width:100%;gap:8px}
 .header-auth a{display:flex;align-items:center;justify-content:center;gap:7px;min-height:42px;flex:1;padding:8px 12px;border-radius:9px;font-size:.92rem;font-weight:700}
 .header-auth .auth-login{background:var(--green);color:#fff}
-.header-auth .auth-register{border:1px solid #ffffff55;color:#fff}
 .user-avatar{width:38px;height:38px;border-radius:50%;object-fit:cover;background:#e2e8f0}
 .header-account{display:flex;align-items:center;gap:8px}
 .profile-heading{display:flex;align-items:center;gap:16px;margin-bottom:18px}
@@ -91,6 +89,7 @@ nav.main a:hover,nav.main a.on{background:rgba(255,255,255,.1);color:#fff}
 @media(min-width:1200px){nav.main{gap:2px}nav.main a{padding:8px 6px;font-size:.87rem;white-space:nowrap}nav.main a i{width:auto;margin:0 4px 0 0}}
 @media(min-width:1200px) and (max-width:1399px){.hrow{flex-wrap:wrap!important}.search{min-width:0}.header-auth{flex-basis:100%;justify-content:flex-end}}
 @media(max-width:500px){.brand img{width:132px;height:auto}.hact .ibtn{min-width:40px;min-height:40px;padding:8px 9px}.profile-summary div{grid-template-columns:1fr;gap:2px}}
+@media(max-width:640px){.profile-page>.profile-heading{align-items:flex-start;padding:16px}.profile-page>.profile-heading .user-avatar{width:60px;height:60px}.profile-page .profile-layout{gap:14px}}
 @media(max-width:360px){.hrow{column-gap:6px}.brand img{width:116px}.menu-toggle{min-width:40px;min-height:40px}.hact{gap:4px}.hact .ibtn{min-width:36px;min-height:36px;padding:7px}}
 /* hero */
 .hero{background:linear-gradient(120deg,var(--navy) 55%,#12304a);color:#fff;border-radius:20px;overflow:hidden;position:relative;margin-top:18px}
@@ -195,23 +194,40 @@ input[type=range]{width:100%;accent-color:var(--green)}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
 .stats div{background:var(--navy);color:#fff;border-radius:12px;padding:14px;text-align:center}
 .stats b{display:block;font-family:Sora;font-size:1.6rem;color:var(--amber)}
+.about-content{overflow-wrap:anywhere;min-width:0}
+.about-content .stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+.about-content .stats div{min-width:0;overflow-wrap:anywhere}
+.about-content .legal{overflow-wrap:anywhere}
+@media(max-width:700px){.about-content .stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:420px){.prose.about-content{padding:16px}.about-content .stats{grid-template-columns:1fr}.about-content h1{font-size:1.45rem;line-height:1.25}}
 .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
 .auth-wrap{max-width:500px;margin:28px auto 48px}
-.auth-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 18px 55px #0f172a12}
+.auth-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:clamp(22px,5vw,38px);box-shadow:0 22px 70px #0f172a16}
 .auth-brand{width:68px;height:68px;border-radius:20px;background:#ecfdf5;display:grid;place-items:center;margin:0 auto 14px}
-.auth-heading{text-align:center;font-size:1.65rem;margin-bottom:8px}
+.auth-kicker{text-align:center;text-transform:uppercase;letter-spacing:.12em;font-size:.76rem;font-weight:800;color:var(--green-d);margin-bottom:7px}
+.auth-heading{text-align:center;font-size:clamp(1.5rem,5vw,1.85rem);margin-bottom:8px}
 .auth-subtitle{text-align:center;color:var(--mute);margin:0 auto 20px;max-width:34ch}
-.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:5px;background:#f1f5f9;border-radius:12px;margin-bottom:20px}
-.auth-tabs button{min-height:44px;border-radius:9px;background:transparent;color:var(--mute);font-weight:700}
-.auth-tabs button.on{background:#fff;color:var(--navy);box-shadow:0 1px 4px #0f172a1a}
 .auth-fields{display:grid;gap:14px}
 .auth-fields .field{margin:0}
 .auth-fields input{width:100%}
+.auth-fields input:not([type=file]){min-height:48px;border-radius:10px}
+.auth-fields input:focus{border-color:var(--green);box-shadow:0 0 0 3px #05966922;outline:0}
 .auth-password{position:relative}
 .auth-password input{padding-right:48px}
 .auth-password button{position:absolute;right:5px;top:5px;width:40px;height:40px;border-radius:8px;background:transparent;color:var(--mute)}
 .auth-error{padding:10px 12px;border:1px solid #fecaca;border-radius:9px;background:#fef2f2;color:#b91c1c;font-size:.95rem}
 .auth-submit{width:100%;margin-top:6px}
+.auth-switch{text-align:center;margin:20px 0 0;color:var(--mute);font-size:.96rem}
+.auth-switch a{color:var(--green-d);font-weight:800;text-decoration:underline;text-underline-offset:3px}
+.profile-page{padding-bottom:28px}
+.profile-page>.profile-heading{padding:18px 20px;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 24px #0f172a08}
+.profile-page .profile-layout{align-items:start}
+.profile-page .box{box-shadow:0 8px 24px #0f172a08}
+.profile-danger{width:100%;margin-top:12px;background:#fff1f2;color:#be123c;border:1px solid #fecdd3}
+.profile-danger:hover{background:#ffe4e6}
+.profile-danger-zone{margin-top:20px;padding-top:16px;border-top:1px solid var(--line)}
+.profile-danger-zone h3{font-size:1rem;color:#9f1239;margin-bottom:4px}
+.profile-danger-zone p{font-size:.9rem;color:var(--mute);margin-bottom:8px}
 @media(max-width:640px){
  body{font-size:18px;line-height:1.6}
  section.blk{padding:28px 0}
@@ -286,7 +302,6 @@ tailwind.config = {
     <a href="#/" data-r="home"><i class="fa-solid fa-house" aria-hidden="true"></i>Accueil</a><a href="#/boutique" data-r="shop"><i class="fa-solid fa-store" aria-hidden="true"></i>Boutique</a><a href="#/a-propos" data-r="about"><i class="fa-regular fa-circle-question" aria-hidden="true"></i>À propos</a><a href="#/contact" data-r="contact"><i class="fa-regular fa-envelope" aria-hidden="true"></i>Contact</a><a href="#/suivi" data-r="track"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i>Suivi</a><a href="#/legal" data-r="legal"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>Mentions légales</a>
     <div class="drawer-auth nav-auth">
      <a class="auth-login" href="#/compte?mode=login"><i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>Se connecter</a>
-     <a class="auth-register" href="#/compte?mode=register"><i class="fa-solid fa-user-plus" aria-hidden="true"></i>Créer un compte</a>
      <a class="auth-account hidden" href="#/compte"><img class="user-avatar" id="drawer-avatar" alt=""><span id="drawer-name">Mon compte</span></a>
      <button class="auth-logout hidden" id="drawer-logout" type="button"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>Se déconnecter</button>
     </div>
@@ -297,12 +312,12 @@ tailwind.config = {
     <button aria-label="Lancer la recherche"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></button>
    </form>
    <div class="hact order-2 ml-auto flex items-center gap-1.5 min-[1200px]:order-3 sm:gap-2">
-    <a class="ibtn" href="#/favoris" aria-label="Favoris"><i class="fa-regular fa-heart" aria-hidden="true"></i><span class="badge" id="wb">0</span></a><a class="ibtn header-account hidden" id="header-account" href="#/compte" aria-label="Mon compte"><i class="fa-regular fa-user" id="header-account-icon" aria-hidden="true"></i><img class="user-avatar hidden" id="header-avatar" alt=""><span class="lbl" id="ul">Mon compte</span></a>
+    <a class="ibtn" href="#/favoris" aria-label="Favoris"><i class="fa-regular fa-heart" aria-hidden="true"></i><span class="badge" id="wb">0</span></a>
     <a class="ibtn" href="#/panier" aria-label="Panier"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i><span class="badge" id="cb">0</span></a>
+    <a class="ibtn header-account hidden" id="header-account" href="#/compte" aria-label="Mon compte"><i class="fa-regular fa-user" id="header-account-icon" aria-hidden="true"></i><img class="user-avatar hidden" id="header-avatar" alt=""><span class="lbl" id="ul">Mon compte</span></a>
    </div>
    <div class="header-auth" id="header-auth">
     <a class="auth-login" href="#/compte?mode=login"><i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>Se connecter</a>
-    <a class="auth-register" href="#/compte?mode=register"><i class="fa-solid fa-user-plus" aria-hidden="true"></i>Créer un compte</a>
    </div>
   </div>
  </div>
@@ -328,7 +343,7 @@ tailwind.config = {
 <script src="assets/catalog.js"></script>
 <script src="app.js"></script>
 <script>
-const RATE=2800; // Taux de conversion indicatif.
+const RATE=2400; // Taux de conversion indicatif.
 const CATS=[{id:'tech',n:'High-Tech & Smartphones',e:'fa-solid fa-mobile-screen-button'},{id:'agro',n:'Agrobusiness & Élevage',e:'fa-solid fa-seedling'}];
 const WHATSAPP_ORDER='243977327328';
 const WHATSAPP_ORDER_SECONDARY='243974809794';
@@ -338,6 +353,13 @@ const P=window.KITIMA_PRODUCTS;
 const $=(s,r=document)=>r.querySelector(s);
 const app=$('#app');
 let cart=[];
+const ACCOUNT_RESET_KEY='kitima_account_reset_2026_10';
+if(!localStorage.getItem(ACCOUNT_RESET_KEY)){
+ try{
+  const accountKeys=Array.from({length:localStorage.length},(_,index)=>localStorage.key(index)).filter(key=>key&&(/^(k_users|k_user|k_orders|k_wish|kitima_cart)$/.test(key)||/^k_(?:wish|cart)_/.test(key)));
+  accountKeys.forEach(key=>localStorage.removeItem(key));localStorage.setItem(ACCOUNT_RESET_KEY,'done');
+ }catch(error){console.error('Could not reset old local accounts',error)}
+}
 const accountKey=(name,id=user?.id)=>id?`k_${name}_${id}`:null;
 const validCart=value=>Array.isArray(value)?value.filter(i=>P.some(p=>p.id===Number(i.id))&&Number.isInteger(i.q)&&i.q>0):[];
 const save=()=>{const key=accountKey('cart');if(key)sv(key,cart);badge()};
@@ -440,6 +462,19 @@ loadAccountData(true);
 const grand=()=>total();
 const fld=(id,l,t='text',v='',ph='')=>`<div class="field"><label for="${id}">${l}</label><input id="${id}" type="${t}" value="${v}" placeholder="${ph}"></div>`;
 const avatarMarkup=(value,alt='')=>`<img class="user-avatar" src="${esc(KitimaAuth.avatarUrl(value))}" alt="${esc(alt)}" onerror="this.onerror=null;this.src='${KitimaAuth.DEFAULT_AVATAR}'">`;
+async function resizeAvatar(file){
+ let source,width,height,cleanup=()=>{};
+ if(typeof createImageBitmap==='function'){
+  source=await createImageBitmap(file);width=source.width;height=source.height;
+ }else{
+  const url=URL.createObjectURL(file),image=new Image();cleanup=()=>URL.revokeObjectURL(url);image.src=url;await image.decode();source=image;width=image.naturalWidth;height=image.naturalHeight;
+ }
+ const canvas=document.createElement('canvas'),limit=320,scale=Math.min(1,limit/Math.max(width,height));
+ canvas.width=Math.max(1,Math.round(width*scale));canvas.height=Math.max(1,Math.round(height*scale));
+ const context=canvas.getContext('2d');if(!context){source.close?.();cleanup();throw new Error('Canvas indisponible')}
+ context.drawImage(source,0,0,canvas.width,canvas.height);source.close?.();cleanup();
+ return canvas.toDataURL('image/jpeg',.82);
+}
 function persistUsers(){localStorage.setItem('k_users',JSON.stringify(users))}
 function persistSession(nextUser){localStorage.setItem('k_user',JSON.stringify(nextUser));user=nextUser;loadAccountData(true)}
 function signOut(){
@@ -452,10 +487,26 @@ function signOut(){
  if(location.hash.startsWith('#/compte'))location.hash='#/';
  else route();
 }
+function deleteAccount(){
+ if(!user?.id)return;
+ const accountId=String(user.id);
+ if(!window.confirm('Voulez-vous vraiment supprimer votre compte ? Votre profil, vos favoris, votre panier et vos commandes enregistrées seront supprimés définitivement.'))return;
+ try{
+  const latestUsers=ls('k_users',[]).filter(value=>value&&typeof value==='object');
+  const latestOrders=ls('k_orders',[]).filter(value=>value&&typeof value==='object');
+  const nextUsers=latestUsers.filter(value=>String(value.id)!==accountId);
+  const nextOrders=latestOrders.filter(value=>String(value.userId)!==accountId);
+  localStorage.setItem('k_users',JSON.stringify(nextUsers));
+  localStorage.setItem('k_orders',JSON.stringify(nextOrders));
+  localStorage.removeItem('k_user');localStorage.removeItem(`k_wish_${accountId}`);localStorage.removeItem(`k_cart_${accountId}`);
+  users=nextUsers;orderHistory=nextOrders;user=null;wish=[];cart=[];viewed=[];badge();hdr();toast('Compte supprimé');
+  location.hash='#/compte?mode=login';
+ }catch(error){console.error('Could not delete account',error);toast('Impossible de supprimer le compte. Réessayez.')}
+}
 function hdr(){
  $('#wb').textContent=wish.length;$('#ul').textContent=user?' '+user.name.split(' ')[0]:' Mon compte';
  const loggedIn=!!user;
- document.querySelectorAll('.auth-login,.auth-register').forEach(link=>link.classList.toggle('hidden',loggedIn));
+ document.querySelectorAll('.auth-login').forEach(link=>link.classList.toggle('hidden',loggedIn));
  document.querySelectorAll('.auth-account').forEach(link=>link.classList.toggle('hidden',!loggedIn));
  document.querySelector('#header-auth').classList.toggle('hidden',loggedIn);
  $('#header-account').classList.toggle('hidden',!loggedIn);
@@ -491,6 +542,7 @@ function cartV(){
  $('#ec').onclick=()=>{cart=[];save();cartV()};
 }
 function checkout(){
+ if(!user){location.hash='#/compte?mode=login&redirect=commande';return}
  if(!cart.length)return cartV();const u=user||{};
  app.innerHTML=`<h1 style="margin:22px 0 14px;font-size:1.6rem">Finaliser la commande</h1><form class="cl" id="cf" novalidate><div class="box"><h2 style="font-size:1.15rem;margin-bottom:12px">Livraison</h2>
  ${fld('nm','Nom complet','text',esc(u.name||''),'Votre nom')}${fld('tl','Téléphone','tel',esc(u.tel||''),'+243 …')}${fld('ad','Ville et adresse de livraison en RDC','text',esc(u.ad||''),'Ville, commune, quartier, avenue')}
@@ -498,6 +550,7 @@ function checkout(){
  <p style="font-size:1rem;color:var(--mute)">Envoyez votre panier à notre service client pour confirmer la disponibilité, la livraison et le montant final.</p></div>
  <div class="box sum" style="align-self:start"><h2 style="font-size:1.2rem;margin-bottom:8px">Récapitulatif de la commande</h2>${cart.map(i=>{const p=find(i.id);return`<div><span>${i.q} × ${p.n}</span><span>${usd(p.p*i.q)}</span></div>`}).join('')}<div class="tot"><span>Sous-total indicatif</span><span>${usd(grand())}</span></div><div class="cdf">≈ ${cdf(grand())} (taux indicatif : 1 USD = ${RATE.toLocaleString('fr-FR')} FC)</div><p class="cdf" style="margin:6px 0 10px">Frais de livraison, prix et disponibilité confirmés sur WhatsApp.</p><button class="btn btn-g" id="pb" type="submit" style="width:100%;margin-top:12px;background:#128c7e"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Finaliser la commande sur WhatsApp</button><a class="btn btn-o" style="width:100%;margin-top:8px" href="#/panier">Modifier le panier</a></div></form>`;
  $('#cf').onsubmit=e=>{e.preventDefault();let ok=true;
+  if(!user?.id){location.hash='#/compte?mode=login&redirect=commande';return}
   ['nm','tl','ad'].forEach(id=>{const f=$('#'+id),bad=!f.value.trim()||(id=='tl'&&f.value.replace(/\D/g,'').length<9);f.style.borderColor=bad?'#dc2626':'';if(bad)ok=false});
   if(!ok)return toast('Indiquez votre nom, votre téléphone et votre adresse de livraison.');
   const lines=cart.map(i=>{const p=find(i.id);return`• ${p.n} — quantité : ${i.q} — prix unitaire : ${usd(p.p)} — sous-total : ${usd(p.p*i.q)}\n  Lien du produit : ${productLink(p)}`});
@@ -540,9 +593,10 @@ function account(mode='login'){
   let registering=mode==='register';
   app.innerHTML=`<section class="auth-wrap px-1 sm:px-0"><div class="auth-card">
    <div class="auth-brand"><img src="assets/favicon.svg" alt="" width="48" height="48"></div>
+   <p class="auth-kicker">Espace client KITIMA SHOP</p>
    <h1 class="auth-heading" id="auth-heading"></h1><p class="auth-subtitle" id="auth-subtitle"></p>
-   <div class="auth-tabs" role="tablist" aria-label="Accès au compte"><button type="button" role="tab" id="login-tab" aria-selected="false" aria-controls="auth-form">Se connecter</button><button type="button" role="tab" id="register-tab" aria-selected="false" aria-controls="auth-form">Créer un compte</button></div>
    <form id="auth-form" class="auth-fields"></form>
+   <p id="auth-switch" class="auth-switch"></p>
   </div></section>`;
   const showError=message=>{
    const error=$('#auth-error');
@@ -550,12 +604,11 @@ function account(mode='login'){
    error.hidden=!message;
   };
   const draw=()=>{
-   $('#login-tab').classList.toggle('on',!registering);
-   $('#register-tab').classList.toggle('on',registering);
-   $('#login-tab').setAttribute('aria-selected',String(!registering));
-   $('#register-tab').setAttribute('aria-selected',String(registering));
    $('#auth-heading').textContent=registering?'Créer votre compte':'Bienvenue chez KITIMA SHOP';
    $('#auth-subtitle').textContent=registering?'Un nom, une adresse e-mail et un mot de passe suffisent.':'Connectez-vous avec votre adresse e-mail et votre mot de passe.';
+   const redirect=new URLSearchParams(location.hash.split('?')[1]||'').get('redirect');
+   const suffix=redirect==='commande'?'&redirect=commande':'';
+   $('#auth-switch').innerHTML=registering?`Vous avez déjà un compte ? <a href="#/compte?mode=login${suffix}">Connectez-vous ici</a>.`:`Vous n’avez pas encore de compte ? <a href="#/compte?mode=register${suffix}">Créez votre compte ici</a>.`;
    $('#auth-form').innerHTML=`
     ${registering?'<div class="field"><label for="auth-name">Nom complet</label><input id="auth-name" name="name" type="text" autocomplete="name" maxlength="100" required></div>':''}
     <div class="field"><label for="auth-email">Adresse e-mail</label><input id="auth-email" name="email" type="email" autocomplete="email" maxlength="254" required></div>
@@ -570,8 +623,6 @@ function account(mode='login'){
    };
    $('#auth-form').addEventListener('input',()=>showError(''));
   };
-  $('#login-tab').onclick=()=>{registering=false;draw()};
-  $('#register-tab').onclick=()=>{registering=true;draw()};
   draw();
   $('#auth-form').onsubmit=async event=>{
    event.preventDefault();
@@ -607,7 +658,8 @@ function account(mode='login'){
      hdr();
      toast('Connexion réussie');
     }
-    route();
+    const redirect=new URLSearchParams(location.hash.split('?')[1]||'').get('redirect');
+    if(redirect==='commande')location.hash='#/commande';else route();
    }catch(error){
     console.error('Authentication failed',error);
     showError(error.message||'Impossible de terminer cette opération. Réessayez.');
@@ -620,40 +672,49 @@ function account(mode='login'){
  const email=user.em||'Aucune adresse e-mail enregistrée',address=user.ad||'Aucune adresse de livraison enregistrée';
  orderHistory=ls('k_orders',[]).filter(value=>value&&typeof value==='object');
  const userOrders=orderHistory.filter(order=>order.userId===user.id).sort((first,second)=>second.ts-first.ts);
- app.innerHTML=`<div class="profile-heading">${avatarMarkup(user.avatar,user.name)}<div><h1 style="font-size:1.6rem">Mon compte</h1><p style="color:var(--mute)">Bienvenue, ${esc(user.name)}.</p></div></div>
-  <div class="cl"><section class="box"><h2 style="font-size:1.2rem">Mon profil</h2>
+ app.innerHTML=`<div class="profile-page"><div class="profile-heading">${avatarMarkup(user.avatar,user.name)}<div><h1 style="font-size:1.6rem">Mon compte</h1><p style="color:var(--mute)">Bienvenue, ${esc(user.name)}.</p></div></div>
+  <div class="cl profile-layout"><section class="box"><h2 style="font-size:1.2rem">Mon profil</h2>
    <dl class="profile-summary"><div><dt>Nom complet</dt><dd>${esc(user.name)}</dd></div><div><dt>E-mail</dt><dd>${esc(email)}</dd></div><div><dt>Téléphone WhatsApp</dt><dd>${esc(user.tel||'Aucun numéro enregistré')}</dd></div><div><dt>Adresse de livraison</dt><dd>${esc(address)}</dd></div></dl>
    <details><summary>Modifier le profil</summary><form id="profile-form" class="auth-fields" style="margin-top:14px" novalidate>
     ${fld('profile-name','Nom complet','text',esc(user.name))}
     ${fld('profile-email','Adresse e-mail','email',esc(user.em||''))}
     ${fld('profile-phone','Téléphone WhatsApp','tel',esc(user.tel||''))}
     ${fld('profile-address','Adresse de livraison','text',esc(user.ad||''))}
-    ${fld('profile-avatar','Photo de profil (URL HTTPS)','url',esc(user.avatar===KitimaAuth.DEFAULT_AVATAR?'':user.avatar),'https://')}
+    <div class="field"><label for="profile-avatar">Photo de profil depuis votre appareil</label><input id="profile-avatar" type="file" accept="image/*"><small>Choisissez une image dans la galerie de votre téléphone ou sur votre appareil.</small></div>
     <p id="profile-error" class="auth-error" role="alert" aria-live="polite" hidden></p>
     <button class="btn btn-g" type="submit">Enregistrer les modifications</button>
    </form></details>
    <a class="btn btn-o" style="width:100%;margin-top:12px" href="#/favoris">Mes favoris (${wish.length})</a>
    <button class="btn" id="account-logout" type="button" style="width:100%;margin-top:8px;background:#fee2e2;color:#991b1b"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Se déconnecter</button>
+   <div class="profile-danger-zone"><h3>Zone de danger</h3><p>La suppression efface le compte et ses données enregistrées.</p>
+    <button class="btn profile-danger" id="account-delete" type="button"><i class="fa-regular fa-trash-can" aria-hidden="true"></i> Supprimer mon compte</button>
+   </div>
   </section>
   <section class="box"><h2 style="font-size:1.2rem;margin-bottom:12px">Mes commandes WhatsApp</h2>
    ${userOrders.length?`<div class="order-list">${userOrders.map(order=>`<article class="order-card"><b>${esc(order.id)}</b><p class="cdf">${new Date(order.ts).toLocaleString('fr-FR')} · ${usd(order.total)}</p><ul>${order.items.map(item=>`<li><a href="#/produit/${Number(item.id)}">${esc(item.quantity)} × ${esc(item.name)}</a> — ${usd(item.subtotal)}</li>`).join('')}</ul><p class="cdf" style="margin-top:8px">Demande préparée pour WhatsApp</p></article>`).join('')}</div>`:'<p>Aucune commande WhatsApp dans votre historique.</p>'}
-  </section></div>`;
- $('#profile-form').onsubmit=event=>{
+  </section></div></div>`;
+ $('#profile-form').onsubmit=async event=>{
   event.preventDefault();
   const error=$('#profile-error'),showProfileError=message=>{error.textContent=message;error.hidden=!message};
-  const name=$('#profile-name').value.trim(),em=KitimaAuth.normalizeEmail($('#profile-email').value),tel=$('#profile-phone').value.trim(),ad=$('#profile-address').value.trim(),avatar=$('#profile-avatar').value.trim();
+  const name=$('#profile-name').value.trim(),em=KitimaAuth.normalizeEmail($('#profile-email').value),tel=$('#profile-phone').value.trim(),ad=$('#profile-address').value.trim(),file=$('#profile-avatar').files[0];
   if(!name)return showProfileError('Indiquez votre nom complet.');
   if(!/^\S+@\S+\.\S+$/.test(em))return showProfileError('Indiquez une adresse e-mail valide.');
   if(tel&&KitimaAuth.normalizePhone(tel).length<9)return showProfileError('Vérifiez le numéro WhatsApp ou laissez ce champ vide.');
-  if(!KitimaAuth.isValidAvatarUrl(avatar))return showProfileError('La photo de profil doit utiliser une URL HTTPS.');
+  if(file&&!file.type.startsWith('image/'))return showProfileError('Choisissez un fichier image valide.');
+  if(file&&file.size>8*1024*1024)return showProfileError('La photo doit peser moins de 8 Mo.');
   if(users.some(value=>value.id!==user.id&&KitimaAuth.normalizeEmail(value.em)===em))return showProfileError('Un compte utilise déjà cette adresse e-mail.');
   if(tel&&users.some(value=>value.id!==user.id&&KitimaAuth.normalizePhone(value.tel)===KitimaAuth.normalizePhone(tel)))return showProfileError('Un compte utilise déjà ce numéro WhatsApp.');
+  let avatar=user.avatar;
+  if(file){
+   try{avatar=await resizeAvatar(file)}catch(error){return showProfileError('Impossible de lire cette image. Choisissez une autre photo.');}
+  }
   const updated={...user,name,em,tel,ad,avatar:KitimaAuth.avatarUrl(avatar)};
   const nextUsers=users.map(value=>value.id===user.id?{...value,...updated}:value);
   try{localStorage.setItem('k_users',JSON.stringify(nextUsers));localStorage.setItem('k_user',JSON.stringify(updated));users=nextUsers;user=updated;hdr();route();toast('Profil mis à jour')}
   catch(error){console.error('Could not save profile',error);toast('Impossible d’enregistrer le profil.')}
  };
  $('#account-logout').onclick=signOut;
+ $('#account-delete').onclick=deleteAccount;
 }
 function contact(){
  app.innerHTML=`<div class="prose"><h1>Contact et service client</h1><p>Notre équipe vous accompagne pour les commandes, les produits et la livraison.</p><div class="cl" style="margin-top:14px"><form id="ctf" novalidate>${fld('cn','Nom complet','text',esc(user?user.name:''),'Votre nom')}${fld('ct','Votre téléphone','tel',esc(user?user.tel||'':''),'+243 …')}<div class="field"><label for="cs">Sujet</label><select id="cs"><option>Question sur un produit</option><option>Suivi de commande</option><option>Question sur la livraison</option><option>Autre demande</option></select></div><div class="field"><label for="cm">Message</label><textarea id="cm" rows="4" required></textarea></div><button class="btn btn-g" type="submit"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Envoyer sur WhatsApp</button></form>
@@ -667,7 +728,7 @@ function faq(){
 }
 addEventListener('scroll',()=>{$('#up').style.display=scrollY>500?'grid':'none'});
 function about(){
- app.innerHTML=`<div class="prose"><h1>À propos de KITIMA WORK SARL</h1>
+ app.innerHTML=`<div class="prose about-content"><h1>À propos de KITIMA WORK SARL</h1>
  <p>KITIMA SHOP est l’enseigne commerciale de KITIMA-WORK SARL, entreprise basée à Goma, dans le Nord-Kivu. Ses activités couvrent deux domaines : les smartphones neufs scellés importés de Dubaï avec garantie et les équipements d’agrobusiness et d’élevage.</p>
  <div class="stats"><div><b>RDC</b>Siège à Goma</div><div><b>2</b>Piliers d’activité</div><div><b>WhatsApp</b>Commande directe</div></div>
  <h2>High-Tech & Smartphones</h2><p>KITIMA SHOP sélectionne des smartphones neufs scellés importés de Dubaï et des équipements high-tech.</p>
