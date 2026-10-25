@@ -67,6 +67,7 @@ nav.main a i{width:24px;margin-right:8px;text-align:center;color:var(--amber)}
 nav.main a:hover,nav.main a.on{background:rgba(255,255,255,.1);color:#fff}
 .drawer-auth{display:grid;gap:10px;margin-top:auto;padding-top:20px;border-top:1px solid #ffffff24}
 .drawer-auth a{display:flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:12px 14px;border-radius:10px;font-weight:700}
+.drawer-auth a.hidden,.header-auth a.hidden{display:none!important}
 .drawer-auth .auth-login{background:var(--green);color:#fff}
 .drawer-auth .auth-account{background:#fff;color:var(--navy)}
 .drawer-auth .auth-logout{border:1px solid #ffffff35;background:transparent;color:#fecaca}
@@ -242,6 +243,14 @@ input[type=range]{width:100%;accent-color:var(--green)}
 .photo-actions .photo-delete{background:#fff1f2;color:#be123c}
 .photo-preview{display:block;width:min(72vw,360px);height:min(72vw,360px);object-fit:contain;margin:0 auto 16px;border-radius:16px;background:#f1f5f9}
 .photo-preview-close{width:100%}
+.crop-stage{position:relative;width:min(78vw,340px);aspect-ratio:1/1;margin:2px auto 8px;overflow:hidden;border-radius:14px;background:#0f172a;touch-action:none;cursor:grab}
+.crop-stage:active{cursor:grabbing}
+.crop-stage img{position:absolute;max-width:none;max-height:none;user-select:none;-webkit-user-drag:none;pointer-events:none}
+.crop-help{font-size:.9rem;color:var(--mute);text-align:center}
+.crop-zoom{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:12px}
+.crop-zoom input{width:100%;accent-color:var(--green)}
+.crop-actions{display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap}
+.profile-edit-panel[hidden]{display:none!important}
 @media(max-width:390px){.photo-actions{grid-template-columns:1fr}.profile-topline{align-items:flex-start}}
 .profile-danger{width:100%;margin-top:12px;background:#fff1f2;color:#be123c;border:1px solid #fecdd3}
 .profile-danger:hover{background:#ffe4e6}
@@ -373,7 +382,7 @@ const P=window.KITIMA_PRODUCTS;
 const $=(s,r=document)=>r.querySelector(s);
 const app=$('#app');
 let cart=[];
-const ACCOUNT_RESET_KEY='kitima_account_reset_2026_10_v2';
+const ACCOUNT_RESET_KEY='kitima_account_reset_2026_10_v3';
 if(!localStorage.getItem(ACCOUNT_RESET_KEY)){
  try{
   const accountKeys=Array.from({length:localStorage.length},(_,index)=>localStorage.key(index)).filter(key=>key&&(/^(k_users|k_user|k_orders|k_wish|kitima_cart)$/.test(key)||/^k_(?:wish|cart)_/.test(key)));
@@ -482,20 +491,8 @@ loadAccountData(true);
 const grand=()=>total();
 const fld=(id,l,t='text',v='',ph='')=>`<div class="field"><label for="${id}">${l}</label><input id="${id}" type="${t}" value="${v}" placeholder="${ph}"></div>`;
 const avatarMarkup=(value,alt='')=>`<img class="user-avatar" src="${esc(KitimaAuth.avatarUrl(value))}" alt="${esc(alt)}" onerror="this.onerror=null;this.src='${KitimaAuth.DEFAULT_AVATAR}'">`;
-async function resizeAvatar(file){
- let source,width,height,cleanup=()=>{};
- if(typeof createImageBitmap==='function'){
-  source=await createImageBitmap(file);width=source.width;height=source.height;
- }else{
-  const url=URL.createObjectURL(file),image=new Image();cleanup=()=>URL.revokeObjectURL(url);image.src=url;await image.decode();source=image;width=image.naturalWidth;height=image.naturalHeight;
- }
- const canvas=document.createElement('canvas'),limit=320,scale=Math.min(1,limit/Math.max(width,height));
- canvas.width=Math.max(1,Math.round(width*scale));canvas.height=Math.max(1,Math.round(height*scale));
- const context=canvas.getContext('2d');if(!context){source.close?.();cleanup();throw new Error('Canvas indisponible')}
- context.drawImage(source,0,0,canvas.width,canvas.height);source.close?.();cleanup();
- return canvas.toDataURL('image/jpeg',.82);
-}
-function closeAvatarModal(){const modal=$('#modal');modal.classList.remove('on');$('#mbox').innerHTML=''}
+let activeCrop=null;
+function closeAvatarModal(){if(activeCrop?.url)URL.revokeObjectURL(activeCrop.url);activeCrop=null;const modal=$('#modal');modal.classList.remove('on');$('#mbox').innerHTML=''}
 function showAvatarPreview(){
  const box=$('#mbox');box.innerHTML=`<div class="photo-options"><img class="photo-preview" src="${esc(KitimaAuth.avatarUrl(user.avatar))}" alt="Photo de profil de ${esc(user.name)}"><button class="btn btn-o photo-preview-close" id="photo-preview-close" type="button">Fermer</button></div>`;
  $('#photo-preview-close').onclick=closeAvatarModal;
@@ -523,11 +520,45 @@ function saveProfileAvatar(avatar){
   users=nextUsers;user=updated;closeAvatarModal();hdr();route();toast('Photo de profil mise à jour');
  }catch(error){console.error('Could not update profile photo',error);closeAvatarModal();toast('Impossible d’enregistrer cette photo.')}
 }
-async function selectProfilePhoto(event){
+function showAvatarCrop(file){
+ const url=URL.createObjectURL(file),image=new Image();activeCrop={url};
+ image.onload=()=>{
+  const box=$('#mbox');box.innerHTML=`<div class="photo-options"><h2>Cadrer la photo</h2><p class="crop-help">Déplacez la photo pour centrer le visage, puis ajustez le zoom.</p><div class="crop-stage" id="crop-stage"><img id="crop-image" src="${esc(url)}" alt="Recadrage de la photo"></div><label class="crop-zoom" for="crop-zoom">Zoom<input id="crop-zoom" type="range" min="1" max="3" step="0.01" value="1"></label><div class="crop-actions"><button class="btn btn-o" id="crop-cancel" type="button">Annuler</button><button class="btn btn-g" id="crop-save" type="button">Utiliser cette photo</button></div></div>`;
+  const stage=$('#crop-stage'),cropImage=$('#crop-image'),stageSize=stage.clientWidth,baseScale=Math.max(stageSize/image.naturalWidth,stageSize/image.naturalHeight);
+  let zoom=1,left=0,top=0,scale=baseScale,drag=null;
+  const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
+  const position=()=>{
+   const width=image.naturalWidth*scale,height=image.naturalHeight*scale;
+   left=clamp(left,stageSize-width,0);top=clamp(top,stageSize-height,0);
+   cropImage.style.width=`${width}px`;cropImage.style.height=`${height}px`;cropImage.style.left=`${left}px`;cropImage.style.top=`${top}px`;
+  };
+  scale=baseScale;left=(stageSize-image.naturalWidth*scale)/2;top=(stageSize-image.naturalHeight*scale)/2;position();
+  activeCrop={url,image,stageSize,baseScale,get crop(){return{zoom,left,top,scale}}};
+  stage.onpointerdown=event=>{drag={x:event.clientX,y:event.clientY,left,top};stage.setPointerCapture(event.pointerId)};
+  stage.onpointermove=event=>{if(!drag)return;left=drag.left+event.clientX-drag.x;top=drag.top+event.clientY-drag.y;position()};
+  stage.onpointerup=()=>{drag=null};stage.onpointercancel=()=>{drag=null};
+  $('#crop-zoom').oninput=event=>{
+   const focusX=(stageSize/2-left)/scale,focusY=(stageSize/2-top)/scale;zoom=Number(event.target.value);scale=baseScale*zoom;
+   left=stageSize/2-focusX*scale;top=stageSize/2-focusY*scale;position();
+  };
+  $('#crop-cancel').onclick=closeAvatarModal;
+  $('#crop-save').onclick=()=>{
+   try{
+    const canvas=document.createElement('canvas'),size=320,sourceSize=stageSize/scale;
+    canvas.width=size;canvas.height=size;const context=canvas.getContext('2d');if(!context)throw new Error('Canvas indisponible');
+    context.drawImage(image,-left/scale,-top/scale,sourceSize,sourceSize,0,0,size,size);
+    saveProfileAvatar(canvas.toDataURL('image/jpeg',.84));
+   }catch(error){console.error('Could not crop profile photo',error);toast('Impossible de cadrer cette photo.')}
+  };
+  $('#modal').classList.add('on');
+ };
+ image.onerror=()=>{closeAvatarModal();toast('Impossible de lire cette image. Choisissez-en une autre.')};image.src=url;
+}
+function selectProfilePhoto(event){
  const input=event.currentTarget,file=input.files[0];input.value='';if(!file)return;
  if(!file.type.startsWith('image/'))return toast('Choisissez un fichier image valide.');
  if(file.size>8*1024*1024)return toast('La photo doit peser moins de 8 Mo.');
- try{saveProfileAvatar(await resizeAvatar(file))}catch(error){console.error('Could not read profile photo',error);toast('Impossible de lire cette image. Choisissez une autre photo.')}
+ showAvatarCrop(file);
 }
 function persistUsers(){localStorage.setItem('k_users',JSON.stringify(users))}
 function persistSession(nextUser){localStorage.setItem('k_user',JSON.stringify(nextUser));user=nextUser;loadAccountData(true)}
@@ -593,7 +624,7 @@ function cartV(){
  app.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>ch(b.dataset.m,-1));
  app.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>ch(b.dataset.p,1));
  app.querySelectorAll('[data-x]').forEach(b=>b.onclick=()=>{cart=cart.filter(x=>x.id!=b.dataset.x);save();cartV()});
- $('#ec').onclick=()=>{cart=[];save();cartV()};
+ $('#ec').onclick=()=>{if(!window.confirm('Voulez-vous vraiment vider votre panier ?'))return;cart=[];save();cartV()};
 }
 function checkout(){
  if(!user){location.hash='#/compte?mode=login&redirect=commande';return}
@@ -734,14 +765,14 @@ function account(mode='login'){
   <button class="btn profile-edit-trigger" id="profile-edit-trigger" type="button"><i class="fa-solid fa-pen" aria-hidden="true"></i><span>Modifier</span></button></div>
   <div class="cl profile-layout"><section class="box"><h2 style="font-size:1.2rem">Mon profil</h2>
    <dl class="profile-summary"><div><dt>Nom complet</dt><dd>${esc(user.name)}</dd></div><div><dt>E-mail</dt><dd>${esc(email)}</dd></div><div><dt>Téléphone WhatsApp</dt><dd>${esc(user.tel||'Aucun numéro enregistré')}</dd></div><div><dt>Adresse de livraison</dt><dd>${esc(address)}</dd></div></dl>
-   <details id="profile-edit-section"><summary>Modifier mes informations</summary><form id="profile-form" class="auth-fields" style="margin-top:14px" novalidate>
+   <div id="profile-edit-section" class="profile-edit-panel" hidden><form id="profile-form" class="auth-fields" style="margin-top:14px" novalidate>
     ${fld('profile-name','Nom complet','text',esc(user.name))}
     ${fld('profile-email','Adresse e-mail','email',esc(user.em||''))}
     ${fld('profile-phone','Téléphone WhatsApp','tel',esc(user.tel||''))}
     ${fld('profile-address','Adresse de livraison','text',esc(user.ad||''))}
     <p id="profile-error" class="auth-error" role="alert" aria-live="polite" hidden></p>
     <button class="btn btn-g" type="submit">Enregistrer les modifications</button>
-   </form></details>
+   </form></div>
    <a class="btn btn-o" style="width:100%;margin-top:12px" href="#/favoris">Mes favoris (${wish.length})</a>
    <button class="btn" id="account-logout" type="button" style="width:100%;margin-top:8px;background:#fee2e2;color:#991b1b"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Se déconnecter</button>
    <div class="profile-danger-zone"><h3>Zone de danger</h3><p>La suppression efface le compte et ses données enregistrées.</p>
@@ -755,7 +786,7 @@ function account(mode='login'){
  $('#profile-photo-camera').onclick=showAvatarOptions;
  $('#profile-avatar-camera').onchange=selectProfilePhoto;
  $('#profile-avatar-upload').onchange=selectProfilePhoto;
- $('#profile-edit-trigger').onclick=()=>{const section=$('#profile-edit-section');section.open=true;section.scrollIntoView({behavior:'smooth',block:'center'})};
+ $('#profile-edit-trigger').onclick=()=>{const section=$('#profile-edit-section');section.hidden=false;section.scrollIntoView({behavior:'smooth',block:'center'})};
  $('#profile-form').onsubmit=async event=>{
   event.preventDefault();
   const error=$('#profile-error'),showProfileError=message=>{error.textContent=message;error.hidden=!message};
@@ -830,9 +861,9 @@ menuToggle.onclick=()=>setMenuOpen(menuToggle.getAttribute('aria-expanded')!=='t
 $('#drawer-logout').onclick=signOut;
 menuScrim.onclick=()=>setMenuOpen(false);
 menu.addEventListener('click',e=>{if(e.target.closest('a'))setMenuOpen(false)});
-addEventListener('keydown',e=>{if(e.key==='Escape')setMenuOpen(false)});
+addEventListener('keydown',e=>{if(e.key==='Escape'){setMenuOpen(false);if($('#modal').classList.contains('on'))closeAvatarModal()}});
 addEventListener('resize',()=>{if(matchMedia('(min-width: 900px)').matches)setMenuOpen(false)});
-$('#modal').onclick=e=>{if(e.target.id=='modal'){$('#modal').classList.remove('on');if(location.hash=='#/commande'&&!cart.length)location.hash='#/'}};
+$('#modal').onclick=e=>{if(e.target.id=='modal'){closeAvatarModal();if(location.hash=='#/commande'&&!cart.length)location.hash='#/'}};
 addEventListener('storage',event=>{
  if(event.key!=='k_user')return;
  const stored=ls('k_user',null),identifier=KitimaAuth.normalizeIdentifier(stored?.em||stored?.tel||'');
