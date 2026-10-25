@@ -70,11 +70,27 @@ nav.main a:hover,nav.main a.on{background:rgba(255,255,255,.1);color:#fff}
 .drawer-auth .auth-login{background:var(--green);color:#fff}
 .drawer-auth .auth-register{border:1px solid #ffffff50;color:#fff}
 .drawer-auth .auth-account{background:#fff;color:var(--navy)}
+.drawer-auth .auth-logout{border:1px solid #ffffff35;background:transparent;color:#fecaca}
 .drawer-auth a:hover{filter:brightness(1.1)}
+.header-auth{display:flex;order:4;width:100%;gap:8px}
+.header-auth a{display:flex;align-items:center;justify-content:center;gap:7px;min-height:42px;flex:1;padding:8px 12px;border-radius:9px;font-size:.92rem;font-weight:700}
+.header-auth .auth-login{background:var(--green);color:#fff}
+.header-auth .auth-register{border:1px solid #ffffff55;color:#fff}
+.user-avatar{width:38px;height:38px;border-radius:50%;object-fit:cover;background:#e2e8f0}
+.header-account{display:flex;align-items:center;gap:8px}
+.profile-heading{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+.profile-heading .user-avatar{width:72px;height:72px}
+.profile-summary{display:grid;gap:8px;margin:14px 0}
+.profile-summary div{display:grid;grid-template-columns:minmax(110px, .4fr) 1fr;gap:12px;padding:8px 0;border-bottom:1px solid var(--line)}
+.profile-summary dt{color:var(--mute);font-weight:600}
+.order-list{display:grid;gap:12px}
+.order-card{border:1px solid var(--line);border-radius:12px;padding:14px}
 .lbl{display:none}
 @media(min-width:1200px){nav.main{display:flex;position:static;width:auto;height:auto;box-shadow:none;flex:0 1 auto;flex-direction:row;padding:0;background:transparent;overflow:visible;animation:none}.nav-auth{display:none}.menu-scrim{display:none}.lbl{display:inline}.search{flex:1 1 260px;min-width:240px}}
+@media(min-width:1200px){.header-auth{order:4;width:auto;flex:0 0 auto}.header-auth a{min-height:40px;padding:8px 10px;white-space:nowrap;font-size:.84rem}}
 @media(min-width:1200px){nav.main{gap:2px}nav.main a{padding:8px 6px;font-size:.87rem;white-space:nowrap}nav.main a i{width:auto;margin:0 4px 0 0}}
-@media(max-width:500px){.brand img{width:132px;height:auto}.hact a[href="#/compte"]{display:none}.hact .ibtn{min-width:40px;min-height:40px;padding:8px 9px}}
+@media(min-width:1200px) and (max-width:1399px){.hrow{flex-wrap:wrap!important}.search{min-width:0}.header-auth{flex-basis:100%;justify-content:flex-end}}
+@media(max-width:500px){.brand img{width:132px;height:auto}.hact .ibtn{min-width:40px;min-height:40px;padding:8px 9px}.profile-summary div{grid-template-columns:1fr;gap:2px}}
 @media(max-width:360px){.hrow{column-gap:6px}.brand img{width:116px}.menu-toggle{min-width:40px;min-height:40px}.hact{gap:4px}.hact .ibtn{min-width:36px;min-height:36px;padding:7px}}
 /* hero */
 .hero{background:linear-gradient(120deg,var(--navy) 55%,#12304a);color:#fff;border-radius:20px;overflow:hidden;position:relative;margin-top:18px}
@@ -194,9 +210,8 @@ input[type=range]{width:100%;accent-color:var(--green)}
 .auth-password{position:relative}
 .auth-password input{padding-right:48px}
 .auth-password button{position:absolute;right:5px;top:5px;width:40px;height:40px;border-radius:8px;background:transparent;color:var(--mute)}
+.auth-error{padding:10px 12px;border:1px solid #fecaca;border-radius:9px;background:#fef2f2;color:#b91c1c;font-size:.95rem}
 .auth-submit{width:100%;margin-top:6px}
-.auth-note{margin-top:18px;padding:12px;border-radius:10px;background:#f8fafc;color:var(--mute);font-size:.82rem;line-height:1.5}
-.auth-note i{color:var(--green);margin-right:6px}
 @media(max-width:640px){
  body{font-size:18px;line-height:1.6}
  section.blk{padding:28px 0}
@@ -272,7 +287,8 @@ tailwind.config = {
     <div class="drawer-auth nav-auth">
      <a class="auth-login" href="#/compte?mode=login"><i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>Se connecter</a>
      <a class="auth-register" href="#/compte?mode=register"><i class="fa-solid fa-user-plus" aria-hidden="true"></i>Créer un compte</a>
-     <a class="auth-account hidden" href="#/compte"><i class="fa-regular fa-user" aria-hidden="true"></i>Mon compte</a>
+     <a class="auth-account hidden" href="#/compte"><img class="user-avatar" id="drawer-avatar" alt=""><span id="drawer-name">Mon compte</span></a>
+     <button class="auth-logout hidden" id="drawer-logout" type="button"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>Se déconnecter</button>
     </div>
    </nav>
    <form class="search order-3 flex min-h-12 flex-[1_1_100%] overflow-hidden rounded-xl bg-white min-[1200px]:order-2 min-[1200px]:flex-[1_1_220px]" id="sf" role="search">
@@ -281,8 +297,12 @@ tailwind.config = {
     <button aria-label="Lancer la recherche"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></button>
    </form>
    <div class="hact order-2 ml-auto flex items-center gap-1.5 min-[1200px]:order-3 sm:gap-2">
-    <a class="ibtn" href="#/favoris" aria-label="Favoris"><i class="fa-regular fa-heart" aria-hidden="true"></i><span class="badge" id="wb">0</span></a><a class="ibtn" href="#/compte" aria-label="Mon compte"><i class="fa-regular fa-user" aria-hidden="true"></i><span class="lbl" id="ul"> Mon compte</span></a>
+    <a class="ibtn" href="#/favoris" aria-label="Favoris"><i class="fa-regular fa-heart" aria-hidden="true"></i><span class="badge" id="wb">0</span></a><a class="ibtn header-account hidden" id="header-account" href="#/compte" aria-label="Mon compte"><i class="fa-regular fa-user" id="header-account-icon" aria-hidden="true"></i><img class="user-avatar hidden" id="header-avatar" alt=""><span class="lbl" id="ul">Mon compte</span></a>
     <a class="ibtn" href="#/panier" aria-label="Panier"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i><span class="badge" id="cb">0</span></a>
+   </div>
+   <div class="header-auth" id="header-auth">
+    <a class="auth-login" href="#/compte?mode=login"><i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>Se connecter</a>
+    <a class="auth-register" href="#/compte?mode=register"><i class="fa-solid fa-user-plus" aria-hidden="true"></i>Créer un compte</a>
    </div>
   </div>
  </div>
@@ -306,6 +326,7 @@ tailwind.config = {
 <div class="toast" id="toast" role="status"></div>
 
 <script src="assets/catalog.js"></script>
+<script src="app.js"></script>
 <script>
 const RATE=2800; // Taux de conversion indicatif.
 const CATS=[{id:'tech',n:'High-Tech & Smartphones',e:'fa-solid fa-mobile-screen-button'},{id:'agro',n:'Agrobusiness & Élevage',e:'fa-solid fa-seedling'}];
@@ -322,6 +343,7 @@ const usd=n=>'$'+n.toLocaleString('fr-FR',{minimumFractionDigits:n%1?2:0,maximum
 const cdf=n=>Math.round(n*RATE).toLocaleString('fr-FR')+' FC';
 const find=id=>P.find(x=>x.id==id);
 const total=()=>cart.reduce((s,i)=>s+find(i.id).p*i.q,0);
+const productLink=p=>{const url=new URL(location.href);url.hash=`#/produit/${p.id}`;return url.href};
 function badge(){const b=$('#cb');b.textContent=cart.reduce((s,i)=>s+i.q,0);b.classList.add('pop');setTimeout(()=>b.classList.remove('pop'),250)}
 let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2200)}
 function add(id,q=1){const i=cart.find(x=>x.id==id);i?i.q+=q:cart.push({id:+id,q});save();toast('Ajouté au panier')}
@@ -333,7 +355,7 @@ const card=p=>`<article class="pc"><div class="pimg" onclick="location.hash='#/p
 function home(){
  const feat=P.filter(p=>p.hot).concat(P.filter(p=>!p.hot)).slice(0,4);
  app.innerHTML=`<div class="hero" id="hero">
- <div class="slide on" style="background-image:linear-gradient(90deg,#0f172af5 0%,#0f172aee 55%,#0f172ac9 100%),url('https://images.unsplash.com/photo-1556656793-08538906a9aa?auto=format&fit=crop&w=1600&q=85')"><span class="tag">KITIMA SHOP</span><h1>Smartphones neufs scellés et équipements high-tech.</h1><p>Une sélection de smartphones importés de Dubaï avec garantie et d’accessoires pour vos usages numériques.</p><div><a class="btn btn-a" href="#/boutique/tech">Découvrir le High-Tech</a></div></div>
+ <div class="slide on" style="background-image:linear-gradient(90deg,#0f172af5 0%,#0f172aee 55%,#0f172ac9 100%),url('https://images.unsplash.com/photo-1556656793-08538906a9f8?auto=format&fit=crop&w=1600&q=85')"><span class="tag">KITIMA SHOP</span><h1>Smartphones neufs scellés et équipements high-tech.</h1><p>Une sélection de smartphones importés de Dubaï avec garantie et d’accessoires pour vos usages numériques.</p><div><a class="btn btn-a" href="#/boutique/tech">Découvrir le High-Tech</a></div></div>
  <div class="slide" style="background-image:linear-gradient(90deg,#0f172af5 0%,#0f172aee 55%,#0f172ac9 100%),url('https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=1600&q=85')"><span class="tag g">Agrobusiness & élevage</span><h1>Des équipements et produits pour vos activités agricoles.</h1><p>Incubateurs automatiques, équipements d’élevage et produits agricoles sélectionnés pour les éleveurs et les producteurs.</p><div><a class="btn btn-g" href="#/boutique/agro">Découvrir l’agrobusiness</a></div></div>
  <div class="dots"><button class="on" aria-label="Diapositive 1"></button><button aria-label="Diapositive 2"></button></div></div>
  <div class="trust"><div><i class="fa-solid fa-truck-fast" aria-hidden="true"></i> Livraison en RDC</div><div><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Commande directe sur WhatsApp</div><div><i class="fa-solid fa-building" aria-hidden="true"></i> Entreprise enregistrée (RCCM/NIF)</div></div>
@@ -399,14 +421,39 @@ async function shareProduct(p){
 const ls=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}};
 const sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let wish=ls('k_wish',[]).filter(id=>P.some(p=>p.id===Number(id))),user=ls('k_user',null),users=ls('k_users',[]),viewed=[];
+let wish=ls('k_wish',[]).filter(id=>P.some(p=>p.id===Number(id))),users=ls('k_users',[]).filter(value=>value&&typeof value==='object'),viewed=[];
+const savedUser=ls('k_user',null),savedIdentifier=KitimaAuth.normalizeIdentifier(savedUser?.em||savedUser?.tel||'');
+let user=users.find(value=>value.id===savedUser?.id||KitimaAuth.normalizeIdentifier(value.em||value.tel)===savedIdentifier)||null;
+let orderHistory=ls('k_orders',[]).filter(value=>value&&typeof value==='object');
 const grand=()=>total();
 const fld=(id,l,t='text',v='',ph='')=>`<div class="field"><label for="${id}">${l}</label><input id="${id}" type="${t}" value="${v}" placeholder="${ph}"></div>`;
+const avatarMarkup=(value,alt='')=>`<img class="user-avatar" src="${esc(KitimaAuth.avatarUrl(value))}" alt="${esc(alt)}" onerror="this.onerror=null;this.src='${KitimaAuth.DEFAULT_AVATAR}'">`;
+function persistUsers(){localStorage.setItem('k_users',JSON.stringify(users))}
+function persistSession(nextUser){localStorage.setItem('k_user',JSON.stringify(nextUser));user=nextUser}
+function signOut(){
+ try{localStorage.removeItem('k_user')}
+ catch(error){console.error('Could not clear session',error);toast('Impossible de fermer la session.');return}
+ user=null;
+ hdr();
+ toast('Déconnexion réussie');
+ if(location.hash.startsWith('#/compte'))location.hash='#/';
+}
 function hdr(){
  $('#wb').textContent=wish.length;$('#ul').textContent=user?' '+user.name.split(' ')[0]:' Mon compte';
- document.querySelector('.auth-login').classList.toggle('hidden',!!user);
- document.querySelector('.auth-register').classList.toggle('hidden',!!user);
- document.querySelector('.auth-account').classList.toggle('hidden',!user);
+ const loggedIn=!!user;
+ document.querySelectorAll('.auth-login,.auth-register').forEach(link=>link.classList.toggle('hidden',loggedIn));
+ document.querySelectorAll('.auth-account').forEach(link=>link.classList.toggle('hidden',!loggedIn));
+ document.querySelector('#header-auth').classList.toggle('hidden',loggedIn);
+ $('#header-account').classList.toggle('hidden',!loggedIn);
+ $('#header-account').setAttribute('aria-label',loggedIn?`Mon compte, ${user.name}`:'Mon compte');
+ $('#header-account-icon').classList.toggle('hidden',loggedIn);
+ $('#header-avatar').classList.toggle('hidden',!loggedIn);
+ $('#drawer-logout').classList.toggle('hidden',!loggedIn);
+ if(loggedIn){
+  $('#header-avatar').src=KitimaAuth.avatarUrl(user.avatar);
+  $('#drawer-avatar').src=KitimaAuth.avatarUrl(user.avatar);
+  $('#drawer-name').textContent=user.name;
+ }
 }
 function fav(id){const on=wish.includes(id);wish=on?wish.filter(x=>x!=id):[...wish,id];sv('k_wish',wish);hdr();document.querySelectorAll('.heart[data-id="'+id+'"]').forEach(h=>h.classList.toggle('on',!on));toast(on?'Retiré des favoris':'Ajouté aux favoris');if(location.hash=='#/favoris')favs()}
 function rv(id){const all=ls('k_rev',{});
@@ -435,7 +482,7 @@ function checkout(){
  $('#cf').onsubmit=e=>{e.preventDefault();let ok=true;
   ['nm','tl','ad'].forEach(id=>{const f=$('#'+id),bad=!f.value.trim()||(id=='tl'&&f.value.replace(/\D/g,'').length<9);f.style.borderColor=bad?'#dc2626':'';if(bad)ok=false});
   if(!ok)return toast('Indiquez votre nom, votre téléphone et votre adresse de livraison.');
-  const lines=cart.map(i=>{const p=find(i.id);return`• ${p.n} — quantité : ${i.q} — prix unitaire : ${usd(p.p)} — sous-total : ${usd(p.p*i.q)}`});
+  const lines=cart.map(i=>{const p=find(i.id);return`• ${p.n} — quantité : ${i.q} — prix unitaire : ${usd(p.p)} — sous-total : ${usd(p.p*i.q)}\n  Lien du produit : ${productLink(p)}`});
   const orderTotal=grand();
   const message=[
    'Bonjour KITIMA SHOP, je souhaite passer une commande.',
@@ -453,6 +500,12 @@ function checkout(){
    '',
    'Merci de confirmer la disponibilité et les modalités de livraison.'
   ].join('\n');
+  if(user?.id){
+   const order={id:`KS-${Date.now()}`,userId:user.id,ts:Date.now(),total:orderTotal,items:cart.map(i=>{const p=find(i.id);return{id:p.id,name:p.n,quantity:i.q,unitPrice:p.p,subtotal:p.p*i.q}})};
+   orderHistory=[order,...orderHistory].slice(0,50);
+   try{localStorage.setItem('k_orders',JSON.stringify(orderHistory))}
+   catch(error){console.error('Could not save order history',error);toast('La demande sera ouverte sur WhatsApp, mais son historique ne peut pas être enregistré.')}
+  }
   const url=`https://wa.me/${WHATSAPP_ORDER}?text=${encodeURIComponent(message)}`;
   const whatsapp=window.open(url,'_blank');
   if(whatsapp)whatsapp.opener=null;
@@ -465,45 +518,123 @@ function track(){
 }
 function favs(){app.innerHTML=`<h1 style="margin:22px 0 14px;font-size:1.6rem">Mes favoris</h1>`+(wish.length?`<div class="grid">${wish.map(id=>card(find(id))).join('')}</div>`:`<div class="empty"><div class="e"><i class="fa-regular fa-heart" aria-hidden="true"></i></div><p style="margin:8px 0 16px">Touchez le cœur d'un produit pour le retrouver ici.</p><a class="btn btn-g" href="#/boutique">Voir la boutique</a></div>`)}
 function account(mode='login'){
- if(!user){let reg=false;
-  reg=mode==='register';
+ if(!user){
+  let registering=mode==='register';
   app.innerHTML=`<section class="auth-wrap px-1 sm:px-0"><div class="auth-card">
    <div class="auth-brand"><img src="assets/favicon.svg" alt="" width="48" height="48"></div>
    <h1 class="auth-heading" id="auth-heading"></h1><p class="auth-subtitle" id="auth-subtitle"></p>
-   <div class="auth-tabs" role="tablist" aria-label="Accès au compte"><button type="button" role="tab" id="t1" aria-controls="af">Se connecter</button><button type="button" role="tab" id="t2" aria-controls="af">Créer un compte</button></div>
-   <form id="af" class="auth-fields" novalidate></form>
-   <p class="auth-note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Votre compte est enregistré sur cet appareil.</p>
+   <div class="auth-tabs" role="tablist" aria-label="Accès au compte"><button type="button" role="tab" id="login-tab" aria-selected="false" aria-controls="auth-form">Se connecter</button><button type="button" role="tab" id="register-tab" aria-selected="false" aria-controls="auth-form">Créer un compte</button></div>
+   <form id="auth-form" class="auth-fields"></form>
   </div></section>`;
+  const showError=message=>{
+   const error=$('#auth-error');
+   error.textContent=message;
+   error.hidden=!message;
+  };
   const draw=()=>{
-   $('#t1').classList.toggle('on',!reg);$('#t2').classList.toggle('on',reg);
-   $('#t1').setAttribute('aria-selected',String(!reg));$('#t2').setAttribute('aria-selected',String(reg));
-   $('#auth-heading').textContent=reg?'Créer votre compte':'Bienvenue chez KITIMA SHOP';
-   $('#auth-subtitle').textContent=reg?'Créez un compte pour enregistrer vos informations sur cet appareil.':'Connectez-vous pour retrouver vos informations enregistrées sur cet appareil.';
-   $('#af').innerHTML=(reg?`<div class="field"><label for="an">Nom complet</label><input id="an" name="name" type="text" autocomplete="name" placeholder="Votre nom complet" required></div>
-    <div class="field"><label for="at">Téléphone</label><input id="at" name="tel" type="tel" autocomplete="tel" placeholder="+243 8X XXX XXXX"></div>`:'')+
-    `<div class="field"><label for="ae">Adresse e-mail</label><input id="ae" name="email" type="email" autocomplete="email" placeholder="Votre adresse e-mail" required></div>
-    <div class="field"><label for="ap">Mot de passe</label><div class="auth-password"><input id="ap" name="password" type="password" autocomplete="${reg?'new-password':'current-password'}" placeholder="6 caractères minimum" minlength="6" required><button id="toggle-password" type="button" aria-label="Afficher le mot de passe"><i class="fa-regular fa-eye" aria-hidden="true"></i></button></div></div>
-    ${reg?`<div class="field"><label for="ac">Confirmer le mot de passe</label><input id="ac" name="password-confirmation" type="password" autocomplete="new-password" placeholder="Répétez votre mot de passe" required></div>`:''}
-    <button class="btn btn-g auth-submit" type="submit"><i class="fa-solid ${reg?'fa-user-plus':'fa-right-to-bracket'}" aria-hidden="true"></i>${reg?'Créer mon compte':'Se connecter'}</button>`;
+   $('#login-tab').classList.toggle('on',!registering);
+   $('#register-tab').classList.toggle('on',registering);
+   $('#login-tab').setAttribute('aria-selected',String(!registering));
+   $('#register-tab').setAttribute('aria-selected',String(registering));
+   $('#auth-heading').textContent=registering?'Créer votre compte':'Bienvenue chez KITIMA SHOP';
+   $('#auth-subtitle').textContent=registering?'Un nom, une adresse e-mail et un mot de passe suffisent.':'Connectez-vous avec votre adresse e-mail et votre mot de passe.';
+   $('#auth-form').innerHTML=`
+    ${registering?'<div class="field"><label for="auth-name">Nom complet</label><input id="auth-name" name="name" type="text" autocomplete="name" maxlength="100" required></div>':''}
+    <div class="field"><label for="auth-email">Adresse e-mail</label><input id="auth-email" name="email" type="email" autocomplete="email" maxlength="254" required></div>
+    <div class="field"><label for="auth-password">Mot de passe</label><div class="auth-password"><input id="auth-password" name="password" type="password" autocomplete="${registering?'new-password':'current-password'}" ${registering?'minlength="8"':''} required><button id="toggle-password" type="button" aria-label="Afficher le mot de passe"><i class="fa-regular fa-eye" aria-hidden="true"></i></button></div>${registering?'<small>8 caractères minimum</small>':''}</div>
+    <p id="auth-error" class="auth-error" role="alert" aria-live="polite" hidden></p>
+    <button class="btn btn-g auth-submit" type="submit"><i class="fa-solid ${registering?'fa-user-plus':'fa-right-to-bracket'}" aria-hidden="true"></i>${registering?'Créer mon compte':'Se connecter'}</button>`;
    $('#toggle-password').onclick=()=>{
-    const password=$('#ap'),visible=password.type==='password';
+    const password=$('#auth-password'),visible=password.type==='password';
     password.type=visible?'text':'password';
     $('#toggle-password').setAttribute('aria-label',visible?'Masquer le mot de passe':'Afficher le mot de passe');
     $('#toggle-password i').className=`fa-regular ${visible?'fa-eye-slash':'fa-eye'}`;
    };
+   $('#auth-form').addEventListener('input',()=>showError(''));
   };
-  $('#t1').onclick=()=>{reg=false;draw()};$('#t2').onclick=()=>{reg=true;draw()};draw();
-  $('#af').onsubmit=e=>{e.preventDefault();const em=$('#ae').value.trim().toLowerCase(),pw=$('#ap').value;
-   if(!/^\S+@\S+\.\S+$/.test(em)||pw.length<6)return toast('E-mail valide et mot de passe de 6 caractères minimum');
-   if(reg){const nm=$('#an').value.trim();if(!nm)return toast('Indiquez votre nom');if(pw!==$('#ac').value)return toast('Les mots de passe ne correspondent pas');if(users.some(u=>u.em==em))return toast('Un compte existe déjà avec cet e-mail');
-    user={name:nm,tel:$('#at').value.trim(),em,pw,ad:''};users.push(user);sv('k_users',users)}
-   else{const u=users.find(u=>u.em==em&&u.pw==pw);if(!u)return toast('E-mail ou mot de passe incorrect');user=u}
-   sv('k_user',user);toast('Bienvenue '+user.name.split(' ')[0]);route()};
-  return}
- app.innerHTML=`<h1 style="margin:22px 0 14px;font-size:1.6rem">Bonjour ${esc(user.name)}</h1><div class="cl"><div class="box"><h2 style="font-size:1.15rem;margin-bottom:8px">Commandes et suivi</h2><p>Les commandes et leur suivi sont traités directement avec notre service client sur WhatsApp.</p><a class="btn btn-g" style="margin-top:12px" href="https://wa.me/${WHATSAPP_ORDER}" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Contacter le service commandes</a></div>
- <div class="box" style="align-self:start"><h2 style="font-size:1.15rem;margin-bottom:8px">Mon profil</h2><form id="pf">${fld('pn','Nom','text',esc(user.name))}${fld('pt','Téléphone','tel',esc(user.tel||''))}${fld('pa','Adresse','text',esc(user.ad||''))}<button class="btn btn-g" style="width:100%">Enregistrer</button></form><a class="btn btn-o" style="width:100%;margin-top:8px" href="#/favoris">Mes favoris (${wish.length})</a><button class="btn btn-o" id="lo" style="width:100%;margin-top:8px">Se déconnecter</button></div></div>`;
- $('#pf').onsubmit=e=>{e.preventDefault();user={...user,name:$('#pn').value.trim()||user.name,tel:$('#pt').value.trim(),ad:$('#pa').value.trim()};users=users.map(x=>x.em==user.em?user:x);sv('k_user',user);sv('k_users',users);hdr();toast('Profil enregistré')};
- $('#lo').onclick=()=>{user=null;sv('k_user',null);toast('Déconnecté');route()};
+  $('#login-tab').onclick=()=>{registering=false;draw()};
+  $('#register-tab').onclick=()=>{registering=true;draw()};
+  draw();
+  $('#auth-form').onsubmit=async event=>{
+   event.preventDefault();
+   const submit=$('#auth-form button[type="submit"]');
+   submit.disabled=true;
+   submit.setAttribute('aria-busy','true');
+   try{
+    const password=$('#auth-password').value;
+    const email=KitimaAuth.normalizeEmail($('#auth-email').value);
+    if(registering&&password.length<8){showError('Choisissez un mot de passe d’au moins 8 caractères.');return}
+    if(registering){
+     const name=$('#auth-name').value.trim();
+     const duplicate=users.some(value=>KitimaAuth.normalizeEmail(value.em)===email);
+     if(duplicate){showError('Un compte utilise déjà cette adresse e-mail. Connectez-vous ou utilisez une autre adresse.');return}
+     const credential=await KitimaAuth.createCredential(password);
+     const latestUsers=ls('k_users',[]).filter(value=>value&&typeof value==='object');
+     if(latestUsers.some(value=>KitimaAuth.normalizeEmail(value.em)===email)){users=latestUsers;showError('Un compte utilise déjà cette adresse e-mail. Connectez-vous ou utilisez une autre adresse.');return}
+     const id=crypto.randomUUID();
+     const record={id,name,em:email,tel:'',ad:'',avatar:KitimaAuth.DEFAULT_AVATAR,...credential};
+     const nextUsers=[...latestUsers,record];
+     localStorage.setItem('k_users',JSON.stringify(nextUsers));
+     users=nextUsers;
+     persistSession({id,name,em:email,tel:'',ad:'',avatar:record.avatar});
+     hdr();
+     toast('Bienvenue sur KITIMA SHOP');
+    }else{
+     const record=users.find(value=>String(value.em||'').trim().toLowerCase()===email);
+     if(!record||!await KitimaAuth.verifyCredential(record,password)){showError('Adresse e-mail ou mot de passe incorrect.');return}
+     if(!record.id)record.id=crypto.randomUUID();
+     record.avatar=KitimaAuth.avatarUrl(record.avatar);
+     if(record.pw&&!record.passwordHash){Object.assign(record,await KitimaAuth.createCredential(password));delete record.pw;persistUsers()}
+     persistSession({id:record.id,name:record.name,em:record.em||'',tel:record.tel||'',ad:record.ad||'',avatar:record.avatar});
+     hdr();
+     toast('Connexion réussie');
+    }
+    route();
+   }catch(error){
+    console.error('Authentication failed',error);
+    showError(error.message||'Impossible de terminer cette opération. Réessayez.');
+   }finally{
+    if(submit.isConnected){submit.disabled=false;submit.removeAttribute('aria-busy')}
+   }
+  };
+  return;
+ }
+ const email=user.em||'Aucune adresse e-mail enregistrée',address=user.ad||'Aucune adresse de livraison enregistrée';
+ const userOrders=orderHistory.filter(order=>order.userId===user.id).sort((first,second)=>second.ts-first.ts);
+ app.innerHTML=`<div class="profile-heading">${avatarMarkup(user.avatar,user.name)}<div><h1 style="font-size:1.6rem">Mon compte</h1><p style="color:var(--mute)">Bienvenue, ${esc(user.name)}.</p></div></div>
+  <div class="cl"><section class="box"><h2 style="font-size:1.2rem">Mon profil</h2>
+   <dl class="profile-summary"><div><dt>Nom complet</dt><dd>${esc(user.name)}</dd></div><div><dt>E-mail</dt><dd>${esc(email)}</dd></div><div><dt>Téléphone WhatsApp</dt><dd>${esc(user.tel||'Aucun numéro enregistré')}</dd></div><div><dt>Adresse de livraison</dt><dd>${esc(address)}</dd></div></dl>
+   <details><summary>Modifier le profil</summary><form id="profile-form" class="auth-fields" style="margin-top:14px" novalidate>
+    ${fld('profile-name','Nom complet','text',esc(user.name))}
+    ${fld('profile-email','Adresse e-mail','email',esc(user.em||''))}
+    ${fld('profile-phone','Téléphone WhatsApp','tel',esc(user.tel||''))}
+    ${fld('profile-address','Adresse de livraison','text',esc(user.ad||''))}
+    ${fld('profile-avatar','Photo de profil (URL HTTPS)','url',esc(user.avatar===KitimaAuth.DEFAULT_AVATAR?'':user.avatar),'https://')}
+    <p id="profile-error" class="auth-error" role="alert" aria-live="polite" hidden></p>
+    <button class="btn btn-g" type="submit">Enregistrer les modifications</button>
+   </form></details>
+   <a class="btn btn-o" style="width:100%;margin-top:12px" href="#/favoris">Mes favoris (${wish.length})</a>
+   <button class="btn" id="account-logout" type="button" style="width:100%;margin-top:8px;background:#fee2e2;color:#991b1b"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Se déconnecter</button>
+  </section>
+  <section class="box"><h2 style="font-size:1.2rem;margin-bottom:12px">Mes commandes WhatsApp</h2>
+   ${userOrders.length?`<div class="order-list">${userOrders.map(order=>`<article class="order-card"><b>${esc(order.id)}</b><p class="cdf">${new Date(order.ts).toLocaleString('fr-FR')} · ${usd(order.total)}</p><ul>${order.items.map(item=>`<li><a href="#/produit/${Number(item.id)}">${esc(item.quantity)} × ${esc(item.name)}</a> — ${usd(item.subtotal)}</li>`).join('')}</ul><p class="cdf" style="margin-top:8px">Demande préparée pour WhatsApp</p></article>`).join('')}</div>`:'<p>Aucune commande WhatsApp dans votre historique.</p>'}
+  </section></div>`;
+ $('#profile-form').onsubmit=event=>{
+  event.preventDefault();
+  const error=$('#profile-error'),showProfileError=message=>{error.textContent=message;error.hidden=!message};
+  const name=$('#profile-name').value.trim(),em=KitimaAuth.normalizeEmail($('#profile-email').value),tel=$('#profile-phone').value.trim(),ad=$('#profile-address').value.trim(),avatar=$('#profile-avatar').value.trim();
+  if(!name)return showProfileError('Indiquez votre nom complet.');
+  if(!/^\S+@\S+\.\S+$/.test(em))return showProfileError('Indiquez une adresse e-mail valide.');
+  if(tel&&KitimaAuth.normalizePhone(tel).length<9)return showProfileError('Vérifiez le numéro WhatsApp ou laissez ce champ vide.');
+  if(!KitimaAuth.isValidAvatarUrl(avatar))return showProfileError('La photo de profil doit utiliser une URL HTTPS.');
+  if(users.some(value=>value.id!==user.id&&KitimaAuth.normalizeEmail(value.em)===em))return showProfileError('Un compte utilise déjà cette adresse e-mail.');
+  if(tel&&users.some(value=>value.id!==user.id&&KitimaAuth.normalizePhone(value.tel)===KitimaAuth.normalizePhone(tel)))return showProfileError('Un compte utilise déjà ce numéro WhatsApp.');
+  const updated={...user,name,em,tel,ad,avatar:KitimaAuth.avatarUrl(avatar)};
+  const nextUsers=users.map(value=>value.id===user.id?{...value,...updated}:value);
+  try{localStorage.setItem('k_users',JSON.stringify(nextUsers));localStorage.setItem('k_user',JSON.stringify(updated));users=nextUsers;user=updated;hdr();route();toast('Profil mis à jour')}
+  catch(error){console.error('Could not save profile',error);toast('Impossible d’enregistrer le profil.')}
+ };
+ $('#account-logout').onclick=signOut;
 }
 function contact(){
  app.innerHTML=`<div class="prose"><h1>Contact et service client</h1><p>Notre équipe vous accompagne pour les commandes, les produits et la livraison.</p><div class="cl" style="margin-top:14px"><form id="ctf" novalidate>${fld('cn','Nom complet','text',esc(user?user.name:''),'Votre nom')}${fld('ct','Votre téléphone','tel',esc(user?user.tel||'':''),'+243 …')}<div class="field"><label for="cs">Sujet</label><select id="cs"><option>Question sur un produit</option><option>Suivi de commande</option><option>Question sur la livraison</option><option>Autre demande</option></select></div><div class="field"><label for="cm">Message</label><textarea id="cm" rows="4" required></textarea></div><button class="btn btn-g" type="submit"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Envoyer sur WhatsApp</button></form>
@@ -559,6 +690,7 @@ function setMenuOpen(open){
  menuToggle.querySelector('.close-icon').classList.toggle('hidden',!open);
 }
 menuToggle.onclick=()=>setMenuOpen(menuToggle.getAttribute('aria-expanded')!=='true');
+$('#drawer-logout').onclick=signOut;
 menuScrim.onclick=()=>setMenuOpen(false);
 menu.addEventListener('click',e=>{if(e.target.closest('a'))setMenuOpen(false)});
 addEventListener('keydown',e=>{if(e.key==='Escape')setMenuOpen(false)});
