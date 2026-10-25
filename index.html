@@ -119,6 +119,51 @@ h2.t a{font-size:1rem;color:var(--green);font-family:Figtree}
 .cat:hover{border-color:var(--green);transform:translateY(-3px);box-shadow:0 10px 24px #0f172a14}
 .cat span{display:block;font-size:2.2rem;margin-bottom:6px;color:var(--green)}
 .cat small{display:block;color:var(--mute);font-weight:400;font-size:.9rem}
+.home-search{margin-top:18px;padding:16px 18px;background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:0 8px 24px #0f172a08}
+.home-search label{display:block;margin-bottom:8px;font-weight:700;color:var(--navy)}
+.home-search label i{color:var(--green);margin-right:6px}
+.home-search>div{display:flex;gap:9px}
+.home-search input{flex:1;min-width:0;min-height:48px;padding:10px 13px;border:1.5px solid var(--line);border-radius:10px;font:inherit}
+.home-search input:focus{outline:0;border-color:var(--green);box-shadow:0 0 0 3px #05966920}
+.home-journeys{display:grid;gap:12px;margin-top:28px}
+.home-journeys>a{display:flex;align-items:center;gap:14px;min-width:0;padding:17px;background:#fff;border:1px solid var(--line);border-radius:14px;transition:.2s}
+.home-journeys>a:hover{border-color:var(--green);transform:translateY(-2px);box-shadow:0 8px 22px #0f172a10}
+.home-journeys>a>span{display:grid;place-items:center;flex:0 0 46px;height:46px;border-radius:12px;background:#ecfdf5;color:var(--green);font-size:1.25rem}
+.home-journeys>a>div{flex:1;min-width:0}.home-journeys b,.home-journeys small{display:block}.home-journeys b{color:var(--navy)}.home-journeys small{margin-top:3px;color:var(--mute);font-size:.9rem;line-height:1.4}.home-journeys>a>.fa-arrow-right{color:var(--green)}
+.home-section-heading{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:14px}
+.home-section-heading .t{margin:0}.home-eyebrow{display:block;margin-bottom:4px;color:var(--green-d);font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.text-link{color:var(--green-d);font-weight:700;white-space:nowrap}.text-link:hover{text-decoration:underline;text-underline-offset:3px}
+.product-rail{display:flex;gap:14px;overflow-x:auto;overflow-y:hidden;padding:3px 2px 14px;scroll-snap-type:x mandatory;scrollbar-width:thin;scrollbar-color:#94a3b8 #e2e8f0;-webkit-overflow-scrolling:touch}
+.product-rail>.pc{flex:0 0 clamp(218px,72vw,260px);max-width:260px;scroll-snap-align:start}
+.product-rail-two{display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,1fr);grid-auto-columns:clamp(218px,72vw,260px);align-items:stretch}
+.product-rail-two>.pc{max-width:none;min-width:0;scroll-snap-align:start}
+.rail-heading{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:14px}
+.rail-heading .t{margin:0}.rail-controls{display:flex;gap:7px;flex:0 0 auto}
+.rail-controls button{width:38px;height:38px;border-radius:10px;background:#fff;border:1px solid var(--line);color:var(--navy)}
+.rail-controls button:hover{border-color:var(--green);color:var(--green-d)}
+.price-compare{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:14px}
+.price-compare table{width:100%;border-collapse:collapse;min-width:560px}
+.price-compare th,.price-compare td{padding:13px 15px;text-align:left;border-bottom:1px solid var(--line)}
+.price-compare th{background:#f1f5f9;color:var(--navy);font-size:.9rem}.price-compare tr:last-child td{border-bottom:0}.price-compare td:nth-child(2){font-weight:700}.price-compare td a{color:var(--green-d)}
+.home-note{margin-top:9px;color:var(--mute);font-size:.9rem}
+.home-benefits,.home-steps,.home-tips{display:grid;gap:12px}
+.home-benefits article,.home-steps article,.home-tips article{padding:18px;background:#fff;border:1px solid var(--line);border-radius:14px}
+.home-benefits article>i{display:grid;place-items:center;width:42px;height:42px;margin-bottom:12px;border-radius:12px;background:#ecfdf5;color:var(--green);font-size:1.2rem}
+.home-benefits h3,.home-steps h3,.home-tips h3{margin-bottom:6px;font-size:1.03rem}.home-benefits p,.home-steps p,.home-tips p{color:var(--mute);font-size:.94rem;line-height:1.55}
+.home-steps article>b{display:grid;place-items:center;width:34px;height:34px;margin-bottom:12px;border-radius:50%;background:var(--navy);color:#fff}
+.home-panels{display:grid;gap:12px}
+.home-panel{display:flex;align-items:flex-start;gap:14px;padding:20px;background:#fff;border:1px solid var(--line);border-radius:14px}
+.home-panel h2{font-size:1.15rem;margin-bottom:6px}.home-panel p{color:var(--mute);margin-bottom:10px}
+.home-icon{display:grid;place-items:center;flex:0 0 44px;height:44px;border-radius:12px;background:#ecfdf5;color:var(--green);font-size:1.2rem}
+.seasonal-panel{background:#fffbeb;border-color:#fde68a}.seasonal-panel .home-icon{background:#fef3c7;color:#b45309}
+.home-tips h3 i{color:var(--green);margin-right:6px}.home-faq{padding:0 18px;background:#fff;border:1px solid var(--line);border-radius:14px}
+.home-address{margin-top:12px;font-size:.94rem}.home-address i{color:var(--green);margin-right:5px}
+.home-contact{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px;background:#fff;border:1px solid var(--line);border-radius:16px}
+.home-contact h2{font-size:1.35rem;margin:0 0 6px}.home-contact p{color:var(--mute)}
+.home-contact-actions{display:flex;flex-wrap:wrap;gap:8px;max-width:440px}.home-contact-actions .btn{min-height:42px;padding:10px 14px}
+.home-dark{background:var(--navy);border-color:var(--navy)}.home-dark h2{color:#fff}.home-dark p{color:#cbd5e1}.home-dark .btn-o{color:var(--navy)}
+@media(min-width:700px){.home-journeys,.home-panels,.home-tips{grid-template-columns:repeat(2,minmax(0,1fr))}.home-benefits,.home-steps{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:560px){.home-search>div{align-items:stretch;flex-direction:column}.home-search .btn{width:100%}.home-section-heading{align-items:flex-start;flex-direction:column}.rail-heading{align-items:center}.home-contact{align-items:stretch;flex-direction:column;padding:18px}.home-contact-actions{max-width:none;flex-direction:column}.home-contact-actions .btn{width:100%}}
 /* products */
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 @media(min-width:760px){.grid{grid-template-columns:repeat(3,1fr);gap:18px}}
@@ -407,15 +452,35 @@ const card=p=>`<article class="pc"><div class="pimg" onclick="location.hash='#/p
 
 /* views */
 function home(){
- const feat=P.filter(p=>p.hot).concat(P.filter(p=>!p.hot)).slice(0,4);
+ const feat=P.filter(p=>p.hot).concat(P.filter(p=>!p.hot)).slice(0,12);
+ const budgetTech=P.filter(p=>p.c==='tech'&&p.p<=100).sort((a,b)=>a.p-b.p).slice(0,3);
+ const budgetAgro=P.filter(p=>p.c==='agro'&&p.p<=100).sort((a,b)=>a.p-b.p).slice(0,3);
+ const budgetPicks=[...budgetTech,...budgetAgro].sort((a,b)=>a.p-b.p);
+ const premiumTech=P.filter(p=>p.c==='tech').slice(0,4);
+ const offers=P.filter(p=>Number(p.o)>Number(p.p));
  app.innerHTML=`<div class="hero" id="hero">
  <div class="slide on" style="background-image:linear-gradient(90deg,#0f172af5 0%,#0f172aee 55%,#0f172ac9 100%),url('https://images.unsplash.com/photo-1556656793-08538906a9f8?auto=format&fit=crop&w=1600&q=85')"><span class="tag">KITIMA SHOP</span><h1>Smartphones neufs scellés et équipements high-tech.</h1><p>Une sélection de smartphones importés de Dubaï avec garantie et d’accessoires pour vos usages numériques.</p><div><a class="btn btn-a" href="#/boutique/tech">Découvrir le High-Tech</a></div></div>
  <div class="slide" style="background-image:linear-gradient(90deg,#0f172af5 0%,#0f172aee 55%,#0f172ac9 100%),url('https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=1600&q=85')"><span class="tag g">Agrobusiness & élevage</span><h1>Des équipements et produits pour vos activités agricoles.</h1><p>Incubateurs automatiques, équipements d’élevage et produits agricoles sélectionnés pour les éleveurs et les producteurs.</p><div><a class="btn btn-g" href="#/boutique/agro">Découvrir l’agrobusiness</a></div></div>
  <div class="dots"><button class="on" aria-label="Diapositive 1"></button><button aria-label="Diapositive 2"></button></div></div>
  <div class="trust"><div><i class="fa-solid fa-truck-fast" aria-hidden="true"></i> Livraison en RDC</div><div><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Commande directe sur WhatsApp</div><div><i class="fa-solid fa-building" aria-hidden="true"></i> Entreprise enregistrée (RCCM/NIF)</div></div>
  <section class="blk"><h2 class="t">Grandes catégories</h2><div class="cats">${CATS.map(c=>`<a class="cat" href="#/boutique/${c.id}"><span><i class="${c.e}" aria-hidden="true"></i></span>${c.n}<small>${P.filter(p=>p.c==c.id).length} produit(s)</small></a>`).join('')}</div></section>
- <section class="blk"><h2 class="t">Produits vedettes <a href="#/boutique">Tout voir</a></h2><div class="grid">${feat.map(card).join('')}</div></section>
- ${viewed.length?`<section class="blk"><h2 class="t">Récemment consultés</h2><div class="grid">${viewed.filter(id=>!feat.some(p=>p.id===id)).map(id=>card(find(id))).join('')}</div></section>`:''}<section class="blk"><div class="box" style="background:var(--navy);color:#fff;display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between"><div><h2 style="color:var(--amber);font-size:1.3rem">Commandez sur WhatsApp</h2><p style="color:#cbd5e1">Préparez votre panier et envoyez votre commande à notre service client.</p></div><a class="btn btn-g" href="https://wa.me/243977327328" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Contacter KITIMA SHOP</a></div></section>`;
+ <section class="blk"><div class="rail-heading"><div><span class="home-eyebrow">À découvrir</span><h2 class="t">Produits vedettes <a href="#/boutique">Tout voir</a></h2></div><div class="rail-controls"><button type="button" data-rail="rail-featured" data-direction="-1" aria-label="Faire défiler les produits vedettes vers la gauche"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button><button type="button" data-rail="rail-featured" data-direction="1" aria-label="Faire défiler les produits vedettes vers la droite"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button></div></div><div class="product-rail product-rail-two" id="rail-featured" tabindex="0" role="region" aria-label="Produits vedettes sur deux rangées">${feat.map(card).join('')}</div></section>
+ <section class="blk"><h2 class="t">Pourquoi acheter chez KITIMA SHOP ?</h2><div class="home-benefits"><article><i class="fa-solid fa-layer-group" aria-hidden="true"></i><h3>Deux univers au même endroit</h3><p>Découvrez les catégories High-Tech et agrobusiness sur une seule boutique.</p></article><article><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><h3>Un échange direct</h3><p>Contactez notre service client sur WhatsApp pour poser vos questions et préparer votre commande.</p></article><article><i class="fa-solid fa-truck-fast" aria-hidden="true"></i><h3>Modalités confirmées avec vous</h3><p>Le service client précise le prix, la disponibilité et les conditions de livraison avant validation.</p></article></div></section>
+ ${viewed.length?`<section class="blk"><h2 class="t">Récemment consultés</h2><div class="grid">${viewed.filter(id=>!feat.some(p=>p.id===id)).map(id=>card(find(id))).join('')}</div></section>`:''}<section class="blk home-final-cta"><div class="box" style="background:var(--navy);color:#fff;display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between"><div><h2 style="color:var(--amber);font-size:1.3rem">Commandez sur WhatsApp</h2><p style="color:#cbd5e1">Préparez votre panier et envoyez votre commande à notre service client.</p></div><a class="btn btn-g" href="https://wa.me/243977327328" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Contacter KITIMA SHOP</a></div></section>`;
+ const quickSearch=`<form class="home-search" id="home-search"><label for="home-query"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Que recherchez-vous ?</label><div><input id="home-query" type="search" placeholder="Ex. smartphone, agriculture, élevage"><button class="btn btn-g" type="submit">Rechercher</button></div></form>`;
+ app.querySelector('.trust').insertAdjacentHTML('beforebegin',quickSearch);
+ const quickFaq=[['Comment passer une commande ?','Ajoutez vos articles au panier, indiquez vos coordonnées et envoyez votre demande au service client sur WhatsApp.'],['La livraison est-elle disponible en RDC ?','La livraison est proposée en RDC. Les modalités, les frais et la disponibilité sont confirmés par le service client.'],['Comment vérifier les caractéristiques ?','Ouvrez la fiche du produit ou contactez notre équipe si vous souhaitez une précision avant de commander.']];
+ const homeSections=`
+  ${offers.length?`<section class="blk"><h2 class="t">Offres du moment <a href="#/boutique">Voir la boutique</a></h2><div class="grid">${offers.slice(0,4).map(card).join('')}</div></section>`:''}
+  <section class="blk"><div class="rail-heading"><div><span class="home-eyebrow">High-Tech et agriculture</span><h2 class="t">Petits prix à découvrir <a href="#/boutique">Tout voir</a></h2></div><div class="rail-controls"><button type="button" data-rail="rail-budget" data-direction="-1" aria-label="Faire défiler les petits prix vers la gauche"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button><button type="button" data-rail="rail-budget" data-direction="1" aria-label="Faire défiler les petits prix vers la droite"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button></div></div><div class="product-rail" id="rail-budget" tabindex="0" role="region" aria-label="Produits high-tech et agricoles à petits prix">${budgetPicks.map(card).join('')}</div></section>
+  ${premiumTech.length?`<section class="blk"><div class="rail-heading"><div><span class="home-eyebrow">High-Tech</span><h2 class="t">Sélection pour le travail</h2></div><div class="rail-controls"><button type="button" data-rail="rail-work" data-direction="-1" aria-label="Faire défiler la sélection vers la gauche"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button><button type="button" data-rail="rail-work" data-direction="1" aria-label="Faire défiler la sélection vers la droite"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button></div></div><div class="product-rail" id="rail-work" tabindex="0" role="region" aria-label="Sélection High-Tech pour le travail">${premiumTech.map(card).join('')}</div></section>`:''}
+  <section class="blk"><h2 class="t">Comment commander ?</h2><div class="home-steps"><article><b>1</b><h3>Choisissez vos articles</h3><p>Consultez les fiches et ajoutez vos choix au panier.</p></article><article><b>2</b><h3>Préparez la demande</h3><p>Indiquez vos coordonnées de livraison et vérifiez le récapitulatif.</p></article><article><b>3</b><h3>Échangez sur WhatsApp</h3><p>L’équipe confirme prix, disponibilité et modalités de livraison.</p></article></div></section>
+  <section class="blk"><div class="home-panel"><span class="home-icon"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i></span><div><h2>Livraison en RDC</h2><p>Les frais, délais et modalités sont confirmés par le service client selon la destination et la commande.</p><a href="#/contact" class="text-link">Demander les modalités <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div></div></section>
+  <section class="blk"><div class="home-section-heading"><h2 class="t">Questions fréquentes</h2><a href="#/faq" class="text-link">Toutes les questions</a></div><div class="home-faq">${quickFaq.map(([q,a])=>`<details><summary>${q}</summary><p>${a}</p></details>`).join('')}</div></section>
+  <section class="blk"><div class="home-contact"><div><span class="home-eyebrow">KITIMA-WORK SARL · Goma</span><h2>Besoin d’un renseignement ?</h2><p>Contactez notre équipe pour les commandes, les produits et la livraison.</p><p class="home-address"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> 26, Av. Coin du Marché, Q. Virunga, C/Karisimbi, Goma, Nord-Kivu, RDC</p></div><div class="home-contact-actions"><a class="btn btn-g" href="https://wa.me/${WHATSAPP_ORDER}" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Écrire au service commandes</a><a class="btn btn-o" href="tel:+${WHATSAPP_SUPPORT}"><i class="fa-solid fa-phone" aria-hidden="true"></i> Appeler le support</a><a class="btn btn-o" href="mailto:${BUSINESS_EMAIL}"><i class="fa-regular fa-envelope" aria-hidden="true"></i> Envoyer un e-mail</a><a class="btn btn-o" href="#/suivi"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i> Suivi de commande</a></div></div></section>`;
+ app.querySelector('.home-final-cta').insertAdjacentHTML('beforebegin',homeSections);
+ $('#home-search').onsubmit=event=>{event.preventDefault();window._q=$('#home-query').value.trim();location.hash='#/boutique'};
+ app.querySelectorAll('[data-rail]').forEach(button=>button.onclick=()=>$("#"+button.dataset.rail).scrollBy({left:Number(button.dataset.direction)*280,behavior:'smooth'}));
  const sl=[...app.querySelectorAll('.slide')],ds=[...app.querySelectorAll('.dots button')];let k=0;
  const go=i=>{k=i;sl.forEach((s,j)=>s.classList.toggle('on',j==i));ds.forEach((d,j)=>d.classList.toggle('on',j==i))};
  ds.forEach((d,i)=>d.onclick=()=>go(i));
@@ -446,7 +511,7 @@ function product(id){
  <div class="gal"><div class="main" id="mn"><img src="${p.img}" alt="${p.n}"></div></div>
  <div>${p.o?' <span class="promo" style="position:static;display:inline-block">Promo</span>':''}<h1>${p.n}</h1>
  <div class="price" style="margin-top:8px">${usd(p.p)}${p.o?`<s>${usd(p.o)}</s>`:''}</div><div class="cdf" style="font-size:.95rem">Prix indicatif · ≈ ${cdf(p.p)}</div>
- <p style="margin:14px 0">${p.d}</p><table class="specs">${Object.entries(p.s).map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join('')}</table>
+ <p style="margin:14px 0">${p.d}</p>${Object.entries(p.s||{}).some(([k,v])=>k!=='Catégorie'&&String(v).trim())?`<table class="specs">${Object.entries(p.s).filter(([k,v])=>k!=='Catégorie'&&String(v).trim()).map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join('')}</table>`:`<p class="home-note">Les caractéristiques détaillées sont à confirmer auprès du service client avant commande.</p>`}
  <div style="display:flex;align-items:center;gap:12px"><b>Quantité</b><div class="qty"><button id="mi" aria-label="Moins"><i class="fa-solid fa-minus" aria-hidden="true"></i></button><span id="qv">1</span><button id="pl" aria-label="Plus"><i class="fa-solid fa-plus" aria-hidden="true"></i></button></div></div>
  <div class="row"><button class="btn btn-g" id="ad"><i class="fa-solid fa-cart-plus" aria-hidden="true"></i> Ajouter au panier</button><button class="btn btn-n" id="bn"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Commander sur WhatsApp</button><button class="btn btn-o" id="wf"><i class="fa-regular fa-heart" aria-hidden="true"></i> Favoris</button><button class="btn btn-o" id="share" type="button"><i class="fa-solid fa-share-nodes" aria-hidden="true"></i> Partager</button></div>
  <p style="margin-top:14px;font-size:1rem;color:var(--mute)"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Commande sur WhatsApp · <i class="fa-solid fa-truck-fast" aria-hidden="true"></i> Livraison en RDC</p></div></div>
