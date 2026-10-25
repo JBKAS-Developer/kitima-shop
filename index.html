@@ -524,6 +524,7 @@ function showAvatarCrop(file){
  const url=URL.createObjectURL(file),image=new Image();activeCrop={url};
  image.onload=()=>{
   const box=$('#mbox');box.innerHTML=`<div class="photo-options"><h2>Cadrer la photo</h2><p class="crop-help">Déplacez la photo pour centrer le visage, puis ajustez le zoom.</p><div class="crop-stage" id="crop-stage"><img id="crop-image" src="${esc(url)}" alt="Recadrage de la photo"></div><label class="crop-zoom" for="crop-zoom">Zoom<input id="crop-zoom" type="range" min="1" max="3" step="0.01" value="1"></label><div class="crop-actions"><button class="btn btn-o" id="crop-cancel" type="button">Annuler</button><button class="btn btn-g" id="crop-save" type="button">Utiliser cette photo</button></div></div>`;
+  $('#modal').classList.add('on');
   const stage=$('#crop-stage'),cropImage=$('#crop-image'),stageSize=stage.clientWidth,baseScale=Math.max(stageSize/image.naturalWidth,stageSize/image.naturalHeight);
   let zoom=1,left=0,top=0,scale=baseScale,drag=null;
   const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
@@ -550,7 +551,6 @@ function showAvatarCrop(file){
     saveProfileAvatar(canvas.toDataURL('image/jpeg',.84));
    }catch(error){console.error('Could not crop profile photo',error);toast('Impossible de cadrer cette photo.')}
   };
-  $('#modal').classList.add('on');
  };
  image.onerror=()=>{closeAvatarModal();toast('Impossible de lire cette image. Choisissez-en une autre.')};image.src=url;
 }
