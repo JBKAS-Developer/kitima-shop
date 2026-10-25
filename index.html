@@ -437,6 +437,7 @@ function signOut(){
  hdr();
  toast('Déconnexion réussie');
  if(location.hash.startsWith('#/compte'))location.hash='#/';
+ else route();
 }
 function hdr(){
  $('#wb').textContent=wish.length;$('#ul').textContent=user?' '+user.name.split(' ')[0]:' Mon compte';
@@ -453,6 +454,10 @@ function hdr(){
   $('#header-avatar').src=KitimaAuth.avatarUrl(user.avatar);
   $('#drawer-avatar').src=KitimaAuth.avatarUrl(user.avatar);
   $('#drawer-name').textContent=user.name;
+ }else{
+  $('#drawer-name').textContent='Mon compte';
+  $('#drawer-avatar').src=KitimaAuth.DEFAULT_AVATAR;
+  $('#header-avatar').src=KitimaAuth.DEFAULT_AVATAR;
  }
 }
 function fav(id){const on=wish.includes(id);wish=on?wish.filter(x=>x!=id):[...wish,id];sv('k_wish',wish);hdr();document.querySelectorAll('.heart[data-id="'+id+'"]').forEach(h=>h.classList.toggle('on',!on));toast(on?'Retiré des favoris':'Ajouté aux favoris');if(location.hash=='#/favoris')favs()}
@@ -600,6 +605,7 @@ function account(mode='login'){
   return;
  }
  const email=user.em||'Aucune adresse e-mail enregistrée',address=user.ad||'Aucune adresse de livraison enregistrée';
+ orderHistory=ls('k_orders',[]).filter(value=>value&&typeof value==='object');
  const userOrders=orderHistory.filter(order=>order.userId===user.id).sort((first,second)=>second.ts-first.ts);
  app.innerHTML=`<div class="profile-heading">${avatarMarkup(user.avatar,user.name)}<div><h1 style="font-size:1.6rem">Mon compte</h1><p style="color:var(--mute)">Bienvenue, ${esc(user.name)}.</p></div></div>
   <div class="cl"><section class="box"><h2 style="font-size:1.2rem">Mon profil</h2>
@@ -696,6 +702,15 @@ menu.addEventListener('click',e=>{if(e.target.closest('a'))setMenuOpen(false)});
 addEventListener('keydown',e=>{if(e.key==='Escape')setMenuOpen(false)});
 addEventListener('resize',()=>{if(matchMedia('(min-width: 900px)').matches)setMenuOpen(false)});
 $('#modal').onclick=e=>{if(e.target.id=='modal'){$('#modal').classList.remove('on');if(location.hash=='#/commande'&&!cart.length)location.hash='#/'}};
+addEventListener('storage',event=>{
+ if(event.key!=='k_user')return;
+ const stored=ls('k_user',null),identifier=KitimaAuth.normalizeIdentifier(stored?.em||stored?.tel||'');
+ user=stored?users.find(value=>value.id===stored.id||KitimaAuth.normalizeIdentifier(value.em||value.tel)===identifier)||null:null;
+ hdr();
+ if(user)user={...user,...stored};
+ if(location.hash.startsWith('#/compte')&&!user)location.hash='#/';
+ else route();
+});
 addEventListener('hashchange',()=>{setMenuOpen(false);route()});badge();route();
 </script>
 </body>
