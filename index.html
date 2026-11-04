@@ -57,9 +57,9 @@ header.site-header{position:sticky;top:0;z-index:70;background:var(--navy);color
 .hact{order:2;display:flex;align-items:center;gap:6px;margin-left:auto}
 .search{order:3;display:flex;flex:1 1 100%;min-width:0;min-height:48px;overflow:hidden;border-radius:12px;background:#fff}
 .header-auth{order:4;display:flex;width:100%;gap:8px}
-.brand{display:flex;align-items:center;gap:8px;padding:4px 9px;border:1px solid #ffffff18;border-radius:12px;background:#ffffff0a;box-shadow:0 2px 8px #02061718;transition:background .2s,border-color .2s}
-.brand:hover{background:#ffffff12;border-color:#ffffff30}
-.brand img{display:block;width:164px;height:auto;max-height:46px;object-fit:contain;border-radius:7px}
+.brand{display:flex;align-items:center;gap:8px;padding:0;border:1px solid #ffffff35;border-radius:12px;background:#020617;box-shadow:0 2px 10px #02061740;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.brand:hover{border-color:#ffffff70;box-shadow:0 3px 14px #02061770}
+.brand img{display:block;width:176px;height:54px;object-fit:cover;object-position:center 50%;border-radius:11px}
 .brand small{color:var(--amber);font-weight:800}
 .search{border:1px solid #dbe2ea;box-shadow:0 2px 8px #02061712}
 .search select{border:0;background:#f1f5f9;padding:0 10px;font:inherit;font-size:.95rem;max-width:42%;color:var(--ink);min-height:48px}
@@ -105,9 +105,9 @@ nav.main a:hover,nav.main a.on{background:rgba(255,255,255,.1);color:#fff}
 @media(min-width:1200px){.header-auth{order:4;width:auto;flex:0 0 auto}.header-auth a{min-height:40px;padding:8px 10px;white-space:nowrap;font-size:.84rem}}
 @media(min-width:1200px){nav.main{gap:2px}nav.main a{padding:8px 6px;font-size:.87rem;white-space:nowrap}nav.main a i{width:auto;margin:0 4px 0 0}}
 @media(min-width:1200px) and (max-width:1399px){.hrow{flex-wrap:wrap}.search{min-width:0}.header-auth{flex-basis:100%;justify-content:flex-end}}
-@media(max-width:500px){.brand img{width:136px;height:auto}.hact .ibtn{min-width:40px;min-height:40px;padding:8px 9px}.profile-summary div{grid-template-columns:1fr;gap:2px}}
+@media(max-width:500px){.brand img{width:142px;height:44px}.hact .ibtn{min-width:40px;min-height:40px;padding:8px 9px}.profile-summary div{grid-template-columns:1fr;gap:2px}}
 @media(max-width:640px){.profile-page>.profile-topline{align-items:flex-start;padding:16px}.profile-page .profile-layout{gap:14px}}
-@media(max-width:360px){.hrow{column-gap:6px}.brand{padding:3px 6px}.brand img{width:116px}.menu-toggle{min-width:40px;min-height:40px}.hact{gap:4px}.hact .ibtn{min-width:36px;min-height:36px;padding:7px}}
+@media(max-width:360px){.hrow{column-gap:6px}.brand img{width:120px;height:38px}.menu-toggle{min-width:40px;min-height:40px}.hact{gap:4px}.hact .ibtn{min-width:36px;min-height:36px;padding:7px}}
 /* hero */
 .hero{background:linear-gradient(120deg,var(--navy) 55%,#12304a);color:#fff;border-radius:20px;overflow:hidden;position:relative;margin-top:18px}
 .slide{display:none;padding:48px 24px 64px;min-height:390px;flex-direction:column;justify-content:center;gap:16px;animation:fade .5s;background-size:cover;background-position:center}
@@ -384,7 +384,7 @@ tailwind.config = {
  <div class="site-header-inner mx-auto w-full max-w-[1400px] px-4">
   <div class="hrow flex flex-wrap items-center gap-2 py-2.5 sm:gap-3 min-[1200px]:flex-nowrap">
    <a href="#/" class="brand order-0 shrink-0" aria-label="KITIMA SHOP – accueil">
-    <img src="assets/kitima-mark.svg" alt="" width="164" height="44" fetchpriority="high" decoding="async">
+    <img src="assets/logo.webp" alt="KITIMA WORK" width="176" height="54" fetchpriority="high" decoding="async">
    </a>
    <button class="menu-toggle order-1 z-[90] inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg bg-white/10 text-white transition hover:bg-white/20 min-[1200px]:hidden" id="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-controls="main-nav" aria-expanded="false">
     <i class="fa-solid fa-bars menu-icon" aria-hidden="true"></i><i class="fa-solid fa-xmark close-icon hidden" aria-hidden="true"></i>
