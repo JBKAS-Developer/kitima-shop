@@ -15,15 +15,15 @@
 <meta property="og:url" content="https://jbkas-developer.github.io/kitima-shop/">
 <meta property="og:title" content="KITIMA SHOP – High-Tech, Smartphones & Agrobusiness">
 <meta property="og:description" content="Smartphones, équipements high-tech, matériel d’élevage et produits agricoles en RDC. Commandez directement sur WhatsApp.">
-<meta property="og:image" content="https://jbkas-developer.github.io/kitima-shop/assets/kitima-social.png">
-<meta property="og:image:type" content="image/png">
+<meta property="og:image" content="https://jbkas-developer.github.io/kitima-shop/assets/kitima-social.webp">
+<meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="KITIMA SHOP : high-tech, agriculture et élevage en RDC">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="KITIMA SHOP – High-Tech, Smartphones & Agrobusiness">
 <meta name="twitter:description" content="Smartphones, équipements high-tech, matériel d’élevage et produits agricoles en RDC. Commandez directement sur WhatsApp.">
-<meta name="twitter:image" content="https://jbkas-developer.github.io/kitima-shop/assets/kitima-social.png">
+<meta name="twitter:image" content="https://jbkas-developer.github.io/kitima-shop/assets/kitima-social.webp">
 <meta name="twitter:image:alt" content="Logo et présentation de KITIMA SHOP">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,7 +32,9 @@
 <style>
 :root{--navy:#0F172A;--green:#059669;--green-d:#047857;--amber:#F59E0B;--bg:#F8FAFC;--card:#fff;--ink:#1e293b;--mute:#64748b;--line:#e2e8f0;--r:14px}
 *{box-sizing:border-box;margin:0}
-body{-webkit-font-smoothing:antialiased;font-size:18px}
+body{background:var(--bg);color:var(--ink);font-family:Figtree,system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;font-size:18px}
+.hidden{display:none!important}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 h1,h2,h3,.brand{font-family:Sora,system-ui,sans-serif;line-height:1.2;color:var(--navy)}
 a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer;border:0}
 :focus-visible{outline:3px solid var(--amber);outline-offset:2px}
@@ -43,7 +45,21 @@ section.blk{padding:36px 0}
 .btn-o{background:#fff;border:1.5px solid var(--line);color:var(--navy)}.btn-o:hover{border-color:var(--navy)}
 .btn-a{background:var(--amber);color:var(--navy)}
 /* header */
-.brand{display:flex;align-items:center;gap:8px;color:#fff;font-weight:800;font-size:1.15rem;letter-spacing:.3px}
+header.site-header{position:sticky;top:0;z-index:70;background:var(--navy);color:#fff}
+.site-header-inner,.site-footer-inner,.app-shell{width:100%;margin-inline:auto;padding-inline:16px}
+.site-header-inner{max-width:1400px}
+.site-footer-inner,.app-shell{max-width:1180px}
+.app-shell{min-height:50vh}
+.site-footer{margin-top:40px;padding-block:32px;background:var(--navy);color:#cbd5e1;font-size:.92rem}
+.hrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding-block:10px}
+.brand{order:0;flex:0 0 auto}
+.menu-toggle{order:1;display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;border-radius:9px;background:#ffffff1a;color:#fff}
+.hact{order:2;display:flex;align-items:center;gap:6px;margin-left:auto}
+.search{order:3;display:flex;flex:1 1 100%;min-width:0;min-height:48px;overflow:hidden;border-radius:12px;background:#fff}
+.header-auth{order:4;display:flex;width:100%;gap:8px}
+.brand{display:flex;align-items:center;gap:8px;padding:4px 9px;border:1px solid #ffffff18;border-radius:12px;background:#ffffff0a;box-shadow:0 2px 8px #02061718;transition:background .2s,border-color .2s}
+.brand:hover{background:#ffffff12;border-color:#ffffff30}
+.brand img{display:block;width:164px;height:auto;max-height:46px;object-fit:contain;border-radius:7px}
 .brand small{color:var(--amber);font-weight:800}
 .search{border:1px solid #dbe2ea;box-shadow:0 2px 8px #02061712}
 .search select{border:0;background:#f1f5f9;padding:0 10px;font:inherit;font-size:.95rem;max-width:42%;color:var(--ink);min-height:48px}
@@ -85,13 +101,13 @@ nav.main a:hover,nav.main a.on{background:rgba(255,255,255,.1);color:#fff}
 .order-list{display:grid;gap:12px}
 .order-card{border:1px solid var(--line);border-radius:12px;padding:14px}
 .lbl{display:none}
-@media(min-width:1200px){nav.main{display:flex;position:static;width:auto;height:auto;box-shadow:none;flex:0 1 auto;flex-direction:row;padding:0;background:transparent;overflow:visible;animation:none}.nav-auth{display:none}.menu-scrim{display:none}.lbl{display:inline}.search{flex:1 1 260px;min-width:240px}}
+@media(min-width:1200px){.hrow{flex-wrap:nowrap;gap:10px}nav.main{order:1;display:flex;position:static;width:auto;height:auto;box-shadow:none;flex:0 1 auto;flex-direction:row;padding:0;background:transparent;overflow:visible;animation:none}.menu-toggle{display:none}.nav-auth{display:none}.menu-scrim{display:none}.lbl{display:inline}.search{order:2;flex:1 1 260px;min-width:240px}.hact{order:3;flex:0 0 auto}.header-auth{order:4;width:auto;flex:0 0 auto}}
 @media(min-width:1200px){.header-auth{order:4;width:auto;flex:0 0 auto}.header-auth a{min-height:40px;padding:8px 10px;white-space:nowrap;font-size:.84rem}}
 @media(min-width:1200px){nav.main{gap:2px}nav.main a{padding:8px 6px;font-size:.87rem;white-space:nowrap}nav.main a i{width:auto;margin:0 4px 0 0}}
-@media(min-width:1200px) and (max-width:1399px){.hrow{flex-wrap:wrap!important}.search{min-width:0}.header-auth{flex-basis:100%;justify-content:flex-end}}
-@media(max-width:500px){.brand img{width:132px;height:auto}.hact .ibtn{min-width:40px;min-height:40px;padding:8px 9px}.profile-summary div{grid-template-columns:1fr;gap:2px}}
+@media(min-width:1200px) and (max-width:1399px){.hrow{flex-wrap:wrap}.search{min-width:0}.header-auth{flex-basis:100%;justify-content:flex-end}}
+@media(max-width:500px){.brand img{width:136px;height:auto}.hact .ibtn{min-width:40px;min-height:40px;padding:8px 9px}.profile-summary div{grid-template-columns:1fr;gap:2px}}
 @media(max-width:640px){.profile-page>.profile-topline{align-items:flex-start;padding:16px}.profile-page .profile-layout{gap:14px}}
-@media(max-width:360px){.hrow{column-gap:6px}.brand img{width:116px}.menu-toggle{min-width:40px;min-height:40px}.hact{gap:4px}.hact .ibtn{min-width:36px;min-height:36px;padding:7px}}
+@media(max-width:360px){.hrow{column-gap:6px}.brand{padding:3px 6px}.brand img{width:116px}.menu-toggle{min-width:40px;min-height:40px}.hact{gap:4px}.hact .ibtn{min-width:36px;min-height:36px;padding:7px}}
 /* hero */
 .hero{background:linear-gradient(120deg,var(--navy) 55%,#12304a);color:#fff;border-radius:20px;overflow:hidden;position:relative;margin-top:18px}
 .slide{display:none;padding:48px 24px 64px;min-height:390px;flex-direction:column;justify-content:center;gap:16px;animation:fade .5s;background-size:cover;background-position:center}
@@ -364,11 +380,11 @@ tailwind.config = {
 </script>
 </head>
 <body class="scroll-smooth bg-kitima-surface font-sans leading-[1.55] text-slate-800 antialiased">
-<header class="sticky top-0 z-[70] bg-kitima-navy text-white">
- <div class="mx-auto w-full max-w-[1400px] px-4">
+<header class="site-header sticky top-0 z-[70] bg-kitima-navy text-white">
+ <div class="site-header-inner mx-auto w-full max-w-[1400px] px-4">
   <div class="hrow flex flex-wrap items-center gap-2 py-2.5 sm:gap-3 min-[1200px]:flex-nowrap">
    <a href="#/" class="brand order-0 shrink-0" aria-label="KITIMA SHOP – accueil">
-    <img src="assets/kitima-mark.svg" alt="" width="156" height="43" class="h-10 w-32 sm:h-11 sm:w-[156px]">
+    <img src="assets/kitima-mark.svg" alt="" width="164" height="44" fetchpriority="high" decoding="async">
    </a>
    <button class="menu-toggle order-1 z-[90] inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg bg-white/10 text-white transition hover:bg-white/20 min-[1200px]:hidden" id="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-controls="main-nav" aria-expanded="false">
     <i class="fa-solid fa-bars menu-icon" aria-hidden="true"></i><i class="fa-solid fa-xmark close-icon hidden" aria-hidden="true"></i>
@@ -398,9 +414,9 @@ tailwind.config = {
  </div>
 </header>
 <button class="menu-scrim" id="menu-scrim" type="button" aria-label="Fermer le menu" tabindex="-1"></button>
-<main id="app" class="mx-auto w-full max-w-[1180px] px-4" tabindex="-1"></main>
-<footer class="mt-10 bg-kitima-navy py-8 text-[.92rem] text-slate-300">
- <div class="mx-auto w-full max-w-[1180px] px-4">
+<main id="app" class="app-shell mx-auto w-full max-w-[1180px] px-4" tabindex="-1"></main>
+<footer class="site-footer mt-10 bg-kitima-navy py-8 text-[.92rem] text-slate-300">
+ <div class="site-footer-inner mx-auto w-full max-w-[1180px] px-4">
   <div class="fg">
    <div><h4>KITIMA SHOP</h4><p>High-Tech, smartphones, agrobusiness et élevage à Goma et partout en RDC. Une enseigne de KITIMA-WORK SARL.</p></div>
    <div><h4>Boutique</h4><a href="#/boutique">Tous les produits</a><a href="#/boutique/tech">High-Tech & Smartphones</a><a href="#/boutique/agro">Agrobusiness & Élevage</a></div>
@@ -429,7 +445,9 @@ const $=(s,r=document)=>r.querySelector(s);
 const app=$('#app');
 let cart=[];
 const ACCOUNT_RESET_KEY='kitima_account_reset_2026_10_v3';
-if(!localStorage.getItem(ACCOUNT_RESET_KEY)){
+let accountResetDone=false;
+try{accountResetDone=localStorage.getItem(ACCOUNT_RESET_KEY)==='done'}catch(error){console.warn('Browser storage is unavailable; continuing without saved account data.',error)}
+if(!accountResetDone){
  try{
   const accountKeys=Array.from({length:localStorage.length},(_,index)=>localStorage.key(index)).filter(key=>key&&(/^(k_users|k_user|k_orders|k_wish|kitima_cart)$/.test(key)||/^k_(?:wish|cart)_/.test(key)));
   accountKeys.forEach(key=>localStorage.removeItem(key));localStorage.setItem(ACCOUNT_RESET_KEY,'done');
@@ -446,7 +464,7 @@ const productLink=p=>{const url=new URL(location.href);url.hash=`#/produit/${p.i
 function badge(){const b=$('#cb');b.textContent=cart.reduce((s,i)=>s+i.q,0);b.classList.add('pop');setTimeout(()=>b.classList.remove('pop'),250)}
 let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2200)}
 function add(id,q=1){const i=cart.find(x=>x.id==id);i?i.q+=q:cart.push({id:+id,q});save();toast('Ajouté au panier')}
-const card=p=>`<article class="pc"><div class="pimg" onclick="location.hash='#/produit/${p.id}'"><img src="${p.img}" alt="${p.n}" loading="lazy">${p.o?`<span class="promo">-${Math.round((1-p.p/p.o)*100)}%</span>`:''}<button class="heart ${wish.includes(p.id)?'on':''}" data-id="${p.id}" aria-label="Ajouter aux favoris" onclick="event.stopPropagation();fav(${p.id})"><i class="fa-solid fa-heart" aria-hidden="true"></i></button></div>
+const card=p=>`<article class="pc"><div class="pimg" onclick="location.hash='#/produit/${p.id}'"><img src="${p.img}" alt="${p.n}" loading="lazy" decoding="async">${p.o?`<span class="promo">-${Math.round((1-p.p/p.o)*100)}%</span>`:''}<button class="heart ${wish.includes(p.id)?'on':''}" data-id="${p.id}" aria-label="Ajouter aux favoris" onclick="event.stopPropagation();fav(${p.id})"><i class="fa-solid fa-heart" aria-hidden="true"></i></button></div>
 <div class="info"><h3 onclick="location.hash='#/produit/${p.id}'">${p.n}</h3><div class="price">${usd(p.p)}${p.o?`<s>${usd(p.o)}</s>`:''}</div><div class="cdf">Prix indicatif · ${cdf(p.p)}</div>
 <button class="btn btn-g" onclick="add(${p.id})">Ajouter au panier</button></div></article>`;
 
@@ -459,8 +477,8 @@ function home(){
  const premiumTech=P.filter(p=>p.c==='tech').slice(0,4);
  const offers=P.filter(p=>Number(p.o)>Number(p.p));
  app.innerHTML=`<div class="hero" id="hero">
- <div class="slide on" style="background-image:linear-gradient(90deg,#0f172af5 0%,#0f172aee 55%,#0f172ac9 100%),url('https://images.unsplash.com/photo-1556656793-08538906a9f8?auto=format&fit=crop&w=1600&q=85')"><span class="tag">KITIMA SHOP</span><h1>Smartphones neufs scellés et équipements high-tech.</h1><p>Une sélection de smartphones importés de Dubaï avec garantie et d’accessoires pour vos usages numériques.</p><div><a class="btn btn-a" href="#/boutique/tech">Découvrir le High-Tech</a></div></div>
- <div class="slide" style="background-image:linear-gradient(90deg,#0f172af5 0%,#0f172aee 55%,#0f172ac9 100%),url('https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=1600&q=85')"><span class="tag g">Agrobusiness & élevage</span><h1>Des équipements et produits pour vos activités agricoles.</h1><p>Incubateurs automatiques, équipements d’élevage et produits agricoles sélectionnés pour les éleveurs et les producteurs.</p><div><a class="btn btn-g" href="#/boutique/agro">Découvrir l’agrobusiness</a></div></div>
+ <div class="slide on"><span class="tag">KITIMA SHOP</span><h1>Smartphones neufs scellés et équipements high-tech.</h1><p>Une sélection de smartphones importés de Dubaï avec garantie et d’accessoires pour vos usages numériques.</p><div><a class="btn btn-a" href="#/boutique/tech">Découvrir le High-Tech</a></div></div>
+ <div class="slide"><span class="tag g">Agrobusiness & élevage</span><h1>Des équipements et produits pour vos activités agricoles.</h1><p>Incubateurs automatiques, équipements d’élevage et produits agricoles sélectionnés pour les éleveurs et les producteurs.</p><div><a class="btn btn-g" href="#/boutique/agro">Découvrir l’agrobusiness</a></div></div>
  <div class="dots"><button class="on" aria-label="Diapositive 1"></button><button aria-label="Diapositive 2"></button></div></div>
  <div class="trust"><div><i class="fa-solid fa-truck-fast" aria-hidden="true"></i> Livraison en RDC</div><div><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Commande directe sur WhatsApp</div><div><i class="fa-solid fa-building" aria-hidden="true"></i> Entreprise enregistrée (RCCM/NIF)</div></div>
  <section class="blk"><h2 class="t">Grandes catégories</h2><div class="cats">${CATS.map(c=>`<a class="cat" href="#/boutique/${c.id}"><span><i class="${c.e}" aria-hidden="true"></i></span>${c.n}<small>${P.filter(p=>p.c==c.id).length} produit(s)</small></a>`).join('')}</div></section>
@@ -508,7 +526,7 @@ function shop(cat='all'){
 function product(id){
  const p=find(id);if(!p)return shop();let q=1;viewed=[p.id,...viewed.filter(x=>x!=p.id)].slice(0,4);const cat=CATS.find(c=>c.id==p.c);
  app.innerHTML=`<div class="crumb"><a href="#/">Accueil</a> / <a href="#/boutique/${p.c}">${cat.n}</a> / ${p.n}</div><div class="pd">
- <div class="gal"><div class="main" id="mn"><img src="${p.img}" alt="${p.n}"></div></div>
+ <div class="gal"><div class="main" id="mn"><img src="${p.img}" alt="${p.n}" fetchpriority="high" decoding="async"></div></div>
  <div>${p.o?' <span class="promo" style="position:static;display:inline-block">Promo</span>':''}<h1>${p.n}</h1>
  <div class="price" style="margin-top:8px">${usd(p.p)}${p.o?`<s>${usd(p.o)}</s>`:''}</div><div class="cdf" style="font-size:.95rem">Prix indicatif · ≈ ${cdf(p.p)}</div>
  <p style="margin:14px 0">${p.d}</p>${Object.entries(p.s||{}).some(([k,v])=>k!=='Catégorie'&&String(v).trim())?`<table class="specs">${Object.entries(p.s).filter(([k,v])=>k!=='Catégorie'&&String(v).trim()).map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join('')}</table>`:`<p class="home-note">Les caractéristiques détaillées sont à confirmer auprès du service client avant commande.</p>`}
@@ -682,7 +700,7 @@ function rv(id){const all=ls('k_rev',{});
  $('#rf').onsubmit=e=>{e.preventDefault();const t=$('#rt').value.trim();if(!t)return toast('Écrivez votre avis');all[id]=[{n:user?user.name:'Visiteur',t},...(all[id]||[])];sv('k_rev',all);toast('Merci pour votre avis');rv(id)}}
 function cartV(){
  if(!cart.length){app.innerHTML=`<div class="empty"><div class="e"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i></div><h2>Votre panier est vide</h2><p style="margin:8px 0 16px">Ajoutez un produit pour commencer.</p><a class="btn btn-g" href="#/boutique">Parcourir la boutique</a></div>`;return}
- app.innerHTML=`<h1 style="margin:22px 0 14px;font-size:1.6rem">Mon panier</h1><div class="cl"><div class="box">${cart.map(i=>{const p=find(i.id);return`<div class="ci"><img class="th" src="${p.img}" alt="${p.n}" style="object-fit:cover"><div><a href="#/produit/${p.id}"><b>${p.n}</b></a><div class="cdf">${usd(p.p)} · ${cdf(p.p)}</div><button class="x" data-x="${p.id}"><i class="fa-regular fa-trash-can" aria-hidden="true"></i> Supprimer</button></div>
+ app.innerHTML=`<h1 style="margin:22px 0 14px;font-size:1.6rem">Mon panier</h1><div class="cl"><div class="box">${cart.map(i=>{const p=find(i.id);return`<div class="ci"><img class="th" src="${p.img}" alt="${p.n}" loading="lazy" decoding="async" style="object-fit:cover"><div><a href="#/produit/${p.id}"><b>${p.n}</b></a><div class="cdf">${usd(p.p)} · ${cdf(p.p)}</div><button class="x" data-x="${p.id}"><i class="fa-regular fa-trash-can" aria-hidden="true"></i> Supprimer</button></div>
  <div style="text-align:right"><div class="qty"><button data-m="${p.id}" aria-label="Moins"><i class="fa-solid fa-minus" aria-hidden="true"></i></button><span>${i.q}</span><button data-p="${p.id}" aria-label="Plus"><i class="fa-solid fa-plus" aria-hidden="true"></i></button></div><div class="price" style="font-size:.95rem;margin-top:6px">${usd(p.p*i.q)}</div></div></div>`}).join('')}</div>
  <div class="box sum" style="align-self:start"><h2 style="font-size:1.2rem;margin-bottom:8px">Récapitulatif</h2><div><span>Sous-total</span><b>${usd(total())}</b></div><div><span>Livraison</span><span>Confirmée par le service client</span></div><div class="tot"><span>Total indicatif</span><span>${usd(grand())}</span></div><div class="cdf">≈ ${cdf(grand())}</div><p class="cdf" style="margin:6px 0 10px">Prix, disponibilité et frais de livraison confirmés sur WhatsApp.</p>
  <a class="btn btn-g" style="width:100%" href="#/commande"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Finaliser la commande sur WhatsApp</a><a class="btn btn-o" style="width:100%;margin-top:8px" href="#/boutique">Continuer mes achats</a><button class="btn btn-o" id="ec" style="width:100%;margin-top:8px">Vider le panier</button></div></div>`;
